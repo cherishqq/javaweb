@@ -68,7 +68,8 @@ public class HttpClientHelp {
 
 			if (response != null
 					&& response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-
+				logger.debug("response status equal OK" );
+				
 			} else {
 				if (logger.isDebugEnabled()) {
 					if (response == null) {

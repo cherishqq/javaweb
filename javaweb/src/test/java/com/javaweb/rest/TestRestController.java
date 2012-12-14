@@ -14,9 +14,9 @@ import com.javaweb.utils.HttpClientHelp;
 
 public class TestRestController {
 	
-	@Test
+	//@Test
 	public void show(){
-		String url = "http://localhost:8080/javaweb/user/show.do";
+		String url = "http://localhost:8080/javaweb/user/show";
 		HttpResponse response = HttpClientHelp.makeRequest(url,"");
 		InputStream is = null;
 		try {
@@ -37,6 +37,37 @@ public class TestRestController {
 		}
 		
 	}
+	
+	/**
+	 * 
+	 *  right: {"id":0,"username":"derek","password":"derek","email":"haijinme@qq.com"}
+	 *  wrong: 
+	 */
+	
+	@Test
+	public void getUser() {
+		String url = "http://localhost:8080/javaweb/user/derek/derek";
+		HttpResponse response = HttpClientHelp.makeRequest(url,"");
+		InputStream is = null;
+		try {
+			if( response != null){
+				is = response.getEntity().getContent();
+				String s = streamToString(is);
+				System.out.println("response:" + s);
+			} else {
+				System.out.println("response is null");
+			}
+
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	 private static String streamToString(InputStream in) {
 	        if (in == null) {
