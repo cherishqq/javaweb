@@ -8,10 +8,13 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+
+import com.javaweb.rest.RestRequest;
 
 /**
  * 
@@ -30,6 +33,8 @@ public class HttpClientHelp {
 	private static final String CONTENT_TYPE = "Content-Type";
 	private static final String COOKIE = "Cookie";
 
+	
+	
 	public static HttpResponse makeRequest(String url, String body) {
 
 		if (url == null || body == null || url.length() <= 0) {
@@ -58,11 +63,11 @@ public class HttpClientHelp {
 		HttpResponse response = null;
 		try {
 			HttpEntity entity = new StringEntity(body);
-			final HttpPost post = new HttpPost(url);
-			post.addHeader(CONTENT_TYPE, TEXT_XML_CHARSET_UTF_8);
-			post.addHeader(CONNECTION, KEEP_ALIVE);
+			final HttpGet post = new HttpGet(url);
+/*			post.addHeader(CONTENT_TYPE, TEXT_XML_CHARSET_UTF_8);
+			post.addHeader(CONNECTION, KEEP_ALIVE);*/
 			// todo 缺少了一个判断网络状态的
-			post.setEntity(entity);
+		//	post.setEntity(entity);
 
 			response = client.execute(post);
 
