@@ -1,5 +1,12 @@
 package com.java.base.generic.two;
 
+
+/**
+ * 只要存在继承关系,就可以转换,和参数没有关系
+ * @author Derek.pan
+ *
+ */
+
 //强制类型转换
 public class CastType {
 	public static void main(String args[]) {

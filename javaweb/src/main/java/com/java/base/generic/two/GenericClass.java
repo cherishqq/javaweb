@@ -2,6 +2,8 @@ package com.java.base.generic.two;
 
 import java.util.Date;
 
+
+
 //继承泛型类
 public class GenericClass {
 	public static void main(String args[]) {
@@ -14,6 +16,16 @@ public class GenericClass {
 	}
 
 }
+
+/**
+ * 
+ * 演示了都是泛型的
+ * Child 中要有 T, 否则 extends Father<T> 时会报错
+ * @author Derek.pan
+ *
+ * @param <T>
+ * @param <U>
+ */
 
 class Child<T, U> extends Father<T> {
 	U u;

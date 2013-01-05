@@ -2,6 +2,9 @@ package com.java.base.generic.one;
 
 import java.util.Date;
 
+
+
+
 public class MyFirstGeneric<T> {
 	T t; //t的类型是T,现在不能具体确定它的类型，需要到创建对象时才能确定
 
