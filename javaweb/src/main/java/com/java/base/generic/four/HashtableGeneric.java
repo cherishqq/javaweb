@@ -2,26 +2,29 @@ package com.java.base.generic.four;
 
 import java.util.Hashtable;
 
-//HashtableµÄ·ºÐÍ»¯
+//Hashtableï¿½Ä·ï¿½ï¿½Í»ï¿½
+// ä½ å¥½
+
+
 public class HashtableGeneric<K, V> {
-	// ´´½¨HashtableµÄ·ºÐÍÀà¶ÔÏó
+	// ï¿½ï¿½ï¿½ï¿½Hashtableï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public Hashtable<K, V> hashTable = new Hashtable<K, V>();
 
-	// ´´½¨put·½·¨ÎªkeyºÍvalue¸³Öµ
+	// ï¿½ï¿½ï¿½ï¿½putï¿½ï¿½ï¿½ï¿½Îªkeyï¿½ï¿½valueï¿½ï¿½Öµ
 	public void put(K k, V v) {
 		hashTable.put(k, v);
 	}
 
-	// ´´½¨get·½·¨¿ÉÒÔ¸ù¾ÝkeyÖµ»ñÈ¡valueµÄÖµ
+	// ï¿½ï¿½ï¿½ï¿½getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½keyÖµï¿½ï¿½È¡valueï¿½ï¿½Öµ
 	public V get(K k) {
 		return hashTable.get(k);
 	}
 
 	public static void main(String args[]) {
 		HashtableGeneric<String, String> t = new HashtableGeneric<String, String>();
-		t.put("key", "JavaÓïÑÔ");
+		t.put("key", "Javaï¿½ï¿½ï¿½ï¿½");
 		String s = t.get("key");
-		System.out.println("¸ù¾ÝkeyÖµ»ñÈ¡µÄvalueµÄÄÚÈÝ£º\n\t" + s);
+		System.out.println("ï¿½ï¿½ï¿½keyÖµï¿½ï¿½È¡ï¿½ï¿½valueï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½\n\t" + s);
 	}
 
 }

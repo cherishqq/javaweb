@@ -1,26 +1,35 @@
 package com.java.base.generic.one;
 
-//ÓĞ½çÀàĞÍ³ÌĞòÊ¾Àı
+
+/**
+ * 
+ * desc: 
+ * @author Administrator
+ * @createtime: 2013-7-4 ä¸Šåˆ9:19:14 
+ * @version  
+ *
+ */
+
 public class BoundedType {
 	public static void main(String args[]) {
-		System.out.println("ÓĞ½çÀàĞÍ³ÌĞòÊ¾ÀıÈçÏÂ£º");
-		Integer inums[] = { 1, 2, 3, 4, 5 };//´´½¨Ò»¸öIntegerÀàĞÍµÄÊı×é
-		MyTypes<Integer> iobj = new MyTypes<Integer>(inums);//Ê¹ÓÃ·ºĞÍ¶ÔÏó
-		System.out.println("\tintĞÍÊı¾İµÄÇóºÍ½á¹ûÎª£º" + iobj.summation());
+		System.out.println("ï¿½Ğ½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½");
+		Integer inums[] = { 1, 2, 3, 4, 5 };//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Integerï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½
+		MyTypes<Integer> iobj = new MyTypes<Integer>(inums);//Ê¹ï¿½Ã·ï¿½ï¿½Í¶ï¿½ï¿½ï¿½
+		System.out.println("\tintï¿½ï¿½ï¿½ï¿½İµï¿½ï¿½ï¿½Í½ï¿½ï¿½Îªï¿½ï¿½" + iobj.summation());
 		Double dnums[] = { 1.1, 2.2, 3.3, 4.4, 5.5 };
-		MyTypes<Double> dobj = new MyTypes<Double>(dnums);//´´½¨Ò»¸öDoubleÀàĞÍµÄÊı
-		System.out.println("\n\tdoubleĞÍÊı¾İµÄÇóºÍ½á¹ûÎª£º" + dobj.summation());
+		MyTypes<Double> dobj = new MyTypes<Double>(dnums);//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Doubleï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½
+		System.out.println("\n\tdoubleï¿½ï¿½ï¿½ï¿½İµï¿½ï¿½ï¿½Í½ï¿½ï¿½Îªï¿½ï¿½" + dobj.summation());
 	}
 }
 class MyTypes<T extends Number> {
-	T[] nums;//¶¨ÒåÒ»¸öNumberÀàµÄÊı×é
-	MyTypes(T[] obj) {//Îª¸ÃÊı×é¸³Öµ
+	T[] nums;//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Numberï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	MyTypes(T[] obj) {//Îªï¿½ï¿½ï¿½ï¿½ï¿½é¸³Öµ
 		nums = obj;
 	}
-	double summation() {//¶Ô²ÎÊı½øĞĞÇóºÍÔËËã
+	double summation() {//ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		double sum = 0.0;
 		for (int i = 0; i < nums.length; ++i)
-			sum += nums[i].doubleValue(); //½«NumberÀàÊı×éÖĞµÄ¶ÔÏó×ª»»³ÉdoubleÀàĞÍ²¢ÒÀ´ÎÏà¼ÓÇóºÍ
+			sum += nums[i].doubleValue(); //ï¿½ï¿½Numberï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ĞµÄ¶ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½doubleï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		return sum ;
 	}
 }

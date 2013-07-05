@@ -18,3 +18,6 @@
 package relate
 1: log4j.xml  logger name="com.javaweb" need to change in different project
 2: dispatcher.xml context:component-scan need to change 
+
+homepage :
+ http://localhost:8080/javaweb/index.jsp

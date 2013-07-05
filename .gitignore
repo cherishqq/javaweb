@@ -4,9 +4,5 @@
 *.jar
 *.war
 *.ear
-.metadata
 target/
 .settings/
-.classpath
-.project
-.gitignore
