@@ -3,9 +3,6 @@
  * @author derek
  * @createtime: 2013-7-4 上午9:39:52 
  * @version  
- *
- * @param <K>
- * @param <V>
  */
 
 /**
@@ -20,6 +17,8 @@ function checkscope(){
 }
 
 alert(checkscope()());   // local scope
+
+
 
 
 /**
@@ -38,7 +37,7 @@ alert(d());   // 20
 alert(d());  //  40
 
 /**
-* third  这里有形成闭包吗？？
+* third  这里有形成闭包吗？？ no closure..
 */
 
 var name = "The Window";   
@@ -69,7 +68,6 @@ function outer(){
 
 /*
  *  five
- *  
  */
 
 var foo = ( function() {

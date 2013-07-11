@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>window 对象的专有事件演示</title>
+
+<!--  window的专有事件:
+	    onload            在浏览器完成对象的装载后触发事件
+		 onunload          在对象卸载前立即触发事件
+		 onbeforeunload    在页面将要被卸载前触发事件 
+		 window对象的事件处理通过body标签的事件属性来设置的
+-->
+<script language="javascript" type="text/javascript">
+			alert("开始加载网页....\n ---请注意网页的加载顺序---");
+		</script>
+</head>
+<body onload="alert('html文档加载完毕')" 
+	      onbeforeunload="window.event.returnValue='******你确定关闭本窗口******'" 
+		   onunload="alert('拜拜')">
+	 <h2>注意网页的加载顺序哦!!!</h2>
+	</body>
+</html>
+<script language="javascript" type="text/javascript">
+			alert("加载写在最下面的JavaScript脚本");
+</script>

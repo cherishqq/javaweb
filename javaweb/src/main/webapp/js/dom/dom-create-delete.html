@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script type="text/javascript">
+       function createDOM(){
+           var mydiv=document.getElementById("div3");
+           var _img=document.createElement("img");
+           _img.setAttribute("src","images/fish.gif");
+           mydiv.appendChild(_img);
+           
+           var _span=document.createElement("span");
+           var _hr=document.createElement("<hr>");
+           var _text=document.createTextNode("hello world");
+          
+           _span.appendChild(_hr);
+           _span.appendChild(_text);
+           insertAt(mydiv,_span,1);
+       }
+       function insertAt(currentNode,newNode,index){
+          //如果父结点无子结点则直接添加
+          if(!currentNode.hasChildNodes()){
+             currentNode.appendChild(newNode);
+          }else{
+             //否则在指定索引的子节点前添加一个节点
+             currentNode.insertBefore(newNode,currentNode.childNodes[index]);
+          }
+       }
+    </script>
+  </head>
+  <body>
+   <div id="div3">
+		<input type="button" value="DOM演示" onclick="createDOM();">
+	</div>
+  </body>
+</html>

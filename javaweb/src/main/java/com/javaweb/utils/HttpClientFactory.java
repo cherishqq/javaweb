@@ -18,7 +18,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
-
+import org.springframework.stereotype.Service;
 
 public class HttpClientFactory {
 

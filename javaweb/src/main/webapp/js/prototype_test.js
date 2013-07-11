@@ -97,4 +97,18 @@ runFx(obj.fx);  //  I am such a beautiful window
 runFx(fx2);     //  A nice demo
 
 
+/**
+ * four
+ */
+
+function Person(name) {
+	this.name = name;
+}
+var p = new Person();
+console.log(p.__proto__ === Person.prototype); // true
+
+console.log(Person.prototype.__proto__ === Object.prototype); // true
+
+console.log( Person.__proto__ == Function.prototype);
+
 

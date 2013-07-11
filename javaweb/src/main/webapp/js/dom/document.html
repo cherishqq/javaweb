@@ -1,0 +1,26 @@
+<body>
+        <h2>开始的内容</h2>
+        <script type="text/javascript">
+            document.write("这是document对象写入的内容<br>");
+            var str = "world";
+            document.write("哈楼 ", str, " javascript ", "<br>");
+            document.writeln(mystr = "Hello ", " World", "<br>");
+            document.writeln(mystr)
+            var a = "帅哥";
+            document.write(newStr = (a == "美女") ? "东方不败" : "西门吹雪");
+			 document.write("<br>");
+			function changeDoc(){
+				 document.writeln("以下是更新后的文档内容<br>");
+				 document.writeln('<script language="javascript">');
+				 document.writeln('function changeDoc()');
+				 document.writeln('{');
+				 document.writeln('document.writeln("hello ");');
+				 document.writeln('document.writeln("world ");');
+				 document.writeln('}');
+				 document.writeln('</scr'+'ipt>');//注意这里写法
+				 document.writeln('<input type="button" value="测试document对象" onclick="changeDoc();">');
+				 document.close();  //关闭文档 输出
+			}
+        </script>
+		<input type="button" value="测试document对象" onclick="changeDoc();">
+    </body>

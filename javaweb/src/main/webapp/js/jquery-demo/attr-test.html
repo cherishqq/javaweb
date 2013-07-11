@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>attr-test</title>
+<!-- 
+  test attr/ removeAttr/prop/ removeProp
+  addClass/ removeClass/ toggleClass/ html/ text/ val
+
+ -->
+
+<script  src="../../libs/jquery-1.7.2.js"></script>
+<script  src="../common/utils.js"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready( function(){
+		$("#test").html("<input type=button value='dd'></input>"); // can add widget
+		//	$("#test").html("dd");  // add character
+			
+			
+		// document.write(" $.text(): " + $("#test2").text());
+	
+	     " $.html() :" + $("#test2").html();
+	   //  alert($("#test2").text());
+	   
+	     p( "$.html():" + $("#test2").html());
+	       p("$.text():" + $("#test2").text());
+	       
+	
+	});
+</script>
+
+</head>
+
+<body>
+	<div id="test">
+	</div>
+	<div id="test2">
+	   <p>derek</p>
+	   <span>name </span>
+	</div>
+	<div id="result"  style=" width:600px;height:200px;border: 1px dashed #000000;">
+	   
+	</div>
+
+</body>
+</html>

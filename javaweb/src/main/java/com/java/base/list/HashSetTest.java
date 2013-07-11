@@ -5,9 +5,6 @@ import java.util.HashSet;
 /**
  *
  * @author derek.pan
- * 这个例子说明了：
- *   1：加入 HashSet 的除了 equals 要相等, hashcode 也要相等。。 否则。。
- *   2：加入相同的，不会被覆盖，会用原先的那个
  *
  */
 
@@ -30,7 +27,7 @@ public class HashSetTest {
 	}
 	
 	/**
-	 *  这里要加 static , 否则会报错
+	 *  
 	 * @author derek.pan
 	 *
 	 */

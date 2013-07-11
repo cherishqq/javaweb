@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>dom-table</title>
+
+<script  src="../../libs/jquery-1.7.2.js"></script>
+<script  src="../common/utils.js"></script>
+
+<script type="text/javascript">
+	   function selectAll(){
+		var selAll=document.getElementById("selAll");
+		var check=selAll.checked;
+		var selIds=document.getElementsByName("selIds");
+		for(var i=0;i<selIds.length;i++){
+				selIds[i].checked=check;
+		}
+	}
+   function addUser(){
+      var name=document.getElementById("myname").value;
+      var unit=document.getElementById("myunit").value;
+      var age=document.getElementById("myage").value;
+      var user=["",name,unit,age];
+      var mytb=document.getElementById("mytb");
+      var len=mytb.rows.length;
+      if(name!="" && unit!="" && age!=""){
+      		var _tr=mytb.insertRow(len);
+      		var _tb0=_tr.insertCell(0);
+       		_tb0.innerHTML="<input type='checkbox' name='selIds'>";
+      		for(var i=1;i<4;i++){
+         		var _tb=_tr.insertCell(i);
+         		_tb.innerHTML=user[i];
+      		}
+      }
+   }
+   
+   function delUser(){
+      var mytb=document.getElementById("mytb");
+      for(var i=(mytb.rows.length-1);i>0;i--){
+           if(mytb.rows(i).cells(0).childNodes[0].checked){
+              mytb.deleteRow(i); 
+           }
+      }
+   }
+	
+	
+</script>
+
+</head>
+
+<body>
+
+  <table border="1"  width="500">
+      	<thead>
+      	<tr>
+      	 	<th>用户名</th><th>地址</th><th>电话</th>
+		</tr>
+      	</thead>
+	  	<tbody>
+	  	 <tr>
+	  	 	<td>宇春妹妹</td><td>后街</td><td>111111</td>
+		 </tr>
+		 <tr>
+	  	 	<td>芙蓉姐姐</td><td>后街</td><td>111111</td>
+		 </tr>
+	  	</tbody>
+    	</table>
+
+    <h3 align="center" >用户信息</h3>
+    <table id="mytb"  align="center" border="1" width="500">
+     <thead>
+      <tr align="center">
+      	<td><input type='checkbox' id="selAll" onclick='selectAll();'></td>
+　　　　　<td>姓名</td><td>单位</td><td>年龄</td></tr>
+	</thead>
+    </table>
+    <hr>
+       <div id="div2" align="center" >
+       	姓名: <input type="text" id="myname" size="10" >
+        	单位: <input type="text" id="myunit" size="10">
+        	年龄: <input type="text" id="myage" size="5"> 
+    	<input type=button value="添加" onclick="addUser()">
+    	<input type=button value="删除" onclick="delUser()">
+    	</div>
+
+	<div id="result"  style=" width:600px;height:200px;border: 1px dashed #000000;">
+	   
+	</div>
+
+</body>
+</html>
