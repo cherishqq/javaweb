@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" language="JavaScript">
+			function showItem(){
+				//获取id为sp的span标记下的img标记数组
+				var imgs=document.getElementById("sp").getElementsByTagName("img");
+				var cp=document.getElementById("cp");
+				var canExpand=true;
+				if(imgs[0].src.indexOf("minus.gif")!=-1){
+					canExpand=false;
+					imgs[0].src="images/plus.gif";
+				}else{
+					imgs[0].src="images/minus.gif";
+				}
+				if(canExpand){
+					cp.style.display="block";  //显示
+				}else{
+					cp.style.display="none";   //隐藏
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<span id="sp" style="cursor:hand;" onclick="showItem()">
+		    <img src="images/minus.gif">
+		</span>总公司
+		<ul id="cp">
+			<li>上海分公司
+			<li>北京分公司
+			<li>常德分公司
+		</ul>
+	</body>
+</html>

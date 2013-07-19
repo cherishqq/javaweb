@@ -1,4 +1,4 @@
-package com.javaweb.annotation;
+package com.javaweb.spring.annotation;
 
 import javax.annotation.PostConstruct;
 
@@ -17,7 +17,6 @@ public class AnnotationTest implements ApplicationContextAware{
 		System.out.println("*********begin**************");
 		System.out.println("*********init**************");
 		System.out.println("*********end**************");
-		
 	}
 
 	@Override

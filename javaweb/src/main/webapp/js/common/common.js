@@ -210,3 +210,42 @@ function findAllInput( type) {
  function isIE7(){
 	return this.navigator.indexOf("msie 7") > -1;
 }
+ 
+//获取元素
+ function $$(id) {
+ 	return document.getElementById(id);
+ }
+
+ //获取选择列表的值
+ function get_slVal(id) {
+ 	var sl = document.getElementById(id);
+ 	return sl.options[sl.selectedIndex].value;
+ }
+
+ //请求Get数据
+ function GetJSON (api, fun) {
+ 	var url = server+api+"&callback=?";
+     baidu.get(encodeURI(url), function(result){
+ 		fun(result);
+     }, 'json');
+ }
+
+ //请求Post数据
+ function PostJSON(api, data, fun) {
+ 	var url = server+api;
+ 	baidu.post(url, data, function(result){
+ 		fun(result);
+     });
+ }
+
+ //取出缓存
+ function getLocal(id, rid, sel) {
+ 	var d = localStorage[id];
+ 	if ( d != null && d != "undefined" && d.length > 0 ) {
+ 		if ( sel==0 ) {
+ 			$$(id+"_"+rid).value = d;
+ 		}else {
+ 			$$(id+"_"+rid).selectedIndex = parseInt(d);
+ 		}
+ 	}
+ }

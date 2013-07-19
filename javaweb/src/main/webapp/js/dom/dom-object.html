@@ -1,0 +1,35 @@
+
+<html>
+
+ <script type="text/javascript">
+            window.status = "清华IT"; //设置状态栏文本
+            document.title = "演示";
+            function show(){
+                alert("文档标题：" + document.title);
+                alert("所有指定了href属性的 对象集合数组长度:" + document.links.length);
+     alert("所有带有 name或 id 属性的 a对象的集合数组长度：" + document.anchors.length);
+                alert(document.links[1].href);
+                alert(document.all["an1"].name)
+                alert(document.forms["frm1"].method);
+            }
+        </script>
+    </head>
+    <body>
+        <button name="btn" onClick="show();">
+            document集合属性演示
+        </button>
+        <br/>
+        <a name="an1" id="a"> TO js_right.html</a>
+        <br/>
+        <a name="an2" id="b" href="js_left.html">链接到js_left.html</a>
+        <br/>
+        <a href="js_right.html">链接到js_right.html</a>
+        <br/>
+        <form name="frm1" method="get">
+        </form>
+        <form name="frm2" method="post">
+        </form>
+        <form name="frm3" method="post">
+        </form>
+    </body>
+    </html>

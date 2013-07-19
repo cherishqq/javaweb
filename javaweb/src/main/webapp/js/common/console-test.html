@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>index</title>
+
+<!-- if use <script /> not <script></script> it will display unusual  -->
+
+<style type="text/css">
+
+.console-panel {
+	right: 5px;
+	top: 18px;
+	display: block;
+	width: 36px;
+	position: fixed;
+	z-index: 501;
+}
+
+.item {
+	display: inline-block;
+	position: relative;
+	width: 36px;
+	height: 36px;
+	outline: none;
+	background: url("./menubar_bg_tm_1ff32815.png") no-repeat;
+	float: left;
+	margin-bottom: 2px;
+	background-position: 0 -38px;
+	z-index: 502;
+}
+
+.console-border {
+	border: 4px solid #F0F0F0;
+	position: absolute;
+	right: 37px;
+	overflow: hidden;
+}
+
+/* .console-panel {
+	font: normal normal 12px/22px consolas, mono, courier;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: white;
+	color: #333;
+	width: 680px;
+	height: 200px;
+	overflow: hidden;
+	z-index: 999;
+} */
+
+.console-panel-box {
+	padding: 0 5px;
+	margin: 10px;
+	height: 180px;
+	width: 650px;
+	overflow: auto;
+}
+
+.console-log {
+	
+}
+
+.console-input {
+	padding: 0 10px;
+	min-height: 1.5em;
+	_height: 1.5em;
+	background: url(./console.png) no-repeat 0 -32px;
+	word-break: break-all;
+	word-wrap: break-word;
+	border: none;
+	outline: none;
+}
+
+.console-input-area {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: none;
+	width: 100%;
+	height: 100%;
+	line-height: 1.5em;
+}
+
+.console-log-line {
+	padding: 0 10px;
+	border-style: solid;
+	border-color: #555;
+	border-width: 0 0 1px;
+	background: url(console.png) no-repeat 0 -13px;
+}
+
+.console-log-line-error {
+	color: red;
+	background-position: 0 7px;
+}
+
+.console-log-line-log { /*color:#777;*/
+	background: none;
+}
+
+.console-log-line-cmd {
+	color: #08F;
+}
+</style>
+
+
+<script type="text/javascript">
+
+  function init(){
+  
+	var cc = new String("cc");
+	consoleIE.log(cc);
+	consoleIE.log('cc');
+	
+	var o = {
+		name : 'derek',
+		age : 28,
+		gender : 'man'
+	};
+	
+	consoleIE.log(o);
+	
+	var e = document.getElementById("test");
+	consoleIE.log(e);
+	
+	function Person(){
+		this.name = name;
+		this.age = age;
+	}
+	
+	consoleIE.log(Person);
+	
+//	consoleUI.newResultRow();
+	}
+	
+	
+	function show(){
+
+	   var e = document.getElementById("result");
+
+	   if( e.style.display == 'none'){
+	   	    e.style.display = 'block';
+	   }
+	}
+</script>
+
+</head>
+<body onload = "init()">
+	<div id="test">
+	   <p> p tag<p>
+	   <span> span tag</span>
+	</div>
+<script  src="console.js"></script>
+	
+<!-- <div style="right:5px;top:18px; display: block; width: 36px;position: fixed; z-index: 501;">
+	<div style="position:relative;width:36px">
+		<a href="#"  onclick="show();return false;" class="item" title="console"  ></a>
+		
+		<div id="result" class="console-border" style="top: 20px; width: 680px; height: 230px; opacity: 1; display:none;">
+			<div class= "console-panel-box">
+				 <div id="console-result-area"  class="console-log">
+				 	<div class="console-log-line console-log-line-log" >"dddfs"</div>
+				 	<div class="console-log-line console-log-line-log" >"dddfs"</div>
+				 	<div class="console-log-line console-log-line-log" >"dddfs"</div>
+				 	<div class="console-log-line console-log-line-log" >"dddfs"</div>
+				 	<div class="console-log-line console-log-line-log" >"dddfs"</div>
+				 </div>
+				 <div id="console-input-area" class="console-input" contenteditable="true"  />
+				
+			</div>
+		</div>
+		
+	</div> 
+</div> -->
+</body>
+
+</html>

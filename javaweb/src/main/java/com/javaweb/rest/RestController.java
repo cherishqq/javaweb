@@ -21,7 +21,7 @@ public class RestController {
 	 * @return
 	 */
 	
-	@RequestMapping(value="/show",method=RequestMethod.GET)
+	@RequestMapping(value="/show")
 	@ResponseBody
 	public String show(){
 		System.out.println("show");
