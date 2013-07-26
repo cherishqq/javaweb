@@ -17,7 +17,7 @@ function outer(){
 	window.setTimeout(inner,2000);
 }
 
-alert('dd');
+console.log('main page');
 	
 </script>
 </head>

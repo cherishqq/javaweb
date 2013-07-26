@@ -18,9 +18,20 @@
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd"
-    default-autowire="byName"   >
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd" >
 
+      <bean id="webAnnotations"
+        class="org.codehaus.xfire.annotations.jsr181.Jsr181WebAnnotations" />
+
+    <bean id="jsr181HandlerMapping"
+        class="org.codehaus.xfire.spring.remoting.Jsr181HandlerMapping">
+        <property name="typeMappingRegistry">
+            <ref bean="xfire.typeMappingRegistry" />
+        </property>
+        <property name="xfire" ref="xfire" />
+        <property name="webAnnotations" ref="webAnnotations" />
+    </bean>
+    
 	
 	<context:component-scan base-package="com.javaweb"/>
 
@@ -39,8 +50,19 @@
         </property>   
     </bean> 
 	-->
+	
+
+
+
+
+<!-- XFire end --> 
+	
+	
+
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
 
+		<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射  -->
+	
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 
     <!-- 根据客户端的不同的请求决定不同的view进行响应, 如 /blog/1.json /blog/1.xml -->
@@ -127,5 +149,21 @@
  
     <tx:annotation-driven transaction-manager="transactionManager" />  
     
+    
+    	
+	<!-- XFire start -->  
+	
+	<!-- 在这里定义没用,转到web.xml 里面加进去,才生效 -->
+<!-- <import resource="classpath:org/codehaus/xfire/spring/xfire.xml" />   -->
+
+
+    
+    
+<!--     <bean id="baseWebService" class="org.codehaus.xfire.spring.remoting.XFireExporter" lazy-init="false" abstract="true">
+       引用xfire.xml中定义的工厂
+       <property name="serviceFactory" ref="xfire.serviceFactory" />
+       引用xfire.xml中的xfire实例
+       <property name="xfire" ref="xfire" />
+    </bean> -->
     
 </beans>

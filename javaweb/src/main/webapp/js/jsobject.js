@@ -46,8 +46,8 @@ alert( " second value: " + c.area());*/
 
 c.setValue('dd');
 
-alert( c.getValue());
-alert( c._bb);
+console.log( c.getValue());
+console.log( c._bb);
 
 
 
@@ -64,7 +64,7 @@ var Book = function( newIsbn, newTitle, newAuthor){
     var isbn,title,author;
     // private method
     function checkIsbn( isbn) {
-    	alert(isbn);
+    	console.log(isbn);
     };
     
     isbn = newIsbn;
@@ -94,13 +94,13 @@ Book.prototype = {
 }
 
 var book = new Book('1111','Android','derek');
- alert(book.getIsbn());
+console.log(book.getIsbn());
  //book.display();
  
  var Person = {
 		 name : 'derek',
 		 show : function(){
-			 alert(this.name);  // must use this.name// no name..
+			 console.log(this.name);  // must use this.name// no name..
 		 }
  }
  

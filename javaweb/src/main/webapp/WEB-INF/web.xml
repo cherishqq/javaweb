@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
 
 
-			 
+
 	<!-- Spring ApplicationContex -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:spring/*.xml</param-value>
+		<param-value>
+		    classpath:org/codehaus/xfire/spring/xfire.xml</param-value>
 	</context-param>
-	
-	<!--  Character Encoding filter -->
+
+	<!-- Character Encoding filter -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -31,7 +35,7 @@
 
 
 
-	<!--  -->
+	<!-- -->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>/static/*</url-pattern>
@@ -40,7 +44,7 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.css</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.js</url-pattern>
 	</servlet-mapping>
@@ -53,12 +57,12 @@
 		<url-pattern>*.png</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	<servlet-name>default</servlet-name>
+		<servlet-name>default</servlet-name>
 		<url-pattern>*.gif</url-pattern>
 	</servlet-mapping>
-	
-	
-		<!-- Error Page定义 -->
+
+
+	<!-- Error Page定义 -->
 	<error-page>
 		<error-code>500</error-code>
 		<location>/commons/error.jsp</location>
@@ -71,23 +75,43 @@
 		<error-code>403</error-code>
 		<location>/commons/403.jsp</location>
 	</error-page>
-	
+
 	<servlet>
-	    <servlet-name>springmvc</servlet-name>
-	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-	    <load-on-startup>1</load-on-startup>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
+
 	<servlet-mapping>
-	    <servlet-name>springmvc</servlet-name>
-	    <url-pattern>/</url-pattern>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
+<!-- 	<servlet>
+		<servlet-name>xfire</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>xfire</servlet-name>
+		<url-pattern>*.ws</url-pattern>
+	</servlet-mapping>
+ -->
+
+		<servlet>
+			<servlet-name>xfireServlet</servlet-name>
+			<servlet-class>org.codehaus.xfire.spring.XFireSpringServlet</servlet-class>
+			<load-on-startup>5</load-on-startup>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>xfireServlet</servlet-name>
+			<url-pattern>/service/*</url-pattern>
+		</servlet-mapping>
+
 		<!-- default homepage -->
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
-	
+		<welcome-file-list>
+			<welcome-file>index.jsp</welcome-file>
+			<welcome-file>index.html</welcome-file>
+		</welcome-file-list>
+
 
 </web-app>

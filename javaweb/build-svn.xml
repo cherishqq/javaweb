@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="dt" basedir=".">  
+    <!--定义属性-->  
+    <property name="src" value="src/main/java" />  
+    <property name="resources" value="src/main/resources"/>  
+    <property name="test" value="test"></property>  
+    <property name="target" value="target"></property>  
+    <property name="main-target" value="target/classes"/>  
+    <property name="test-target" value="target/test-classes"/>  
+    <property name="lib-dir" value="WebContent/WEB-INF/lib"/>
+    <!--ant lib目录>  
+    <property name="ant-lib-dir" value="E:/Program Files/apache-ant-1.9.2"/>  
+
+    <!-- svn路径 -->  
+    <property name="urlRepos" value="https://svn.sinaapp.com/dingcanla/" />  
+    <!-- 定义classpath-->  
+    <path id="classpath">  
+        <fileset dir="${lib-dir}" includes="***.jar"></fileset>  
+        <fileset dir="${tomcat-lib}" includes="***.jar"></fileset>  
+    </path>  
+    <!-- 引用svn task文件，使用svn任务可以使用-->  
+    <typedef resource="org/tigris/subversion/svnant/svnantlib.xml" />  
+    <!-- 清理-->  
+    <target name="clean">  
+        <delete dir="${target}"></delete>  
+    </target>  
+    <!-- 初始化-->  
+    <target name="init" depends="clean">  
+          
+        <mkdir dir="${main-target}"/>  
+        <mkdir dir="${test-target}"/>  
+    </target>  
+    <!-- 设置svn相关属性 -->  
+    <svnSetting id="svn.setting" svnkit="true" username="hzl" password="111111"  javahl="false" />  
+    <!-- 检出代码 这里使用 export 不是checkout 二者区别 checkout会svn相关信息文件检出，export只是检出最新的文件-->  
+    <target name="checkout" depends="clean">  
+        <svn refid="svn.setting">  
+            <export srcUrl="${urlRepos}" destPath="." force="true"/>  
+        </svn>  
+    </target>  
+    <!-- 编译 -->  
+    <target name="compile" depends="checkout">  
+        <javac srcdir="${src}" destdir="${main-target}" encoding="UTF-8" includeAntRuntime="false">  
+            <classpath refid="classpath"></classpath>  
+        </javac>  
+        <copy todir="${main-target}">  
+            <fileset dir="${resources}">  
+                <exclude name="sql/**"/>  
+            </fileset>  
+        </copy>  
+    </target>  
+    <!-- 打war包 -->  
+    <target name="build" depends="compile">  
+          
+        <war destfile="${target}/dt.war" webxml="WebContent/WEB-INF/web.xml">  
+            <fileset dir="WebContent"></fileset>  
+            <classes dir="${main-target}"></classes>  
+        </war>  
+        <delete dir="${main-target}"></delete>  
+        <delete dir="${test-target}"></delete>  
+    </target>  
+      
+    <!--shutdowntomcat-->  
+    <target name="shutdowntomcat" description="========shutdowntomcat===========">  
+        <exec executable="${tomcat.home}/bin/shutdown.sh" failonerror="false"></exec>  
+        <sleep seconds="10"/>  
+    </target>  
+      
+    <!--startuptomcat-->  
+    <target name="startuptomcat" description="========startuptomcat===========">  
+        <sleep seconds="5"/>  
+        <exec executable="${tomcat.home}/bin/startup.sh" failonerror="false"></exec>  
+    </target>  
+  
+    <!--部署到tomcat下面-->  
+    <target name="deploy" depends="war">  
+        <copy file="${target}/dt.war" todir="${tomcat.home}/webapps" />  
+    </target>   
+</project>  
