@@ -1,11 +1,11 @@
 package com.javaweb.spring.annotation.webservice.client;
 
 import org.apache.log4j.Logger;
-import org.codehaus.xfire.XFire;
+/*import org.codehaus.xfire.XFire;
 import org.codehaus.xfire.XFireFactory;
 import org.codehaus.xfire.client.XFireProxyFactory;
 import org.codehaus.xfire.service.Service;
-import org.codehaus.xfire.service.binding.ObjectServiceFactory;
+import org.codehaus.xfire.service.binding.ObjectServiceFactory;*/
 
 import com.javaweb.spring.annotation.webservice.IBookService;
 
@@ -33,18 +33,18 @@ public class Client {
     public static void main(String[] args) {
 
         //Create a metadata of the service
-        Service serviceModel = new ObjectServiceFactory().create(IBookService.class);
+/*        Service serviceModel = new ObjectServiceFactory().create(IBookService.class);
         log.debug("callSoapServiceLocal(): got service model.");
 
         //Create a proxy for the deployed service
         XFire xfire = XFireFactory.newInstance().getXFire();
-        XFireProxyFactory factory = new XFireProxyFactory(xfire);
+        XFireProxyFactory factory = new XFireProxyFactory(xfire);*/
 
         String serviceUrl = "http://localhost:8080/javaweb/service/BookService";
 
         IBookService bookService = null;
-        try {
-        	bookService = (IBookService) factory.create(serviceModel, serviceUrl);
+/*        try {
+       	bookService = (IBookService) factory.create(serviceModel, serviceUrl);
         	
         	log.debug("bookService:" + bookService.getBook());
            System.out.println( bookService.getBook()) ; 
@@ -52,7 +52,7 @@ public class Client {
         } catch (MalformedURLException e) {
             log.error("Client.callWebService(): EXCEPTION: " + e.toString());
         }
-
+*/
 /*        //Invoke the service
         try {
             TemperatureInfo temperature = getTodayTemperature(weatherService, "Houston");

@@ -9,11 +9,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-version>3.1.1.RELEASE</spring-version>
-
-		
+		<cxf.version>2.7.5</cxf.version>
 	</properties>
-	
-
 	
 	<dependencies> 
 	
@@ -205,7 +202,8 @@
             <artifactId>xstream</artifactId>  
             <version>1.3.1</version>  
         </dependency>
-
+	
+	<!--  xfire start 	-->
 	<dependency>
 		<groupId>org.codehaus.xfire</groupId>
 		<artifactId>xfire-aegis</artifactId>
@@ -223,16 +221,13 @@
 			</exclusion>
 		</exclusions>
 	</dependency>
-
 	<dependency>
 		<groupId>xalan</groupId>
-
 		<artifactId>xalan</artifactId>
-
 		<version>2.7.0</version>
-
 	</dependency>
 	
+
 	<dependency>
 			<groupId>xfire</groupId>
 			<artifactId>xfire-jsr181-api</artifactId>
@@ -245,7 +240,7 @@
 			</exclusions>
 		</dependency>
 		
-			<dependency>
+		<dependency>
 			<groupId>org.codehaus.xfire</groupId>
 			<artifactId>xfire-annotations</artifactId>
             <version>1.2.6</version>
@@ -256,8 +251,28 @@
 			<artifactId>xfire-java5</artifactId>
             <version>1.2.6</version>
 		</dependency>
+	
 		
-		
+
+	<!--  cxf  start-->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<!-- cxf wss4j -->
+		<dependency>  
+            <groupId>org.apache.cxf</groupId>  
+            <artifactId>cxf-rt-ws-security</artifactId>  
+            <version>${cxf.version}</version>  
+        </dependency> 
+
+		<!--  end -->
 		
 	</dependencies>
 </project>

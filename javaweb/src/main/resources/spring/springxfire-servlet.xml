@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 
-    
+    <import resource="org/codehaus/xfire/spring/xfire.xml"/>
       <bean id="webAnnotations"
         class="org.codehaus.xfire.annotations.jsr181.Jsr181WebAnnotations" />
 
