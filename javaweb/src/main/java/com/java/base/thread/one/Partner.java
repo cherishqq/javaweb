@@ -1,83 +1,84 @@
 package com.java.base.thread.one;
 
+
 public class Partner {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MatchMarry group1 = new MatchMarry("TOM", "SUSAN"); // ÊµÀı»¯¶ÔÏó
-		MatchMarry group2 = new MatchMarry("ÕÅÈı", "ÀîĞ¡ºì");
-		MatchMarry group3 = new MatchMarry("°²Äİ", "ÂŞ²·ÌØ¡¤²¨ÒÁ¶û");
-		MatchMarry group4 = new MatchMarry("TOM", "°²Äİ");
-		MatchMarry group5 = new MatchMarry("SUSAN", "ÕÅÈı");
-		System.out.println("**ËÙÅä»éÒö½éÉÜËù£¬×ÚÖ¼ÊÇÒª±£Ö¤·¢Ñï\"Ğ¯×ÓÖ®ÊÖ Óë×ÓÙÉÀÏ\"µÄ¾«Éñ");
-		group1.start(); // Æô¶¯Ïß³Ì
+		MatchMarry group1 = new MatchMarry("TOM", "SUSAN"); // å®ä¾‹åŒ–å¯¹è±¡
+		MatchMarry group2 = new MatchMarry("å¼ ä¸‰", "æå°çº¢");
+		MatchMarry group3 = new MatchMarry("å®‰å¦®", "ç½—åœç‰¹Â·æ³¢ä¼Šå°”");
+		MatchMarry group4 = new MatchMarry("TOM", "å®‰å¦®");
+		MatchMarry group5 = new MatchMarry("SUSAN", "å¼ ä¸‰");
+		System.out.println("**é€Ÿé…å©šå§»ä»‹ç»æ‰€ï¼Œå®—æ—¨æ˜¯è¦ä¿è¯å‘æ‰¬\"æºå­ä¹‹æ‰‹ ä¸å­å•è€\"çš„ç²¾ç¥");
+		group1.start(); // å¯åŠ¨çº¿ç¨‹
 		try {
-			group1.join(); // µÈ´ıÏß³ÌÔËĞĞ½áÊø
-		} catch (InterruptedException e) { // ²¶»ñ»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
+			group1.join(); // ç­‰å¾…çº¿ç¨‹è¿è¡Œç»“æŸ
+		} catch (InterruptedException e) { // æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
 		}
 		group2.start();
 		try {
-			group2.join(); // µÈ´ıÏß³ÌÔËĞĞ½áÊø
-		} catch (InterruptedException e) { // ²¶»ñ»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
+			group2.join(); // ç­‰å¾…çº¿ç¨‹è¿è¡Œç»“æŸ
+		} catch (InterruptedException e) { // æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
 		}
 		group3.start();
 		try {
-			group3.join(); // µÈ´ıÏß³ÌÔËĞĞ½áÊø
-		} catch (InterruptedException e) { // ²¶»ñ»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
+			group3.join(); // ç­‰å¾…çº¿ç¨‹è¿è¡Œç»“æŸ
+		} catch (InterruptedException e) { // æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
 		}
 
 		group4.start();
 		try {
-			group4.join(); // µÈ´ıÏß³ÌÔËĞĞ½áÊø
-		} catch (InterruptedException e) { // ²¶»ñ»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
+			group4.join(); // ç­‰å¾…çº¿ç¨‹è¿è¡Œç»“æŸ
+		} catch (InterruptedException e) { // æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
 		}
 		group5.start();
 		try {
-			group5.join(); // µÈ´ıÏß³ÌÔËĞĞ½áÊø
-		} catch (InterruptedException e) { // ²¶»ñ»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
+			group5.join(); // ç­‰å¾…çº¿ç¨‹è¿è¡Œç»“æŸ
+		} catch (InterruptedException e) { // æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
 		}
-		System.out.println("ËÙÅä½áÊø...");
+		System.out.println("é€Ÿé…ç»“æŸ...");
 
 	}
 
 }
 
-class MatchMarry extends Thread { // ²âÊÔÆ¥Åä½á»éµÄÀà
-	private String name; // ÈËÔ±Ãû³Æ
+class MatchMarry extends Thread { // æµ‹è¯•åŒ¹é…ç»“å©šçš„ç±»
+	private String name; // äººå‘˜åç§°
 
-	private String otherName; // ½á»é¶ÔÏó
+	private String otherName; // ç»“å©šå¯¹è±¡
 
-	private boolean isMarry = false; // ÊÇ·ñ½á»é
+	private boolean isMarry = false; // æ˜¯å¦ç»“å©š
 
-	public MatchMarry(String name, String otherName) { // ´ø²ÎÊı¹¹Ôì·½·¨½øĞĞ³õÊ¼»¯
+	public MatchMarry(String name, String otherName) { // å¸¦å‚æ•°æ„é€ æ–¹æ³•è¿›è¡Œåˆå§‹åŒ–
 		this.name = name;
 		this.otherName = otherName;
 	}
 
 	public void run() {
 		try {
-			int person = (int) Math.floor((Math.random() * 10 + 1));// »ñµÃËæ»úÊı
+			int person = (int) Math.floor((Math.random() * 10 + 1));// è·å¾—éšæœºæ•°
 			if (person % 2 == 0) {
-				isMarry = true; // ÉèÖÃ±êÊ¶
+				isMarry = true; // è®¾ç½®æ ‡è¯†
 			} else {
 				isMarry = false;
 			}
 			if (!isMarry) {
-				System.out.println(name + "¿ÉÒÔÓë" + otherName + "½á»é£¬×£¸£ÄãÃÇ");
+				System.out.println(name + "å¯ä»¥ä¸" + otherName + "ç»“å©šï¼Œç¥ç¦ä½ ä»¬");
 			} else {
-				System.out.println(otherName + "ÒÑ»é£¬ºìÉ«¾¯¸æ£º¶Ô´ı»éÒö²»ÒªÓĞ¶şĞÄ");
+				System.out.println(otherName + "å·²å©šï¼Œçº¢è‰²è­¦å‘Šï¼šå¯¹å¾…å©šå§»ä¸è¦æœ‰äºŒå¿ƒ");
 			}
-			Thread.sleep(200); // Ïß³ÌĞİÃß
+			Thread.sleep(200); // çº¿ç¨‹ä¼‘çœ 
 
-		} catch (InterruptedException e) { // ²¶»ñ»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
+		} catch (InterruptedException e) { // æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
 		}
 	}
 }

@@ -1,64 +1,65 @@
 package com.java.base.thread.two;
 
-public class DoorOpen {
-	static String[] keys = new String[] { "µÚ1°ÑÔ¿³×", "µÚ2°ÑÔ¿³×" };
 
-	static class DoorKey1 extends Thread { // ¾²Ì¬ÄÚ²¿Àà
+public class DoorOpen {
+	static String[] keys = new String[] { "ç¬¬1æŠŠé’¥åŒ™", "ç¬¬2æŠŠé’¥åŒ™" };
+
+	static class DoorKey1 extends Thread { // é™æ€å†…éƒ¨ç±»
 		public void run() {
-			synchronized (keys[0]) { // ÔÚÍ¬Ò»Ê±¼äÖ»ÄÜÓĞÒ»¸öÀà·ÃÎÊ
-				System.out.println("ÎÒÄÃÆğÁË" + keys[0] + ",ÔÚµÈ×ÅÅóÓÑÓÃ" + keys[1]
-						+ "¿ª·ÀµÁÃÅ");
+			synchronized (keys[0]) { // åœ¨åŒä¸€æ—¶é—´åªèƒ½æœ‰ä¸€ä¸ªç±»è®¿é—®
+				System.out.println("æˆ‘æ‹¿èµ·äº†" + keys[0] + ",åœ¨ç­‰ç€æœ‹å‹ç”¨" + keys[1]
+						+ "å¼€é˜²ç›—é—¨");
 				try {
-					Thread.sleep(100); // Ïß³ÌĞİÃß
-				} catch (Exception e) { // ²¶»ñÒì³£
-					System.out.println("Ïß³ÌĞİÃß³ö´í£º" + e.getMessage());
+					Thread.sleep(100); // çº¿ç¨‹ä¼‘çœ 
+				} catch (Exception e) { // æ•è·å¼‚å¸¸
+					System.out.println("çº¿ç¨‹ä¼‘çœ å‡ºé”™ï¼š" + e.getMessage());
 				}
 				synchronized (keys[1]) {
-					System.out.println("ÎÒÓÖÄÃ³öÀ´" + keys[1] + "´ò¿ªÁË·ÀµÁÃÅ");
+					System.out.println("æˆ‘åˆæ‹¿å‡ºæ¥" + keys[1] + "æ‰“å¼€äº†é˜²ç›—é—¨");
 				}
 			}
 		}
 	}
 
-	static class DoorKey2 extends Thread { // ¾²Ì¬ÄÚ²¿Àà
+	static class DoorKey2 extends Thread { // é™æ€å†…éƒ¨ç±»
 		public void run() {
 			synchronized (keys[0]) {
-				System.out.println("\nÅóÓÑÄÃ³öÁË" + keys[0] + ",ÔÚµÈ´ıÎÒÓÃ" + keys[1]
-						+ "¿ª·ÀµÁÃÅ");
+				System.out.println("\næœ‹å‹æ‹¿å‡ºäº†" + keys[0] + ",åœ¨ç­‰å¾…æˆ‘ç”¨" + keys[1]
+						+ "å¼€é˜²ç›—é—¨");
 				try {
-					Thread.sleep(100); // Ïß³ÌĞİÃß
-				} catch (Exception e) { // ²¶»ñÒì³£
-					System.out.println("Ïß³ÌĞİÃß³ö´í£º" + e.getMessage());
+					Thread.sleep(100); // çº¿ç¨‹ä¼‘çœ 
+				} catch (Exception e) { // æ•è·å¼‚å¸¸
+					System.out.println("çº¿ç¨‹ä¼‘çœ å‡ºé”™ï¼š" + e.getMessage());
 				}
 				synchronized (keys[1]) {
-					System.out.println("ÅóÓÑÓÖÄÃ³öÁË" + keys[1] + "´ò¿ªÁË·ÀµÁÃÅ");
+					System.out.println("æœ‹å‹åˆæ‹¿å‡ºäº†" + keys[1] + "æ‰“å¼€äº†é˜²ç›—é—¨");
 				}
 			}
 		}
 	}
 
-	static class GoWrong extends Thread { // ¾²Ì¬ÊØ»¤Ïß³ÌÀà
+	static class GoWrong extends Thread { // é™æ€å®ˆæŠ¤çº¿ç¨‹ç±»
 		public GoWrong() {
-			this.setDaemon(true); // Ïß³ÌÉèÖÃÊØ»¤
+			this.setDaemon(true); // çº¿ç¨‹è®¾ç½®å®ˆæŠ¤
 		}
 
 		public void run() {
 			while (true) {
 				try {
-					Thread.sleep(1000); // Ïß³ÌĞİÃß
-				} catch (Exception e) { // ²¶»ñÒì³£
-					System.out.println("Ïß³ÌĞİÃß³ö´í£º" + e.getMessage());
+					Thread.sleep(1000); // çº¿ç¨‹ä¼‘çœ 
+				} catch (Exception e) { // æ•è·å¼‚å¸¸
+					System.out.println("çº¿ç¨‹ä¼‘çœ å‡ºé”™ï¼š" + e.getMessage());
 				}
-				System.out.println("ÊØ»¤Ïß³Ì£º³ÌĞòÕıÔÚÔËĞĞ...");
+				System.out.println("å®ˆæŠ¤çº¿ç¨‹ï¼šç¨‹åºæ­£åœ¨è¿è¡Œ...");
 			}
 		}
 	}
 
-	public static void main(String[] args) { // java³ÌĞòÖ÷Èë¿Ú´¦
-		DoorKey1 one = new DoorKey1(); // ÊµÀı»¯¶ÔÏó
+	public static void main(String[] args) { // javaç¨‹åºä¸»å…¥å£å¤„
+		DoorKey1 one = new DoorKey1(); // å®ä¾‹åŒ–å¯¹è±¡
 		DoorKey2 two = new DoorKey2();
 		GoWrong daemon = new GoWrong();
-		one.start(); // Æô¶¯Ïß³Ì
+		one.start(); // å¯åŠ¨çº¿ç¨‹
 		two.start();
 		daemon.start();
 	}

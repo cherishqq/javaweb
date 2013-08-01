@@ -1,13 +1,13 @@
 package com.java.base.thread.five;
 
-public class CallCenter extends Object {//¿Í·şÖĞĞÄ
-	private static int nextServiceID = 0;//ÏÂÒ»¸ö¿Í·şµÄID
-	private InterNIC iNIC;//ÉùÃ÷Íø¼ÊÍøÂçĞÅÏ¢ÖĞĞÄ¶ÔÏó
-	private int ServiceID;//¿Í·şID
-	private InterNIC handoffBox;//ÉùÃ÷Íø¼ÊÍøÂçĞÅÏ¢ÖĞĞÄ¶ÔÏó
-	private Thread thread;//ÉùÃ÷Ò»¸öÏß³Ì¶ÔÏó
-	private volatile boolean isStop;//Í£Ö¹·şÎñµÄ±êÖ¾
-	public CallCenter(InterNIC iNIC) {//¹¹Ôìº¯Êı
+public class CallCenter extends Object {//å®¢æœä¸­å¿ƒ
+	private static int nextServiceID = 0;//ä¸‹ä¸€ä¸ªå®¢æœçš„ID
+	private InterNIC iNIC;//å£°æ˜ç½‘é™…ç½‘ç»œä¿¡æ¯ä¸­å¿ƒå¯¹è±¡
+	private int ServiceID;//å®¢æœID
+	private InterNIC handoffBox;//å£°æ˜ç½‘é™…ç½‘ç»œä¿¡æ¯ä¸­å¿ƒå¯¹è±¡
+	private Thread thread;//å£°æ˜ä¸€ä¸ªçº¿ç¨‹å¯¹è±¡
+	private volatile boolean isStop;//åœæ­¢æœåŠ¡çš„æ ‡å¿—
+	public CallCenter(InterNIC iNIC) {//æ„é€ å‡½æ•°
 		this.iNIC = iNIC;
 		ServiceID = getNextWorkerID();
 		handoffBox = new InterNIC(1); 
@@ -24,7 +24,7 @@ public class CallCenter extends Object {//¿Í·şÖĞĞÄ
 		thread = new Thread(r);
 		thread.start();
 	}
-	public static synchronized int getNextWorkerID() { //»ñÈ¡ÏÂ¸ö¿Í·şIDºÅ
+	public static synchronized int getNextWorkerID() { //è·å–ä¸‹ä¸ªå®¢æœIDå·
 		int id = nextServiceID;
 		nextServiceID++;
 		return id;
@@ -32,38 +32,38 @@ public class CallCenter extends Object {//¿Í·şÖĞĞÄ
 	public void process(Runnable target) throws InterruptedException {
 		handoffBox.add(target);
 	}
-	private void runWork() {//ÕıÔÚ¹¤×÷ÖĞ
+	private void runWork() {//æ­£åœ¨å·¥ä½œä¸­
 		while ( isStop ) {
 			try {
-				System.out.println("¿Í·ş" + (ServiceID+1) + 
-						"ºÅ, ÕıÔÚÍ¨»°ÖĞ£¬ÇëÉÔºò¡­");
+				System.out.println("å®¢æœ" + (ServiceID+1) + 
+						"å·, æ­£åœ¨é€šè¯ä¸­ï¼Œè¯·ç¨å€™â€¦");
 				iNIC.add(this);
 				Runnable r = (Runnable) handoffBox.remove();
-				System.out.println("¿Í·ş" + (ServiceID+1) + 
-						"ºÅ, ÕıÔÚÓëÁíÒ»Î»ĞÂÓÃ»§" + r+"½¨Á¢Í¨»°Á¬½Ó¡­");
+				System.out.println("å®¢æœ" + (ServiceID+1) + 
+						"å·, æ­£åœ¨ä¸å¦ä¸€ä½æ–°ç”¨æˆ·" + r+"å»ºç«‹é€šè¯è¿æ¥â€¦");
 				runFailed(r); 
 			} catch ( InterruptedException x ) {
 				Thread.currentThread().interrupt(); 
 			}
 		}
 	}
-	private void runFailed(Runnable r) {//Á¬½ÓÊ§°Ü
+	private void runFailed(Runnable r) {//è¿æ¥å¤±è´¥
 		try {
 			r.run();
 		} catch ( Exception runex ) {
-			System.err.println("Á¬½ÓÊ§°Ü£¬ÔİÊ±ÎŞ·¨½ÓÍ¨¡­");
+			System.err.println("è¿æ¥å¤±è´¥ï¼Œæš‚æ—¶æ— æ³•æ¥é€šâ€¦");
 			runex.printStackTrace();
 		} finally {
 			Thread.interrupted();
 		}
 	}
-	public void stopRequest() {//Í£Ö¹·şÎñ
-		System.out.println("¿Í·ş" + (ServiceID+1)+ 
-				"ºÅ, Í£Ö¹·şÎñ");
+	public void stopRequest() {//åœæ­¢æœåŠ¡
+		System.out.println("å®¢æœ" + (ServiceID+1)+ 
+				"å·, åœæ­¢æœåŠ¡");
 		isStop = false;
 		thread.interrupt();
 	}
 	public boolean isAlive() {
-		return thread.isAlive();//ÅĞ¶Ï¸ÃÏß³ÌÊÇ·ñ´¦ÓÚ»î¶¯×´Ì¬
+		return thread.isAlive();//åˆ¤æ–­è¯¥çº¿ç¨‹æ˜¯å¦å¤„äºæ´»åŠ¨çŠ¶æ€
 	}
 }

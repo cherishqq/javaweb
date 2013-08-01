@@ -1,5 +1,6 @@
 package com.java.base.thread.six;
 
+
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,51 +8,51 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 
 public class SplitLine extends Applet implements Runnable {
-	private Image moveleft__1, moveright_1, moveleft_2, moveright_2, temp;// ÉùÃ÷Image¶ÔÏó
+	private Image moveleft__1, moveright_1, moveleft_2, moveright_2, temp;// å£°æ˜Imageå¯¹è±¡
 	private Image image;//
 	private Graphics graphics;
 	private Thread thread = null;
 	private MediaTracker img_tracker;
 	private int height, width;
-	public void init() {// ³õÊ¼»¯AppletĞ¡³ÌĞò
-		// ´´½¨Image¶ÔÏó
+	public void init() {// åˆå§‹åŒ–Appletå°ç¨‹åº
+		// åˆ›å»ºImageå¯¹è±¡
 		moveright_1 = getImage(getDocumentBase(), "3.jpg");
 		moveright_2 = getImage(getDocumentBase(), "4.jpg");
 		moveleft__1 = getImage(getDocumentBase(), "1.jpg");
 		moveleft_2 = getImage(getDocumentBase(), "2.jpg");
-		// ´´½¨MediaTracker¶ÔÏó
+		// åˆ›å»ºMediaTrackerå¯¹è±¡
 		img_tracker = new MediaTracker(this);
-		// ½«Í¼Æ¬¶ÔÏó¼ÓÔØµ½Ã½Ìå¸ú×ÙÆ÷ÖĞ
+		// å°†å›¾ç‰‡å¯¹è±¡åŠ è½½åˆ°åª’ä½“è·Ÿè¸ªå™¨ä¸­
 		img_tracker.addImage(moveright_1, 0);
 		img_tracker.addImage(moveleft__1, 0);
 		img_tracker.addImage(moveright_2, 0);
 		img_tracker.addImage(moveleft_2, 0);
-		// »ñÈ¡AppletµÄ³¤ºÍ¿í
+		// è·å–Appletçš„é•¿å’Œå®½
 		width = this.size().width;
 		height = this.size().height;
 		try {
-			img_tracker.waitForID(0);// ¸ú×ÙÖ¸¶¨IDµÄÍ¼Ïó
+			img_tracker.waitForID(0);// è·Ÿè¸ªæŒ‡å®šIDçš„å›¾è±¡
 		} catch (InterruptedException e) {
 		}
-		// ´´½¨Í¼ÏóÇø
+		// åˆ›å»ºå›¾è±¡åŒº
 		image = createImage(width, height);
-		// ´´½¨Graphics¶ÔÏó
+		// åˆ›å»ºGraphicså¯¹è±¡
 		graphics = image.getGraphics();
 	}
-	public void start() {// AppletĞ¡³ÌĞòµÄstart·½·¨
+	public void start() {// Appletå°ç¨‹åºçš„startæ–¹æ³•
 		if (thread == null) {
 			thread = new Thread(this);
-			thread.start();// ¿ªÊ¼ÔËĞĞÏß³Ì
+			thread.start();// å¼€å§‹è¿è¡Œçº¿ç¨‹
 		}
 	}
-	public void run() {// Ïß³ÌµÄrun·½·¨
+	public void run() {// çº¿ç¨‹çš„runæ–¹æ³•
 		Color fg = this.getForeground();
 		int imgWidth, imageHeight, x = 0, y = 0;
 		boolean forward = true;
 		imgWidth = moveright_1.getWidth(this);
 		imageHeight = moveright_1.getHeight(this);
 		y = (height - imageHeight) / 2;
-		fg = Color.blue;// ÉèÖÃ·Ö¸îÏßµÄÑÕÉ«
+		fg = Color.blue;// è®¾ç½®åˆ†å‰²çº¿çš„é¢œè‰²
 		try {
 			while (thread != null) {
 				thread.sleep(200);
@@ -76,7 +77,7 @@ public class SplitLine extends Applet implements Runnable {
 						forward = true;
 					}
 				}
-				graphics.setColor(Color.white);// ÉèÖÃĞ¡³ÌĞòµÄ±³¾°ÑÕÉ«
+				graphics.setColor(Color.white);// è®¾ç½®å°ç¨‹åºçš„èƒŒæ™¯é¢œè‰²
 				graphics.fillRect(0, 0, width, height);
 				graphics.setColor(fg.brighter().darker());
 				graphics.drawLine(0, (height - imageHeight) / 2 + imageHeight,

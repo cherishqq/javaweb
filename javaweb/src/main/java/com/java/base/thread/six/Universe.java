@@ -5,16 +5,16 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 public class Universe extends java.applet.Applet implements Runnable {
-	int Width, Height;// ¶¨ÒåĞ¡³ÌĞòµÄ³¤ºÍ¿í
-	Thread thread = null;// ÉùÃ÷Ò»¸öÏß³Ì¶ÔÏó
-	boolean suspend = false;// ÊÇ·ñÔİÍ£
-	Image im;// ÉùÃ÷Ò»¸öÍ¼Ïó¶ÔÏó
-	Graphics graphics;// ÉùÃ÷Ò»¸öGraphics¶ÔÏó
-	double rot, dx, ddx;// ÉùÃ÷doubleĞÍ±äÁ¿
-	int speed, stars, type;// ÉùÃ÷intĞÍ±äÁ¿
-	double defddx, max;// ÉùÃ÷doubleĞÍ±äÁ¿
-	Star pol[]; // ĞÇ¹â
-	public void init() {// ³õÊ¼»¯AppletĞ¡³ÌĞò
+	int Width, Height;// å®šä¹‰å°ç¨‹åºçš„é•¿å’Œå®½
+	Thread thread = null;// å£°æ˜ä¸€ä¸ªçº¿ç¨‹å¯¹è±¡
+	boolean suspend = false;// æ˜¯å¦æš‚åœ
+	Image im;// å£°æ˜ä¸€ä¸ªå›¾è±¡å¯¹è±¡
+	Graphics graphics;// å£°æ˜ä¸€ä¸ªGraphicså¯¹è±¡
+	double rot, dx, ddx;// å£°æ˜doubleå‹å˜é‡
+	int speed, stars, type;// å£°æ˜intå‹å˜é‡
+	double defddx, max;// å£°æ˜doubleå‹å˜é‡
+	Star pol[]; // æ˜Ÿå…‰
+	public void init() {// åˆå§‹åŒ–Appletå°ç¨‹åº
 		rot = 0;
 		dx = 0;
 		ddx = 0;
@@ -37,7 +37,7 @@ public class Universe extends java.applet.Applet implements Runnable {
 			pol[i] = new Star(Width, Height, 150, type);
 		System.out.println(Width + "," + Height);
 	}
-	public void paint(Graphics g) {// »æÖÆ×é¼ş
+	public void paint(Graphics g) {// ç»˜åˆ¶ç»„ä»¶
 		if (graphics != null) {
 			paintStart(graphics);
 			g.drawImage(im, 0, 0, this);
@@ -51,19 +51,19 @@ public class Universe extends java.applet.Applet implements Runnable {
 		for (int i = 0; i < stars; i++)
 			pol[i].DrawSelf(g, rot);
 	}
-	public void start() {// Æô¶¯AppletĞ¡³ÌĞò
+	public void start() {// å¯åŠ¨Appletå°ç¨‹åº
 		if (thread == null) {
 			thread = new Thread(this);
-			thread.start();// Æô¶¯Ïß³Ì
+			thread.start();// å¯åŠ¨çº¿ç¨‹
 		}
 	}
-	public void stop() {// Í£Ö¹ÔËĞĞAppletĞ¡³ÌĞò
+	public void stop() {// åœæ­¢è¿è¡ŒAppletå°ç¨‹åº
 		if (thread != null) {
 			thread.stop();
 			thread = null;
 		}
 	}
-	public void run() {// ÔËĞĞÏß³Ì
+	public void run() {// è¿è¡Œçº¿ç¨‹
 		while (thread != null) {
 			rot += dx;
 			dx += ddx;
@@ -78,7 +78,7 @@ public class Universe extends java.applet.Applet implements Runnable {
 			repaint();
 		}
 	}
-	public void update(Graphics g) {// ÖØĞÂ»æÖÆ×é²®
+	public void update(Graphics g) {// é‡æ–°ç»˜åˆ¶ç»„ä¼¯
 		paint(g);
 	}
 	public void Show(String theString, String theValue) {
@@ -89,11 +89,11 @@ public class Universe extends java.applet.Applet implements Runnable {
 		}
 	}
 }
-class Star {// ´ú±íĞÇĞÇÀà
+class Star {// ä»£è¡¨æ˜Ÿæ˜Ÿç±»
 	int H, V;
 	int x, y, z;
 	int type;
-	Star(int width, int height, int depth, int type) {// ¹¹Ôìº¯ÊıÎª¸÷±äÁ¿³õÊ¼»¯
+	Star(int width, int height, int depth, int type) {// æ„é€ å‡½æ•°ä¸ºå„å˜é‡åˆå§‹åŒ–
 		this.type = type;
 		H = width / 2;
 		V = height / 2;
@@ -103,7 +103,7 @@ class Star {// ´ú±íĞÇĞÇÀà
 			x = 10;
 		z = (int) (Math.random() * depth);
 	}
-	public void DrawSelf(Graphics g, double rot) {// ¸ù¾İ×ø±ê»æÖÆĞÇĞÇ
+	public void DrawSelf(Graphics g, double rot) {// æ ¹æ®åæ ‡ç»˜åˆ¶æ˜Ÿæ˜Ÿ
 		double X, Y;
 		int h, v, hh, vv;
 		int d;
@@ -137,7 +137,7 @@ class Star {// ´ú±íĞÇĞÇÀà
 			}
 		}
 	}
-	public void setColor(Graphics g) {// ¸ø»æÖÆµÄ¶ÔÏóÉèÖÃÑÕÉ«
+	public void setColor(Graphics g) {// ç»™ç»˜åˆ¶çš„å¯¹è±¡è®¾ç½®é¢œè‰²
 		if (z > 50) {
 			g.setColor(Color.gray);
 		} else if (z > 25) {

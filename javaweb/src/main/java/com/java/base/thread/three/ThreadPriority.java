@@ -1,67 +1,68 @@
 package com.java.base.thread.three;
 
+
 import java.util.*;
 
 public class ThreadPriority {
-	public static void main(String[] args) { // java³ÌĞòÖ÷Èë¿Ú´¦
-		List list = new ArrayList();// ´´½¨Ò»¸öList¶ÔÏó
-		Student stu1 = new Student("ÕÅÈı", 5, 98, 130);// ´´½¨Ò»¸öStudent¶ÔÏó
-		list.add(stu1);// ½«Student¶ÔÏóÌí¼Óµ½ListÁĞ±íÖĞ
-		Student stu2 = new Student("Àî¹ú", 3, 95, 150);
+	public static void main(String[] args) { // javaç¨‹åºä¸»å…¥å£å¤„
+		List list = new ArrayList();// åˆ›å»ºä¸€ä¸ªListå¯¹è±¡
+		Student stu1 = new Student("å¼ ä¸‰", 5, 98, 130);// åˆ›å»ºä¸€ä¸ªStudentå¯¹è±¡
+		list.add(stu1);// å°†Studentå¯¹è±¡æ·»åŠ åˆ°Liståˆ—è¡¨ä¸­
+		Student stu2 = new Student("æå›½", 3, 95, 150);
 		list.add(stu2);
-		Student stu3 = new Student("ÄôÁÁ", 4, 100, 120);
+		Student stu3 = new Student("è‚äº®", 4, 100, 120);
 		list.add(stu3);
-		Student stu4 = new Student("Å·ÑôÑ©", 6, 91, 140);
+		Student stu4 = new Student("æ¬§é˜³é›ª", 6, 91, 140);
 		list.add(stu4);
-		Student stu5 = new Student("Ğ¤Ğ¤", 7, 93, 150);
+		Student stu5 = new Student("è‚–è‚–", 7, 93, 150);
 		list.add(stu5);
-		System.out.println("°´³É¼¨·ÖÊıµÄ¸ßµÍÅÅ×ø");
+		System.out.println("æŒ‰æˆç»©åˆ†æ•°çš„é«˜ä½æ’å");
 		new Score().RowSeat(list);
-		System.out.println("°´¸ö×ÓµÄ¸ßµÍÅÅ×ø");
+		System.out.println("æŒ‰ä¸ªå­çš„é«˜ä½æ’å");
 		new Height().RowSeat(list);
 	}
 
 }
 
-class Height implements Runnable { // Ïß³ÌÊµÏÖ½Ó¿ÚRunnable
-	Thread thread; // ÉùÃ÷Ò»¸öÏß³Ì
+class Height implements Runnable { // çº¿ç¨‹å®ç°æ¥å£Runnable
+	Thread thread; // å£°æ˜ä¸€ä¸ªçº¿ç¨‹
 
 	Height() {
-	} // Ä¬ÈÏ¹¹Ôì·½·¨
+	} // é»˜è®¤æ„é€ æ–¹æ³•
 
-	Height(String name) { // ¹¹Ôì·½·¨³õÊ¼Ò»¸öÏß³Ì
+	Height(String name) { // æ„é€ æ–¹æ³•åˆå§‹ä¸€ä¸ªçº¿ç¨‹
 		thread = new Thread(this, name);
 	}
 
 	public void run() {
-		System.out.println("Ò»ÄêÒ»°àµÄÑ§Éú³ÉÔ±£º" + thread.getName()); // »ñµÃÏß³ÌµÄÃû³Æ
+		System.out.println("ä¸€å¹´ä¸€ç­çš„å­¦ç”Ÿæˆå‘˜ï¼š" + thread.getName()); // è·å¾—çº¿ç¨‹çš„åç§°
 	}
 
-	public void RowSeat(List list) { // °´ÓÅÏÈ¼¶Ö´ĞĞÏß³Ì
+	public void RowSeat(List list) { // æŒ‰ä¼˜å…ˆçº§æ‰§è¡Œçº¿ç¨‹
 		Student st = (Student) list.get(0);
 		Student st1 = (Student) list.get(1);
 		Student st2 = (Student) list.get(2);
 		Student st3 = (Student) list.get(3);
 		Student st4 = (Student) list.get(4);
-		Height o1 = new Height(st.name);// ´´½¨Ïß³Ì¶ÔÏó²¢ÃüÃû
+		Height o1 = new Height(st.name);// åˆ›å»ºçº¿ç¨‹å¯¹è±¡å¹¶å‘½å
 		Height o2 = new Height(st1.name);
 		Height o3 = new Height(st2.name);
 		Height o4 = new Height(st3.name);
 		Height o5 = new Height(st4.name);
-		o1.thread.setPriority(st.height / 10 - 10); // MAX_PRIORITYÓÅÏÈ¼¶×î´ó
-		o2.thread.setPriority(st1.height / 10 - 10); // ½Ï´ÎÖ®
-		o3.thread.setPriority(st2.height / 10 - 10); // NORM_PRIORITY´¦ÓÚÖĞ¼äÎ»ÖÃ
+		o1.thread.setPriority(st.height / 10 - 10); // MAX_PRIORITYä¼˜å…ˆçº§æœ€å¤§
+		o2.thread.setPriority(st1.height / 10 - 10); // è¾ƒæ¬¡ä¹‹
+		o3.thread.setPriority(st2.height / 10 - 10); // NORM_PRIORITYå¤„äºä¸­é—´ä½ç½®
 		o4.thread.setPriority(st3.height / 10 - 10);
-		o5.thread.setPriority(st4.height / 10 - 10); // MIN_PRIORITYÓÅÏÈ¼¶×îĞ¡
-		o1.thread.start(); // Æô¶¯Ïß³Ì
+		o5.thread.setPriority(st4.height / 10 - 10); // MIN_PRIORITYä¼˜å…ˆçº§æœ€å°
+		o1.thread.start(); // å¯åŠ¨çº¿ç¨‹
 		o2.thread.start();
 		o3.thread.start();
 		o4.thread.start();
 		o5.thread.start();
 		try {
-			o5.thread.join(); // µÈ´ıÏß³ÌÔËĞĞ½áÊø
-		} catch (InterruptedException e) { // ²¶»ñÀ¹½ØÒì³£
-			System.out.println("µÈ´ıÏß³Ì½áÊø³ö´í£º" + e.getMessage());
+			o5.thread.join(); // ç­‰å¾…çº¿ç¨‹è¿è¡Œç»“æŸ
+		} catch (InterruptedException e) { // æ•è·æ‹¦æˆªå¼‚å¸¸
+			System.out.println("ç­‰å¾…çº¿ç¨‹ç»“æŸå‡ºé”™ï¼š" + e.getMessage());
 		}
 	}
 }
@@ -70,55 +71,55 @@ class Score extends Thread {
 	Thread thread;
 
 	public Score() {
-	} // Ä¬ÈÏ¹¹Ôì·½·¨
+	} // é»˜è®¤æ„é€ æ–¹æ³•
 
-	public Score(String name) { // ´ø²ÎÊı¹¹Ôì·½·¨³õÊ¼Ò»¸öÏß³Ì
+	public Score(String name) { // å¸¦å‚æ•°æ„é€ æ–¹æ³•åˆå§‹ä¸€ä¸ªçº¿ç¨‹
 		thread = new Thread(this, name);
 	}
 
 	public void run() {
-		System.out.println("Ò»ÄêÒ»°àµÄÑ§Éú³ÉÔ±£º" + thread.getName()); // »ñµÃÏß³ÌµÄÃû³Æ
+		System.out.println("ä¸€å¹´ä¸€ç­çš„å­¦ç”Ÿæˆå‘˜ï¼š" + thread.getName()); // è·å¾—çº¿ç¨‹çš„åç§°
 	}
 
-	public void RowSeat(List list) { // °´ÓÅÏÈ¼¶Ö´ĞĞÏß³Ì
+	public void RowSeat(List list) { // æŒ‰ä¼˜å…ˆçº§æ‰§è¡Œçº¿ç¨‹
 		Student st = (Student) list.get(0);
 		Student st1 = (Student) list.get(1);
 		Student st2 = (Student) list.get(2);
 		Student st3 = (Student) list.get(3);
 		Student st4 = (Student) list.get(4);
-		Score e1 = new Score(st.name);// ´´½¨Ïß³Ì¶ÔÏó²¢ÃüÃû
+		Score e1 = new Score(st.name);// åˆ›å»ºçº¿ç¨‹å¯¹è±¡å¹¶å‘½å
 		Score e2 = new Score(st1.name);
 		Score e3 = new Score(st2.name);
 		Score e4 = new Score(st3.name);
 		Score e5 = new Score(st4.name);
-		e1.thread.setPriority(st.score / 10); // MAX_PRIORITYÓÅÏÈ¼¶×î´ó
-		e2.thread.setPriority(st1.score / 10); // ½Ï´ÎÖ®
-		e3.thread.setPriority(st2.score / 10); // NORM_PRIORITY´¦ÓÚÖĞ¼äÎ»ÖÃ
+		e1.thread.setPriority(st.score / 10); // MAX_PRIORITYä¼˜å…ˆçº§æœ€å¤§
+		e2.thread.setPriority(st1.score / 10); // è¾ƒæ¬¡ä¹‹
+		e3.thread.setPriority(st2.score / 10); // NORM_PRIORITYå¤„äºä¸­é—´ä½ç½®
 		e4.thread.setPriority(st3.score / 10);
-		e5.thread.setPriority(st4.score / 10); // MIN_PRIORITYÓÅÏÈ¼¶×îĞ¡
-		e1.thread.start(); // Æô¶¯Ïß³Ì
+		e5.thread.setPriority(st4.score / 10); // MIN_PRIORITYä¼˜å…ˆçº§æœ€å°
+		e1.thread.start(); // å¯åŠ¨çº¿ç¨‹
 		e2.thread.start();
 		e3.thread.start();
 		e4.thread.start();
 		e5.thread.start();
 		try {
-			e5.thread.join(); // µÈ´ıÏß³ÌÔËĞĞ½áÊø
-		} catch (InterruptedException e) { // ²¶»ñÀ¹½ØÒì³£
-			System.out.println("µÈ´ıÏß³Ì½áÊø³ö´í£º" + e.getMessage());
+			e5.thread.join(); // ç­‰å¾…çº¿ç¨‹è¿è¡Œç»“æŸ
+		} catch (InterruptedException e) { // æ•è·æ‹¦æˆªå¼‚å¸¸
+			System.out.println("ç­‰å¾…çº¿ç¨‹ç»“æŸå‡ºé”™ï¼š" + e.getMessage());
 		}
 	}
 }
 
-class Student {// Ñ§ÉúÀà
-	public String name;// ĞÕÃû
+class Student {// å­¦ç”Ÿç±»
+	public String name;// å§“å
 
-	public int age;// ÄêÁä
+	public int age;// å¹´é¾„
 
-	public int score;// ³É¼¨
+	public int score;// æˆç»©
 
-	public int height;// Éí¸ß
+	public int height;// èº«é«˜
 
-	public Student(String name, int age, int score, int height) {// ¹¹Ôìº¯ÊıÎª¸÷³ÉÔ±±äÁ¿
+	public Student(String name, int age, int score, int height) {// æ„é€ å‡½æ•°ä¸ºå„æˆå‘˜å˜é‡
 		this.name = name;
 		this.age = age;
 		this.height = height;

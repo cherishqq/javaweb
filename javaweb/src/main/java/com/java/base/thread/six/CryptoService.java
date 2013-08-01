@@ -1,5 +1,6 @@
 package com.java.base.thread.six;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -17,10 +18,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class CryptoService extends JComponent {
-	private BufferedImage image;// ÉùÃ÷Ò»¸öBufferedImageÀà¶ÔÏó
-	private Dimension imageOfSize;// ÉùÃ÷Ò»¸öDimensionÀà¶ÔÏó
-	private volatile int currOffset;// ÉùÃ÷Ò»¸öÓÃÓÚ±íÊ¾Æ«ÒÆÁ¿µÄ±äÁ¿
-	private Thread thread;// ÉùÃ÷Ò»¸öÏß³Ì
+	private BufferedImage image;// å£°æ˜ä¸€ä¸ªBufferedImageç±»å¯¹è±¡
+	private Dimension imageOfSize;// å£°æ˜ä¸€ä¸ªDimensionç±»å¯¹è±¡
+	private volatile int currOffset;// å£°æ˜ä¸€ä¸ªç”¨äºè¡¨ç¤ºåç§»é‡çš„å˜é‡
+	private Thread thread;// å£°æ˜ä¸€ä¸ªçº¿ç¨‹
 	private volatile boolean flag;
 	public CryptoService(String text) {
 		currOffset = 0;
@@ -45,49 +46,49 @@ public class CryptoService extends JComponent {
 	private void buildImage(String text) {
 		RenderingHints renderHints = new RenderingHints(
 				RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);// ¸ù¾İ¿¹¾â³İÌáÊ¾¼üºÍ¿¹¾â³İÌáÊ¾ÖµÀ´´´½¨Ò»¸öRenderingHintsÀà¶ÔÏó
+				RenderingHints.VALUE_ANTIALIAS_ON);// æ ¹æ®æŠ—é”¯é½¿æç¤ºé”®å’ŒæŠ—é”¯é½¿æç¤ºå€¼æ¥åˆ›å»ºä¸€ä¸ªRenderingHintsç±»å¯¹è±¡
 		renderHints.put(RenderingHints.KEY_RENDERING,
-				RenderingHints.VALUE_RENDER_QUALITY);// ½«Ö¸¶¨µÄ³ÊÏÖÌáÊ¾¼üÓ³Éäµ½´ËRenderingHints¶ÔÏóÖĞµÄÖ¸¶¨³ÊÏÖÖ¸Ê¾Öµ¡£
+				RenderingHints.VALUE_RENDER_QUALITY);// å°†æŒ‡å®šçš„å‘ˆç°æç¤ºé”®æ˜ å°„åˆ°æ­¤RenderingHintså¯¹è±¡ä¸­çš„æŒ‡å®šå‘ˆç°æŒ‡ç¤ºå€¼ã€‚
 		BufferedImage scratchImage = new BufferedImage(1, 1,
-				BufferedImage.TYPE_INT_RGB);// ¹¹ÔìÒ»¸öÀàĞÍÎªÔ¤¶¨ÒåµÄÍ¼Ïñ
-		Graphics2D scratchG2 = scratchImage.createGraphics();// ´´½¨Ò»¸öGraphics2DÀà¶ÔÏó
-		scratchG2.setRenderingHints(renderHints);// ÉèÖÃ³ÊÏÖËã·¨
-		Font font = new Font("Serif", Font.BOLD | Font.ITALIC, 24);// ´´½¨Ò»¸öFont×ÖÌå¶ÔÏó
-		FontRenderContext frc = scratchG2.getFontRenderContext();// ´´½¨Ò»¸öFontRenderContext¶ÔÏó
-		TextLayout tl = new TextLayout(text, font, frc);// ´´½¨Ò»¸öTextLayout¶ÔÏó
-		Rectangle2D textBounds = tl.getBounds();// ´´½¨Ò»¸öRectangle2D¶ÔÏó
-		int textWidth = (int) Math.ceil(textBounds.getWidth());// ÉèÖÃÎÄ×ÖµÄÏÔÊ¾¿í¶È
-		int textHeight = (int) Math.ceil(textBounds.getHeight());// ÉèÖÃÎÄ×ÖµÄÏÔÊ¾³¤¶È
-		int horizontalPad = 10;// ÉèÖÃË®Æ½¼ä¾àÎª10ÏóËØ
-		int verticalPad = 6;// ÉèÖÃ´¹Ö±¼ä¾àÎª6ÏóËØ
-		imageOfSize = new Dimension(// ´´½¨Dimension¶ÔÏó
+				BufferedImage.TYPE_INT_RGB);// æ„é€ ä¸€ä¸ªç±»å‹ä¸ºé¢„å®šä¹‰çš„å›¾åƒ
+		Graphics2D scratchG2 = scratchImage.createGraphics();// åˆ›å»ºä¸€ä¸ªGraphics2Dç±»å¯¹è±¡
+		scratchG2.setRenderingHints(renderHints);// è®¾ç½®å‘ˆç°ç®—æ³•
+		Font font = new Font("Serif", Font.BOLD | Font.ITALIC, 24);// åˆ›å»ºä¸€ä¸ªFontå­—ä½“å¯¹è±¡
+		FontRenderContext frc = scratchG2.getFontRenderContext();// åˆ›å»ºä¸€ä¸ªFontRenderContextå¯¹è±¡
+		TextLayout tl = new TextLayout(text, font, frc);// åˆ›å»ºä¸€ä¸ªTextLayoutå¯¹è±¡
+		Rectangle2D textBounds = tl.getBounds();// åˆ›å»ºä¸€ä¸ªRectangle2Då¯¹è±¡
+		int textWidth = (int) Math.ceil(textBounds.getWidth());// è®¾ç½®æ–‡å­—çš„æ˜¾ç¤ºå®½åº¦
+		int textHeight = (int) Math.ceil(textBounds.getHeight());// è®¾ç½®æ–‡å­—çš„æ˜¾ç¤ºé•¿åº¦
+		int horizontalPad = 10;// è®¾ç½®æ°´å¹³é—´è·ä¸º10è±¡ç´ 
+		int verticalPad = 6;// è®¾ç½®å‚ç›´é—´è·ä¸º6è±¡ç´ 
+		imageOfSize = new Dimension(// åˆ›å»ºDimensionå¯¹è±¡
 				textWidth + horizontalPad, textHeight + verticalPad);
 		image = new BufferedImage(
-				// ´´½¨BufferedImage¶ÔÏó
+				// åˆ›å»ºBufferedImageå¯¹è±¡
 				imageOfSize.width, imageOfSize.height,
 				BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = image.createGraphics();
 		g2.setRenderingHints(renderHints);
-		int baselineOffset = (verticalPad / 2) - ((int) textBounds.getY());// »ùÏßµÄÆ«ÒÆÁ¿
-		g2.setColor(Color.black);// ÉèÎªºÚÉ«±³Ó°
+		int baselineOffset = (verticalPad / 2) - ((int) textBounds.getY());// åŸºçº¿çš„åç§»é‡
+		g2.setColor(Color.black);// è®¾ä¸ºé»‘è‰²èƒŒå½±
 		g2.fillRect(0, 0, imageOfSize.width, imageOfSize.height);
-		g2.setColor(Color.WHITE);// °×É«×ÖÌå
+		g2.setColor(Color.WHITE);// ç™½è‰²å­—ä½“
 		tl.draw(g2, 0, baselineOffset);
 		scratchG2.dispose();
 		scratchImage.flush();
 		g2.dispose();
 	}
 	public void paint(Graphics g) {
-		// ½«µ±Ç°µÄ¼ôÌùÇøÉèÖÃÎªÓÉ¸ø¶¨×ø±êÖ¸¶¨µÄ¾ØĞÎ¡£
+		// å°†å½“å‰çš„å‰ªè´´åŒºè®¾ç½®ä¸ºç”±ç»™å®šåæ ‡æŒ‡å®šçš„çŸ©å½¢ã€‚
 		g.setClip(0, 0, imageOfSize.width, imageOfSize.height);
-		int localOffset = currOffset; // ±¾µØÆ«ÒÆÁ¿ÊÇ²»¶ÏµÄ±ä»¯µÄ
+		int localOffset = currOffset; // æœ¬åœ°åç§»é‡æ˜¯ä¸æ–­çš„å˜åŒ–çš„
 		g.drawImage(image, -localOffset, 0, this);
 		g.drawImage(image, imageOfSize.width - localOffset, 0, this);
-		// »æ»­³ö±ß¿ò
+		// ç»˜ç”»å‡ºè¾¹æ¡†
 		g.setColor(Color.red);
 		g.drawRect(0, 0, imageOfSize.width - 1, imageOfSize.height - 1);
 	}
-	private void ScrollING() {// Ö´ĞĞ¹ö¶¯²Ù×÷
+	private void ScrollING() {// æ‰§è¡Œæ»šåŠ¨æ“ä½œ
 		while (flag) {
 			try {
 				Thread.sleep(100); 
@@ -99,10 +100,10 @@ public class CryptoService extends JComponent {
 		}
 	}
 	public static void main(String[] args) {
-		CryptoService st = new CryptoService("½ÌÊ¦½Ú¿ìÀÖ");
+		CryptoService st = new CryptoService("æ•™å¸ˆèŠ‚å¿«ä¹");
 		JPanel p = new JPanel(new FlowLayout());
 		p.add(st);
-		JFrame f = new JFrame("¹ö¶¯µÄÎÄ×Ö");
+		JFrame f = new JFrame("æ»šåŠ¨çš„æ–‡å­—");
 		f.setContentPane(p);
 		f.setSize(400, 100);
 		f.setVisible(true);

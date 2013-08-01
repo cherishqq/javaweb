@@ -2,19 +2,19 @@ package com.java.base.generic.one;
 
 /**
  * Created by IntelliJ IDEA. User: leizhimin Date: 2007-9-18 Time: 16:09:37
- * ÈıÖÖ×ø±ê£¬ÓÃ·ºĞÍÊµÏÖ×ø±ê´òÓ¡
+ * ä¸‰ç§åæ ‡ï¼Œç”¨æ³›å‹å®ç°åæ ‡æ‰“å°
  */
 public class CoorGeneric {
-	static void showXY(GenericCoords<?> c) {// ¶¨Òå·ºĞÍ·½·¨£¬ÀûÓÃÍ¨Åä·ûÉèÖÃ²ÎÊıCµÄÀàĞÍÎªXL²¢ÏÔÊ¾ÀàXLÖĞµÄ±äÁ¿XºÍYµÄÖµ
-		System.out.println("X Y ×ø±êÖá:");
+	static void showXY(GenericCoords<?> c) {//å®šä¹‰æ³›å‹æ–¹æ³•ï¼Œåˆ©ç”¨é€šé…ç¬¦è®¾ç½®å‚æ•°Cçš„ç±»å‹ä¸ºXLå¹¶æ˜¾ç¤ºç±»XLä¸­çš„å˜é‡Xå’ŒYçš„å€¼
+		System.out.println("X Y åæ ‡è½´::");
 		for (int i = 0; i < c.gcs.length; i++) {
 			System.out.println(c.gcs[i].x + "  " + c.gcs[i].y);
 		}
 	}
 
 	static void showXYZ(GenericCoords<? extends XYZ> c) {
-		System.out.println("X Y Z ×ø±êÖá:");
-		// ¶¨Òå·ºĞÍ·½·¨£¬ÀûÓÃÍ¨Åä·ûÉèÖÃ²ÎÊıCµÄÀàĞÍÎªXYZ²¢ÏÔÊ¾ÀàXYZÖĞµÄ±äÁ¿X¡¢YºÍZµÄÖµ
+		System.out.println("X Y Z åæ ‡è½´:");
+		// å®šä¹‰æ³›å‹æ–¹æ³•ï¼Œåˆ©ç”¨é€šé…ç¬¦è®¾ç½®å‚æ•°Cçš„ç±»å‹ä¸ºXYZå¹¶æ˜¾ç¤ºç±»XYZä¸­çš„å˜é‡Xã€Yå’ŒZçš„å€¼
 		for (int i = 0; i < c.gcs.length; i++) {
 			System.out.println(c.gcs[i].x + "  " + c.gcs[i].y + "  "
 					+ c.gcs[i].z);
@@ -22,8 +22,8 @@ public class CoorGeneric {
 	}
 
 	static void showAll(GenericCoords<? extends XYZT> c) {
-		System.out.println("X Y Z T ×ø±êÖá:");
-		// ¶¨Òå·ºĞÍ·½·¨£¬ÀûÓÃÍ¨Åä·ûÉèÖÃ²ÎÊıCµÄÀàĞÍÎªXYZT²¢ÏÔÊ¾ÀàXYZTÖĞµÄ±äÁ¿X¡¢Y¡¢ZºÍTµÄÖµ
+		System.out.println("X Y Z T åæ ‡è½´:");
+		// å®šä¹‰æ³›å‹æ–¹æ³•ï¼Œåˆ©ç”¨é€šé…ç¬¦è®¾ç½®å‚æ•°Cçš„ç±»å‹ä¸ºXYZTå¹¶æ˜¾ç¤ºç±»XYZTä¸­çš„å˜é‡Xã€Yã€Zå’ŒTçš„å€¼
 		for (int i = 0; i < c.gcs.length; i++) {
 			System.out.println(c.gcs[i].x + "  " + c.gcs[i].y + "  "
 					+ c.gcs[i].z + "  " + c.gcs[i].t);
@@ -33,52 +33,53 @@ public class CoorGeneric {
 	public static void main(String args[]) {
 		XY td[] = { new XY(0, 0), new XY(7, 9), new XY(18, 4), new XY(-1, -23) };
 		GenericCoords<XY> gcd1 = new GenericCoords<XY>(td);
-		System.out.println("GenericCoordsÀà¶ÔÏógcd2ÖĞµÄÄÚÈİ£º");
+		System.out.println("GenericCoordsç±»å¯¹è±¡gcd2ä¸­çš„å†…å®¹");
 		showXY(gcd1);
 		XYZT fd[] = { new XYZT(1, 2, 3, 4), new XYZT(6, 8, 14, 8),
 				new XYZT(22, 9, 4, 9), new XYZT(3, -2, -23, 17) };
 		GenericCoords<XYZT> gcd2 = new GenericCoords<XYZT>(fd);
-		System.out.println("GenericCoordsÀà¶ÔÏógcd2ÖĞµÄÄÚÈİ£º");
+		System.out.println("GenericCoordsç±»å¯¹è±¡gcd2ä¸­çš„å†…å®¹ï¼š");
 		showXY(gcd2);
 		showXYZ(gcd2);
 		showAll(gcd2);
 	}
 }
 
-class XY {// ±íÊ¾Ö»ÓĞXY×ø±êµÄÀà
+class XY {// è¡¨ç¤ºåªæœ‰XYZåæ ‡çš„ç±»
 	int x, y;
 
-	public XY(int x, int y) {// Îª±äÁ¿X¡¢Y¸³Öµ
+	public XY(int x, int y) {// è°ƒç”¨çˆ¶ç±»çš„æ„é€ æ–¹æ³•Öµ
 		this.x = x;
 		this.y = y;
 	}
 }
 
-class XYZ extends XY {// ±íÊ¾Ö»ÓĞXYZ×ø±êµÄÀà
+class XYZ extends XY {// è¡¨ç¤ºåªæœ‰XYZTåæ ‡çš„ç±»ï¼Œå…¶ä¸­Xï¼šæ¨ªåæ ‡ï¼ŒYï¼šçºµåæ ‡ Zï¼šå‚ç›´åæ ‡ï¼ŒTï¼šç©ºé—´
 	int z;
 
 	public XYZ(int x, int y, int z) {
-		super(x, y);// µ÷ÓÃ¸¸ÀàµÄ¹¹Ôì·½·¨
+		super(x, y);// è°ƒç”¨çˆ¶ç±»çš„æ„é€ æ–¹æ³•
 		this.z = z;
 	}
 }
 
-class XYZT extends XYZ {// ±íÊ¾Ö»ÓĞXYZT×ø±êµÄÀà£¬ÆäÖĞX£ººá×ø±ê£¬Y£º×İ×ø±ê Z£º´¹Ö±×ø±ê£¬T£º¿Õ¼ä
+class XYZT extends XYZ {// è¡¨ç¤ºåªæœ‰XYZTåæ ‡çš„ç±»ï¼Œå…¶ä¸­Xï¼šæ¨ªåæ ‡ï¼ŒYï¼šçºµåæ ‡ Zï¼šå‚ç›´åæ ‡ï¼ŒTï¼šç©ºé—´
 	int t;
 
 	public XYZT(int x, int y, int z, int t) {
-		super(x, y, z);// µ÷ÓÃ¸¸ÀàµÄ¹¹Ôì·½·¨
+		super(x, y, z);// è°ƒç”¨çˆ¶ç±»çš„æ„é€ æ–¹æ³•
 		this.t = t;
 	}
 }
 
 /**
- * ´æ·Å·ºĞÍ×ø±êµÄ£¨Êı¾İ½á¹¹£©Àà
+ * å­˜æ”¾æ³›å‹åæ ‡çš„ï¼ˆæ•°æ®ç»“æ„ï¼‰ç±»
  */
-class GenericCoords<T extends XY> {// ¶¨Òå·ºĞÍÀà£¬ÉèÖÃÆä²ÎÊıÀàĞÍÎªXY
+class GenericCoords<T extends XY> {// å®šä¹‰æ³›å‹ç±»ï¼Œè®¾ç½®å…¶å‚æ•°ç±»å‹ä¸ºXY
 	T[] gcs;
 
 	public GenericCoords(T[] gcs) {
 		this.gcs = gcs;
 	}
 }
+

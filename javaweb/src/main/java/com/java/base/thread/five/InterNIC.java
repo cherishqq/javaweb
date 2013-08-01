@@ -1,43 +1,43 @@
 package com.java.base.thread.five;
 
 public class InterNIC extends Object {
-	private Object[] queue;// ÉùÃ÷Ò»¸ö¶ÓÁĞ
-	private int capacity;// ĞÅÏ¢ÈİÁ¿
-	private int size;// ´óĞ¡
-	private int head;// ĞÅÏ¢Í·
-	private int tail;// ĞÅÏ¢Î²
+	private Object[] queue;// å£°æ˜ä¸€ä¸ªé˜Ÿåˆ—
+	private int capacity;// ä¿¡æ¯å®¹é‡
+	private int size;// å¤§å°
+	private int head;// ä¿¡æ¯å¤´
+	private int tail;// ä¿¡æ¯å°¾
 	public InterNIC(int cap) {
-		capacity = (cap > 0) ? cap : 1; // Éè³õÊ¼ÈİÁ¿Îª1
-		queue = new Object[capacity];// ¸ù¾İÈİÁ¿´´½¨Ò»¸öObjectÊı×é
+		capacity = (cap > 0) ? cap : 1; // è®¾åˆå§‹å®¹é‡ä¸º1
+		queue = new Object[capacity];// æ ¹æ®å®¹é‡åˆ›å»ºä¸€ä¸ªObjectæ•°ç»„
 		head = 0;
 		tail = 0;
 		size = 0;
 	}
-	public int getCapacity() {// »ñÈ¡ÈİÁ¿
+	public int getCapacity() {// è·å–å®¹é‡
 		return capacity;
 	}
-	public synchronized int getSize() {// »ñÈ¡ĞÅÏ¢µÄ´óĞ¡
+	public synchronized int getSize() {// è·å–ä¿¡æ¯çš„å¤§å°
 		return size;
 	}
-	public synchronized boolean isEmpty() {// ÅĞ¶ÏĞÅÏ¢ÊÇ·ñ¿Õ
+	public synchronized boolean isEmpty() {// åˆ¤æ–­ä¿¡æ¯æ˜¯å¦ç©º
 		return (size == 0);
 	}
-	public synchronized boolean isFull() {// ÅĞ¶ÏĞÅÏ¢ÊÇ·ñ
+	public synchronized boolean isFull() {// åˆ¤æ–­ä¿¡æ¯æ˜¯å¦
 		return (size == capacity);
 	}
-	public synchronized void add(Object obj) throws InterruptedException {//Ìí¼ÓĞÅÏ¢
+	public synchronized void add(Object obj) throws InterruptedException {//æ·»åŠ ä¿¡æ¯
 		waitWhileFull();
 		queue[head] = obj;
 		head = (head + 1) % capacity;
 		size++;
 		notifyAll();
 	}
-	public synchronized void addEach(Object[] list) throws InterruptedException {//Ìí¼ÓĞÅÏ¢Î²²¿
+	public synchronized void addEach(Object[] list) throws InterruptedException {//æ·»åŠ ä¿¡æ¯å°¾éƒ¨
 		for (int i = 0; i < list.length; i++) {
 			add(list[i]);
 		}
 	}
-	public synchronized Object remove() throws InterruptedException {//ĞÅÏ¢µÄÒÆ³ö
+	public synchronized Object remove() throws InterruptedException {//ä¿¡æ¯çš„ç§»å‡º
 		waitWhileEmpty();
 		Object obj = queue[tail];
 		queue[tail] = null;
@@ -46,7 +46,7 @@ public class InterNIC extends Object {
 		notifyAll();
 		return obj;
 	}
-	public synchronized Object[] removeAll() throws InterruptedException {//ĞÅÏ¢È«²¿ÒÆ³ö
+	public synchronized Object[] removeAll() throws InterruptedException {//ä¿¡æ¯å…¨éƒ¨ç§»å‡º
 		Object[] list = new Object[size]; // use the current size
 		for (int i = 0; i < list.length; i++) {
 			list[i] = remove();
@@ -57,7 +57,7 @@ public class InterNIC extends Object {
 		waitWhileEmpty();
 		return removeAll();
 	}
-	public synchronized boolean waitUntilEmpty(long msTimeout)//Öğ½¥½«ĞÅÏ¢È«²¿Çå³ı
+	public synchronized boolean waitUntilEmpty(long msTimeout)//é€æ¸å°†ä¿¡æ¯å…¨éƒ¨æ¸…é™¤
 			throws InterruptedException {
 		if (msTimeout == 0L) {
 			waitUntilEmpty();

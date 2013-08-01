@@ -2,18 +2,18 @@ package com.java.base.generic.two;
 
 import com.java.base.generic.one.MyFirstGeneric;
 
-//·ºĞÍÔËĞĞÊ±ÀàĞÍÊ¶±ğ 1
+//æ³›å‹è¿è¡Œæ—¶ç±»å‹è¯†åˆ« 1
 public class GenericRTTI {
 	public static void main(String args[]) {
 		MyFirstGeneric<Double> dou = new MyFirstGeneric<Double>(100.0);
 		MyFirstGeneric<String> str = new MyFirstGeneric<String>("hellow");
-		if (dou instanceof MyFirstGeneric)//ÅĞ¶ÏdouÊÇ·ñÊÇMyFirstGenericÀàµÄÊµÀı
+		if (dou instanceof MyFirstGeneric)//åˆ¤æ–­douæ˜¯å¦æ˜¯MyFirstGenericç±»çš„å®ä¾‹
 			System.out
 					.println("MyFirstGeneric<Integer> object is instance of MyFirstGeneric");
-		if (dou instanceof MyFirstGeneric<?>)//ÅĞ¶ÏdouÊÇ·ñÊÇMyFirstGeneric<?>·ºĞÍÀàµÄÊµÀı
+		if (dou instanceof MyFirstGeneric<?>)//åˆ¤æ–­douæ˜¯å¦æ˜¯MyFirstGeneric<?>æ³›å‹ç±»çš„å®ä¾‹
 			System.out
 					.println("MyFirstGeneric<Integer> object is instance of MyFirstGeneric<?>");
-		if (dou.getClass() == str.getClass())//ÅĞ¶ÏÕâÁ½¸ö¶ÔÏóÔËĞĞÊ±µÄÀàÊÇ·ñÏàµÈ
+		if (dou.getClass() == str.getClass())//åˆ¤æ–­è¿™ä¸¤ä¸ªå¯¹è±¡è¿è¡Œæ—¶çš„ç±»æ˜¯å¦ç›¸ç­‰
 			System.out
 					.println("MyFirstGeneric<Integer> class equals MyFirstGeneric<String> class");
 	}

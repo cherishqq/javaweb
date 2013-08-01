@@ -5,53 +5,53 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
-public class TextThreadYield {					// ²Ù×÷Ïß³ÌÈÃ²½µÄÀà
-	private Vector vector = new Vector();			// ´´½¨ÏòÁ¿¼¯ºÏ
-										// ´´½¨ÈÕÆÚ¸ñÊ½
+public class TextThreadYield {					// æ“ä½œçº¿ç¨‹è®©æ­¥çš„ç±»
+	private Vector vector = new Vector();			// åˆ›å»ºå‘é‡é›†åˆ
+										// åˆ›å»ºæ—¥æœŸæ ¼å¼
 	private DateFormat dateFormat = new SimpleDateFormat("HH-mm-ss:SSSS"); 
 	private boolean isFlag = false;
-	private class Yield extends Thread {			//ÈÃ²½½ÓÊÕÎÄ¼şÀà
+	private class Yield extends Thread {			//è®©æ­¥æ¥æ”¶æ–‡ä»¶ç±»
 		public Yield() {
-			this.setName("½ÓÊÕÎÄ¼ş");			//ÉèÖÃÏß³ÌÃû³Æ
-			this.setDaemon(true);			// Èç¹ûSendFileÏß³Ì½áÊø£¬Ôò¸ÃÏß³Ì×Ô¶¯½áÊø
+			this.setName("æ¥æ”¶æ–‡ä»¶");			//è®¾ç½®çº¿ç¨‹åç§°
+			this.setDaemon(true);			// å¦‚æœSendFileçº¿ç¨‹ç»“æŸï¼Œåˆ™è¯¥çº¿ç¨‹è‡ªåŠ¨ç»“æŸ
 		}
 		public void run() {
-			while (!isFlag) {					// ±êÊ¶ÎªÕæ½øĞĞÑ­»·
+			while (!isFlag) {					// æ ‡è¯†ä¸ºçœŸè¿›è¡Œå¾ªç¯
 				try {
-					Thread.sleep(100);		// ĞİÃß
-				}catch(InterruptedException e){	//²¶»ñ»½ĞÑÒì³£
-					System.out.println("»½ĞÑÒì³£:"+e.getMessage());
+					Thread.sleep(100);		// ä¼‘çœ 
+				}catch(InterruptedException e){	//æ•è·å”¤é†’å¼‚å¸¸
+					System.out.println("å”¤é†’å¼‚å¸¸:"+e.getMessage());
 				}
-				if (vector.size() == 0) {		//ÅĞ¶ÏÏòÁ¿¼¯ºÏ´óĞ¡
-					System.out.println(dateFormat.format(new Date())+ "\tÏòÁ¿¼¯ºÏÖĞÃ»ÓĞÎÄ¼ş£¬Ö´ĞĞyield²Ù×÷");
-					Thread.yield();			//µ÷ÓÃÏß³ÌÈÃ²½
-				} else {					//ÒÆ¶ÓÎÄ¼ş»ñµÃ¶ÔÏó
+				if (vector.size() == 0) {		//åˆ¤æ–­å‘é‡é›†åˆå¤§å°
+					System.out.println(dateFormat.format(new Date())+ "\tå‘é‡é›†åˆä¸­æ²¡æœ‰æ–‡ä»¶ï¼Œæ‰§è¡Œyieldæ“ä½œ");
+					Thread.yield();			//è°ƒç”¨çº¿ç¨‹è®©æ­¥
+				} else {					//ç§»é˜Ÿæ–‡ä»¶è·å¾—å¯¹è±¡
 					String ss = (String) vector.remove(0); 
-					System.out.println(dateFormat.format(new Date())+"\tÈ¡µ½ÎÄ¼ş£¬ÃûÎª" + ss);
+					System.out.println(dateFormat.format(new Date())+"\tå–åˆ°æ–‡ä»¶ï¼Œåä¸º" + ss);
 				}
 			}
 		}
 	}
-	private class SendFile extends Thread {		//·¢ËÍÎÄ¼şÀà
-		private String[] files = new String[] { "ĞÂÎÅÎÄ¼ş", "¹úÄÚÂÃÓÎÏòµ¼", "É½Ë®Ãû»­ĞÀÉÍ", "·¢¼ÒÖÂ¸»ËµÃ÷" };
+	private class SendFile extends Thread {		//å‘é€æ–‡ä»¶ç±»
+		private String[] files = new String[] { "æ–°é—»æ–‡ä»¶", "å›½å†…æ—…æ¸¸å‘å¯¼", "å±±æ°´åç”»æ¬£èµ", "å‘å®¶è‡´å¯Œè¯´æ˜" };
 		public SendFile() {
-			this.setName("·¢ËÍÎÄ¼ş");
+			this.setName("å‘é€æ–‡ä»¶");
 		}
 		public void run() {
 			try {
-				for (int i=0;i < files.length;i++){	//Ñ­»·Ê¹Ïß³ÌĞİÃß
-					Thread.sleep(201);		//Ïß³ÌĞİÃß
-					vector.add(files[i]);		//Ìí¼ÓÎÄ¼ş
+				for (int i=0;i < files.length;i++){	//å¾ªç¯ä½¿çº¿ç¨‹ä¼‘çœ 
+					Thread.sleep(201);		//çº¿ç¨‹ä¼‘çœ 
+					vector.add(files[i]);		//æ·»åŠ æ–‡ä»¶
 				}
-				Thread.sleep(100);			//Ïß³ÌĞİÃß
-			} catch (InterruptedException e) {	//²¶»ñ»½ĞÑÒì³£
-				System.out.println("»½ĞÑÒì³£:"+e.getMessage());
+				Thread.sleep(100);			//çº¿ç¨‹ä¼‘çœ 
+			} catch (InterruptedException e) {	//æ•è·å”¤é†’å¼‚å¸¸
+				System.out.println("å”¤é†’å¼‚å¸¸:"+e.getMessage());
 			}
 		}
 	}
-	public static void main(String []args){			//java³ÌĞòÖ÷Èë¿Ú´¦
-		TextThreadYield text=new TextThreadYield();//ÊµÀı»¯¶ÔÏó
-		text.new Yield().start();				//ÊµÀı¶ÔÏóÆô¶¯Ïß³Ì
+	public static void main(String []args){			//javaç¨‹åºä¸»å…¥å£å¤„
+		TextThreadYield text=new TextThreadYield();//å®ä¾‹åŒ–å¯¹è±¡
+		text.new Yield().start();				//å®ä¾‹å¯¹è±¡å¯åŠ¨çº¿ç¨‹
 		text.new SendFile().start();
 	}
 }

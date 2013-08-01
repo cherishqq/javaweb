@@ -1,5 +1,6 @@
 package com.java.base.thread.one;
 
+
 import java.applet.Applet;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -8,45 +9,45 @@ import java.awt.Graphics2D;
 import java.util.Date;
 
 public class MoveClock extends Applet implements Runnable {
-	Thread hourThread = null; 		// Ê±ÕëÏß³Ì
-	Thread minuteThread = null; 		// ·ÖÕëÏß³Ì
-	Thread secondThread = null; 		// ÃëÕëÏß³Ì
-	int hourX, hourY, minuteX, minuteY, secondX, secondY;// ±íÊ¾Ê±,·Ö,ÃëÕë¶ËµãµÄXY×ø±êµã
-	int currentHour = 0; 				// »ñÈ¡µ±Ç°Ê±¼äÖĞ´ú±íĞ¡Ê±µÄÊı×ÖÖµ
-	int currentMinute = 0; 			// »ñÈ¡µ±Ç°Ê±¼äÖĞ´ú±í·ÖÖÓµÄÊı×ÖÖµ
-	int currentSecond = 0; 			// »ñÈ¡µ±Ç°Ê±¼äÖĞ´ú±íÃëµÄÊı×ÖÖµ
-	Graphics secondGraphics = null; 	// »æÖÆÃëÕëµÄGraphics¶ÔÏó
-	Graphics minuteGraphics = null; 	// »æÖÆ·ÖÕëµÄGraphics¶ÔÏó
-	Graphics hourGraphics = null; 		// »æÖÆÊ±ÕëµÄGraphics¶ÔÏó
-	Graphics2D minuteg2D = null;		// ´´½¨Graphics2D¶ÔÏó
-	Graphics2D hourg2D = null;		// ´´½¨Graphics2D¶ÔÏó
-	Graphics2D secondg2D = null;		// ´´½¨Graphics2D¶ÔÏó
-	double drawX[] = new double[61]; 	// ´æ·Å±íÅÌ¿Ì¶ÈµÄXÖáÊı×é
-	double drawY[] = new double[61]; 	// ´æ·Å±íÅÌ¿Ì¶ÈµÄYÖáÊı×é
-	double dial_x[] = new double[61]; 	// ¹©»æÖÆ±íÅÌÊ¹µÄxµã×ø±êÖµ
-	double dial_y[] = new double[61];	// ¹©»æÖÆ±íÅÌÊ¹µÄYµã×ø±êÖµ
-	int isRestart = 0; 	// ÅĞ¶ÏÊÇ·ñÖØĞÂ¿ªÊ¼
-	public void init() { 	// Êı¾İ³õÊ¼»¯
-		hourGraphics = this.getGraphics(); 		// ÊµÀı»¯Ê±ÕëGraphics¶ÔÏó
-		hourGraphics.setColor(Color.white); 	// ÉèÖÃÊ±ÕëµÄÑÕÉ«
-		hourg2D = (Graphics2D) hourGraphics;	// ÊµÀı»¯Ê±ÕëGraphics2D¶ÔÏó
-		hourGraphics.translate(200, 200); 		// ½øĞĞ×ø±êÏµÍ³±ä»»Ô­µãÉèÔÚ(200,200)´¦
-		minuteGraphics = this.getGraphics(); 	// ÊµÀı»¯·ÖÕëGraphics¶ÔÏó
-		minuteg2D = (Graphics2D) minuteGraphics;	// ÊµÀı»¯·ÖÕëGraphics2D¶ÔÏó
-		minuteGraphics.setColor(Color.green); 		// ÉèÖÃ·ÖÕëµÄÑÕÉ«
-		minuteGraphics.translate(200, 200); 		// ½øĞĞ×ø±êÏµÍ³±ä»»£¬Ô­µãÉèÔÚ(200,200)´¦
-		secondGraphics = this.getGraphics(); 		// ÊµÀı»¯ÃëÕëGraphics¶ÔÏó
-		secondg2D = (Graphics2D) secondGraphics;	// ÊµÀı»¯ÃëÕëGraphics2D¶ÔÏó
-		secondGraphics.setColor(Color.blue); 		// ÉèÖÃÃëÕëµÄÑÕÉ«
-		secondGraphics.translate(200, 200); 		// ½øĞĞ×ø±êÏµÍ³±ä»»£¬Ô­µãÉèÔÚ(200,200)´¦
+	Thread hourThread = null; 		// æ—¶é’ˆçº¿ç¨‹
+	Thread minuteThread = null; 		// åˆ†é’ˆçº¿ç¨‹
+	Thread secondThread = null; 		// ç§’é’ˆçº¿ç¨‹
+	int hourX, hourY, minuteX, minuteY, secondX, secondY;// è¡¨ç¤ºæ—¶,åˆ†,ç§’é’ˆç«¯ç‚¹çš„XYåæ ‡ç‚¹
+	int currentHour = 0; 				// è·å–å½“å‰æ—¶é—´ä¸­ä»£è¡¨å°æ—¶çš„æ•°å­—å€¼
+	int currentMinute = 0; 			// è·å–å½“å‰æ—¶é—´ä¸­ä»£è¡¨åˆ†é’Ÿçš„æ•°å­—å€¼
+	int currentSecond = 0; 			// è·å–å½“å‰æ—¶é—´ä¸­ä»£è¡¨ç§’çš„æ•°å­—å€¼
+	Graphics secondGraphics = null; 	// ç»˜åˆ¶ç§’é’ˆçš„Graphicså¯¹è±¡
+	Graphics minuteGraphics = null; 	// ç»˜åˆ¶åˆ†é’ˆçš„Graphicså¯¹è±¡
+	Graphics hourGraphics = null; 		// ç»˜åˆ¶æ—¶é’ˆçš„Graphicså¯¹è±¡
+	Graphics2D minuteg2D = null;		// åˆ›å»ºGraphics2Då¯¹è±¡
+	Graphics2D hourg2D = null;		// åˆ›å»ºGraphics2Då¯¹è±¡
+	Graphics2D secondg2D = null;		// åˆ›å»ºGraphics2Då¯¹è±¡
+	double drawX[] = new double[61]; 	// å­˜æ”¾è¡¨ç›˜åˆ»åº¦çš„Xè½´æ•°ç»„
+	double drawY[] = new double[61]; 	// å­˜æ”¾è¡¨ç›˜åˆ»åº¦çš„Yè½´æ•°ç»„
+	double dial_x[] = new double[61]; 	// ä¾›ç»˜åˆ¶è¡¨ç›˜ä½¿çš„xç‚¹åæ ‡å€¼
+	double dial_y[] = new double[61];	// ä¾›ç»˜åˆ¶è¡¨ç›˜ä½¿çš„Yç‚¹åæ ‡å€¼
+	int isRestart = 0; 	// åˆ¤æ–­æ˜¯å¦é‡æ–°å¼€å§‹
+	public void init() { 	// æ•°æ®åˆå§‹åŒ–
+		hourGraphics = this.getGraphics(); 		// å®ä¾‹åŒ–æ—¶é’ˆGraphicså¯¹è±¡
+		hourGraphics.setColor(Color.white); 	// è®¾ç½®æ—¶é’ˆçš„é¢œè‰²
+		hourg2D = (Graphics2D) hourGraphics;	// å®ä¾‹åŒ–æ—¶é’ˆGraphics2Då¯¹è±¡
+		hourGraphics.translate(200, 200); 		// è¿›è¡Œåæ ‡ç³»ç»Ÿå˜æ¢åŸç‚¹è®¾åœ¨(200,200)å¤„
+		minuteGraphics = this.getGraphics(); 	// å®ä¾‹åŒ–åˆ†é’ˆGraphicså¯¹è±¡
+		minuteg2D = (Graphics2D) minuteGraphics;	// å®ä¾‹åŒ–åˆ†é’ˆGraphics2Då¯¹è±¡
+		minuteGraphics.setColor(Color.green); 		// è®¾ç½®åˆ†é’ˆçš„é¢œè‰²
+		minuteGraphics.translate(200, 200); 		// è¿›è¡Œåæ ‡ç³»ç»Ÿå˜æ¢ï¼ŒåŸç‚¹è®¾åœ¨(200,200)å¤„
+		secondGraphics = this.getGraphics(); 		// å®ä¾‹åŒ–ç§’é’ˆGraphicså¯¹è±¡
+		secondg2D = (Graphics2D) secondGraphics;	// å®ä¾‹åŒ–ç§’é’ˆGraphics2Då¯¹è±¡
+		secondGraphics.setColor(Color.blue); 		// è®¾ç½®ç§’é’ˆçš„é¢œè‰²
+		secondGraphics.translate(200, 200); 		// è¿›è¡Œåæ ‡ç³»ç»Ÿå˜æ¢ï¼ŒåŸç‚¹è®¾åœ¨(200,200)å¤„
 		drawX[0] = 0;
-		// ¸÷¸öÊ±Õë12µã´¦µÄÎ»ÖÃ×ø±ê£¨°´ĞÂ×ø±êÏµµÄ×ø±ê£©
+		// å„ä¸ªæ—¶é’ˆ12ç‚¹å¤„çš„ä½ç½®åæ ‡ï¼ˆæŒ‰æ–°åæ ‡ç³»çš„åæ ‡ï¼‰
 		drawY[0] = -120;
 		dial_x[0] = 0;
-		// 12µã´¦µÄ¿Ì¶ÈÎ»ÖÃ×ø±ê£¨°´ĞÂ×ø±êÏµµÄ×ø±ê£©
+		// 12ç‚¹å¤„çš„åˆ»åº¦ä½ç½®åæ ‡ï¼ˆæŒ‰æ–°åæ ‡ç³»çš„åæ ‡ï¼‰
 		dial_y[0] = -140;
 		double jiaodu = 6 * Math.PI / 180;
-		// ±íÅÌ·Ö¸î³É60·Ö£¬½«·Ö¸îµãµÄ×ø±ê´æ·ÅÔÚÊı×éÖĞ
+		// è¡¨ç›˜åˆ†å‰²æˆ60åˆ†ï¼Œå°†åˆ†å‰²ç‚¹çš„åæ ‡å­˜æ”¾åœ¨æ•°ç»„ä¸­
 		for (int i = 0; i < 60; i++) {
 			drawX[i + 1] = drawX[i] * Math.cos(jiaodu) - Math.sin(jiaodu)
 					* drawY[i];
@@ -55,7 +56,7 @@ public class MoveClock extends Applet implements Runnable {
 		}
 		drawX[60] = 0;
 		drawY[60] = -120;
-		// ±íÅÌ·Ö¸î³É60·Ö£¬½«·Ö¸îµãµÄ×ø±ê´æ·ÅÔÚ»æÖÆÊı×éÖĞ
+		// è¡¨ç›˜åˆ†å‰²æˆ60åˆ†ï¼Œå°†åˆ†å‰²ç‚¹çš„åæ ‡å­˜æ”¾åœ¨ç»˜åˆ¶æ•°ç»„ä¸­
 		for (int i = 0; i < 60; i++) {
 			dial_x[i + 1] = dial_x[i] * Math.cos(jiaodu) - Math.sin(jiaodu)
 					* dial_y[i];
@@ -67,102 +68,102 @@ public class MoveClock extends Applet implements Runnable {
 	}
 	public void start() {
 		if (isRestart >= 1) {
-			secondThread.interrupt(); 	// »½ĞÑÏß³Ì
+			secondThread.interrupt(); 	// å”¤é†’çº¿ç¨‹
 			minuteThread.interrupt();
 			hourThread.interrupt();
 		}
-		hourThread = new Thread(this); 	// ´´½¨Ê±ÕëÏß³Ì
-		minuteThread = new Thread(this); 	// ´´½¨·ÖÕëÏß³Ì
-		secondThread = new Thread(this); 	// ´´½¨ÃëÕëÏß³Ì
-		secondThread.start(); 			// Æô¶¯ÃëÕëÏß³Ì
-		minuteThread.start(); 			// Æô¶¯·ÖÕëÏß³Ì
-		hourThread.start(); 				// Æô¶¯Ê±ÕëÏß³Ì
+		hourThread = new Thread(this); 	// åˆ›å»ºæ—¶é’ˆçº¿ç¨‹
+		minuteThread = new Thread(this); 	// åˆ›å»ºåˆ†é’ˆçº¿ç¨‹
+		secondThread = new Thread(this); 	// åˆ›å»ºç§’é’ˆçº¿ç¨‹
+		secondThread.start(); 			// å¯åŠ¨ç§’é’ˆçº¿ç¨‹
+		minuteThread.start(); 			// å¯åŠ¨åˆ†é’ˆçº¿ç¨‹
+		hourThread.start(); 				// å¯åŠ¨æ—¶é’ˆçº¿ç¨‹
 		isRestart++;
 		if (isRestart >= 2)
 			isRestart = 1;
 	}
 	public void stop() {
-		secondThread.interrupt(); // »½ĞÑÏß³Ì
+		secondThread.interrupt(); // å”¤é†’çº¿ç¨‹
 		minuteThread.interrupt();
 		hourThread.interrupt();
 	}
-	public void paint(Graphics g) { // »æÖÆÍ¼ĞÎ
+	public void paint(Graphics g) { // ç»˜åˆ¶å›¾å½¢
 		this.setBackground(Color.black);
 		this.start();
-		g.drawOval(50, 50, 300, 300);	// ±íÅÌµÄÍâÈ¦
-		g.translate(200, 200); 		// ½øĞĞ×ø±êÏµÍ³±ä»»
-		for (int i = 0; i < 60; i++) { 		// »æÖÆ±íÅÌµÄĞ¡¿Ì¶ÈºÍ´ó¿Ì¶È
+		g.drawOval(50, 50, 300, 300);	// è¡¨ç›˜çš„å¤–åœˆ
+		g.translate(200, 200); 		// è¿›è¡Œåæ ‡ç³»ç»Ÿå˜æ¢
+		for (int i = 0; i < 60; i++) { 		// ç»˜åˆ¶è¡¨ç›˜çš„å°åˆ»åº¦å’Œå¤§åˆ»åº¦
 			if (i % 5 == 0) {
-				g.setColor(Color.red); // ÉèÖÃÑÕÉ«
+				g.setColor(Color.red); // è®¾ç½®é¢œè‰²
 				g.fillOval((int) dial_x[i], (int) dial_y[i], 10, 10);
 			} else
 				g.fillOval((int) dial_x[i], (int) dial_y[i], 5, 5);
 		}
 	}
-	public void run() { 			// ÊµÏÖThreadµÄ·½·¨,¿ªÊ¼Ïß³Ì
-		Date date = new Date(); 	// »ñÈ¡±¾µØÊ±¼ä
+	public void run() { 			// å®ç°Threadçš„æ–¹æ³•,å¼€å§‹çº¿ç¨‹
+		Date date = new Date(); 	// è·å–æœ¬åœ°æ—¶é—´
 		String string = date.toString();
-		currentHour = Integer.parseInt(string.substring(11, 13)); 	// »ñµÃµ±Ç°Ê±¼äµÄĞ¡Ê±
-		currentMinute = Integer.parseInt(string.substring(14, 16)); // »ñÈ¡µ±Ç°Ê±¼äµÄ·ÖÖÓ
-		currentSecond = Integer.parseInt(string.substring(17, 19));// »ñÈ¡µ±Ç°Ê±¼äµÄÃëÖÓ
-		if (Thread.currentThread() == secondThread) { 		// Èç¹ûµ±Ç°Ïß³ÌÊÇÃëÏß³Ì
-			secondX = (int) drawX[currentSecond]; 			// ÃëÕë³õÊ¼»¯
+		currentHour = Integer.parseInt(string.substring(11, 13)); 	// è·å¾—å½“å‰æ—¶é—´çš„å°æ—¶
+		currentMinute = Integer.parseInt(string.substring(14, 16)); // è·å–å½“å‰æ—¶é—´çš„åˆ†é’Ÿ
+		currentSecond = Integer.parseInt(string.substring(17, 19));// è·å–å½“å‰æ—¶é—´çš„ç§’é’Ÿ
+		if (Thread.currentThread() == secondThread) { 		// å¦‚æœå½“å‰çº¿ç¨‹æ˜¯ç§’çº¿ç¨‹
+			secondX = (int) drawX[currentSecond]; 			// ç§’é’ˆåˆå§‹åŒ–
 			secondY = (int) drawX[currentSecond];
-			// ÓÃ±³¾°É«Çå³ıÇ°Ò»ÃëµÄÃëÕë
+			// ç”¨èƒŒæ™¯è‰²æ¸…é™¤å‰ä¸€ç§’çš„ç§’é’ˆ
 			secondGraphics.drawLine(0, 0, secondX, secondY);
-			secondg2D.setStroke(new BasicStroke(2.0f));		// ÉèÖÃËù»æÖÆÃëÕëµÄ¿í¶È
+			secondg2D.setStroke(new BasicStroke(2.0f));		// è®¾ç½®æ‰€ç»˜åˆ¶ç§’é’ˆçš„å®½åº¦
 			int i = currentSecond;
 			while (true) {
 				try {
-					secondThread.sleep(1000); 			// Ã¿¸ôÒ»ÃëĞİÃß
-					Color c = getBackground(); 			// »ñÈ¡±³¾°ÑÕÉ«
-					secondGraphics.setColor(c); 			// ÉèÖÃÃëÕëµÄÑÕÉ«
-					// ÓÃ±³¾°É«Çå³ıÇ°Ò»ÃëµÄÃëÕë
+					secondThread.sleep(1000); 			// æ¯éš”ä¸€ç§’ä¼‘çœ 
+					Color c = getBackground(); 			// è·å–èƒŒæ™¯é¢œè‰²
+					secondGraphics.setColor(c); 			// è®¾ç½®ç§’é’ˆçš„é¢œè‰²
+					// ç”¨èƒŒæ™¯è‰²æ¸…é™¤å‰ä¸€ç§’çš„ç§’é’ˆ
 					secondGraphics.drawLine(0, 0, secondX, secondY);
 					secondg2D.setStroke(new BasicStroke(2.0f));
-					// ÃëÕëÓë·ÖÕëÖØºÏ,»Ö¸´·ÖÕëÏÔÊ¾
+					// ç§’é’ˆä¸åˆ†é’ˆé‡åˆ,æ¢å¤åˆ†é’ˆæ˜¾ç¤º
 					if ((secondX == minuteX) && (secondY == minuteY)) {
-						// ÓÃ±³¾°É«Çå³ıÇ°Ò»·ÖµÄ·ÖÕë
+						// ç”¨èƒŒæ™¯è‰²æ¸…é™¤å‰ä¸€åˆ†çš„åˆ†é’ˆ
 						minuteGraphics.drawLine(0, 0, minuteX, minuteY);
 					}
-					// ÃëÕëÓëÊ±ÕëÖØºÏ£¬»Ö¸´Ê±ÕëµÄÏÔÊ¾
+					// ç§’é’ˆä¸æ—¶é’ˆé‡åˆï¼Œæ¢å¤æ—¶é’ˆçš„æ˜¾ç¤º
 					if ((secondX == hourX) && (secondY == hourY)) {
-						// ÓÃ±³¾°É«Çå³ıÇ°Ò»Ê±µÄÊ±Õë
+						// ç”¨èƒŒæ™¯è‰²æ¸…é™¤å‰ä¸€æ—¶çš„æ—¶é’ˆ
 						hourGraphics.drawLine(0, 0, hourX, hourY);
-						hourg2D.setStroke(new BasicStroke(4.0f));// ÉèÖÃËù»æÖÆÊ±ÕëµÄ¿í¶È
+						hourg2D.setStroke(new BasicStroke(4.0f));// è®¾ç½®æ‰€ç»˜åˆ¶æ—¶é’ˆçš„å®½åº¦
 					}
-				} catch (InterruptedException e) { 	// ²¶»ñÒì³£
-					Color c = getBackground(); 	// »ñÈ¡±³¾°ÑÕÉ«
-					secondGraphics.setColor(c);	// ÉèÖÃÃëÕëµÄÑÕÉ«
-					// ÓÃ±³¾°É«Çå³ıÃëÕë
+				} catch (InterruptedException e) { 	// æ•è·å¼‚å¸¸
+					Color c = getBackground(); 	// è·å–èƒŒæ™¯é¢œè‰²
+					secondGraphics.setColor(c);	// è®¾ç½®ç§’é’ˆçš„é¢œè‰²
+					// ç”¨èƒŒæ™¯è‰²æ¸…é™¤ç§’é’ˆ
 					secondGraphics.drawLine(0, 0, secondX, secondY);
 					secondg2D.setStroke(new BasicStroke(2.0f));
 					return;
 				}
-				secondX = (int) drawX[(i + 1) % 60]; 	// ÃëÕëÏòÇ°×ßÒ»¸öµ¥Î»
-				secondY = (int) drawY[(i + 1) % 60]; 	// Ã¿Ò»Ãë×ß6¶È£¨Ò»¸öµ¥Î»¸ñ£©
-				secondGraphics.setColor(Color.blue);	// »æÖÆÃëÕëµÄÑÕÉ«
-				// ÓÃ±³¾°É«Çå³ıÇ°Ò»ÃëµÄÃëÕë
+				secondX = (int) drawX[(i + 1) % 60]; 	// ç§’é’ˆå‘å‰èµ°ä¸€ä¸ªå•ä½
+				secondY = (int) drawY[(i + 1) % 60]; 	// æ¯ä¸€ç§’èµ°6åº¦ï¼ˆä¸€ä¸ªå•ä½æ ¼ï¼‰
+				secondGraphics.setColor(Color.blue);	// ç»˜åˆ¶ç§’é’ˆçš„é¢œè‰²
+				// ç”¨èƒŒæ™¯è‰²æ¸…é™¤å‰ä¸€ç§’çš„ç§’é’ˆ
 				secondGraphics.drawLine(0, 0, secondX, secondY);
 				secondg2D.setStroke(new BasicStroke(2.0f));
 				i++;
 			}
 		}
-		if (Thread.currentThread() == minuteThread) { 		// Èç¹ûµ±Ç°Ïß³ÌÊÇ·ÖÏß³Ì
+		if (Thread.currentThread() == minuteThread) { 		// å¦‚æœå½“å‰çº¿ç¨‹æ˜¯åˆ†çº¿ç¨‹
 			minuteX = (int) drawX[currentMinute];
 			minuteY = (int) drawY[currentMinute];
 			minuteGraphics.drawLine(0, 0, minuteX, minuteY);
 			minuteg2D.setStroke(new BasicStroke(3.0f));
-			int i = currentMinute; // »ñÈ¡µ±Ç°·ÖÖÓ
+			int i = currentMinute; // è·å–å½“å‰åˆ†é’Ÿ
 			while (true) {
-				try { // µÚÒ»´Î¹ı60-secondÃë¾ÍÇ°½øÒ»·ÖÖÓ£¬ÒÔºóÃ¿¹ı60ÃëÇ°½øÒ»·ÖÖÓ
+				try { // ç¬¬ä¸€æ¬¡è¿‡60-secondç§’å°±å‰è¿›ä¸€åˆ†é’Ÿï¼Œä»¥åæ¯è¿‡60ç§’å‰è¿›ä¸€åˆ†é’Ÿ
 					minuteThread.sleep(1000 * 60 - currentSecond * 1000);
 					currentSecond = 0;
-					Color c = getBackground(); 		// »ñÈ¡±³¾°ÑÕÉ«
-					minuteGraphics.setColor(c); 		// ÉèÖÃ·ÖÕëµÄÑÕÉ«
-					minuteg2D.setStroke(new BasicStroke(3.0f));// ÉèÖÃËù»æÖÆ·ÖÕëµÄ¿í¶È
+					Color c = getBackground(); 		// è·å–èƒŒæ™¯é¢œè‰²
+					minuteGraphics.setColor(c); 		// è®¾ç½®åˆ†é’ˆçš„é¢œè‰²
+					minuteg2D.setStroke(new BasicStroke(3.0f));// è®¾ç½®æ‰€ç»˜åˆ¶åˆ†é’ˆçš„å®½åº¦
 					minuteGraphics.drawLine(0, 0, minuteX, minuteY);
-					// Èç¹ûÊ±ÕëºÍ·ÖÕëÖØºÏ
+					// å¦‚æœæ—¶é’ˆå’Œåˆ†é’ˆé‡åˆ
 					if ((hourX == minuteX) && (hourY == minuteY)) {
 						hourGraphics.drawLine(0, 0, minuteX, minuteY);
 						hourg2D.setStroke(new BasicStroke(4.0f));
@@ -170,16 +171,16 @@ public class MoveClock extends Applet implements Runnable {
 				} catch (InterruptedException e) {
 					return;
 				}
-				minuteX = (int) drawX[(i + 1) % 60]; 		// ·ÖÕëÏòÇ°×ßÒ»¸öµ¥Î»
-				minuteY = (int) drawY[(i + 1) % 60]; 		// Ã¿Ò»·Ö×ß6¶È£¨Ò»¸öµ¥Î»¸ñ£©
-				minuteGraphics.setColor(Color.BLUE); 	// »æÖÆ·ÖÕëµÄÑÕÉ«
+				minuteX = (int) drawX[(i + 1) % 60]; 		// åˆ†é’ˆå‘å‰èµ°ä¸€ä¸ªå•ä½
+				minuteY = (int) drawY[(i + 1) % 60]; 		// æ¯ä¸€åˆ†èµ°6åº¦ï¼ˆä¸€ä¸ªå•ä½æ ¼ï¼‰
+				minuteGraphics.setColor(Color.BLUE); 	// ç»˜åˆ¶åˆ†é’ˆçš„é¢œè‰²
 				minuteg2D.setStroke(new BasicStroke(3.0f));
 				minuteGraphics.drawLine(0, 0, minuteX, minuteY);
 				i++;
 				currentSecond = 0;
 			}
 		}
-		if (Thread.currentThread() == hourThread) { // Èç¹ûµ±Ç°Ïß³ÌÊÇÊ±Ïß³Ì
+		if (Thread.currentThread() == hourThread) { // å¦‚æœå½“å‰çº¿ç¨‹æ˜¯æ—¶çº¿ç¨‹
 			int h = currentHour % 12;
 			hourX = (int) drawX[h * 5 + currentMinute / 12];
 			hourY = (int) drawY[h * 5 + currentMinute / 12];
@@ -188,7 +189,7 @@ public class MoveClock extends Applet implements Runnable {
 			hourg2D.setStroke(new BasicStroke(4.0f));
 			while (true) {
 				try {
-					// µÚÒ»´Î¹ı12-minute%12·ÖÖÓ¾ÍÇ°½øÒ»¸ö¿Ì¶È,ÒÔºóÃ¿¹ı12·ÖÖÓÇ°½øÒ»¿Ì¶È
+					// ç¬¬ä¸€æ¬¡è¿‡12-minute%12åˆ†é’Ÿå°±å‰è¿›ä¸€ä¸ªåˆ»åº¦,ä»¥åæ¯è¿‡12åˆ†é’Ÿå‰è¿›ä¸€åˆ»åº¦
 					hourThread.sleep(1000 * 60 * 12 - 1000 * 60
 							* (currentMinute % 12) - currentSecond * 1000);
 					currentMinute = 0;

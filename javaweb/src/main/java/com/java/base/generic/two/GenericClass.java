@@ -2,37 +2,25 @@ package com.java.base.generic.two;
 
 import java.util.Date;
 
-
-
-//¼Ì³Ğ·ºĞÍÀà
+//ç»§æ‰¿æ³›å‹ç±»
 public class GenericClass {
 	public static void main(String args[]) {
-		System.out.println("ÒÔ·ºĞÍÀàÎª¸¸ÀàµÄÊµÏÖ·½·¨ÈçÏÂ£º");
-		// ´´½¨×ÓÀàµÄ¶ÔÏó£¬ËüĞèÒª´«µİÁ½¸ö²ÎÊı£¬DateÀàĞÍ¸ø¸¸Àà£¬×Ô¼ºÊ¹ÓÃStringÀàĞÍ
+		System.out.println("ä»¥æ³›å‹ç±»ä¸ºçˆ¶ç±»çš„å®ç°æ–¹æ³•å¦‚ä¸‹ï¼š");
+		// åˆ›å»ºå­ç±»çš„å¯¹è±¡ï¼Œå®ƒéœ€è¦ä¼ é€’ä¸¤ä¸ªå‚æ•°ï¼ŒDateç±»å‹ç»™çˆ¶ç±»ï¼Œè‡ªå·±ä½¿ç”¨Stringç±»å‹
 		Child<Date, String> cd = new Child<Date, String>(new Date(),
-				"µ±Ç°ÏµÍ³µÄÊ±¼äÎª: ");
+				"å½“å‰ç³»ç»Ÿçš„æ—¶é—´ä¸º: ");
 		System.out.print("\t" + cd.getDob());
 		System.out.println(cd.getOb());
 	}
 
 }
 
-/**
- * 
- * ÑİÊ¾ÁË¶¼ÊÇ·ºĞÍµÄ
- * Child ÖĞÒªÓĞ T, ·ñÔò extends Father<T> Ê±»á±¨´í
- * @author Derek.pan
- *
- * @param <T>
- * @param <U>
- */
-
 class Child<T, U> extends Father<T> {
 	U u;
 
 	public Child(T t1, U u1) {
-		super(t1); // ´«µİ²ÎÊı¸ø¸¸Àà
-		u = u1; // Îª×Ô¼ºµÄ³ÉÔ±¸³Öµ
+		super(t1); // ä¼ é€’å‚æ•°ç»™çˆ¶ç±»
+		u = u1; // ä¸ºè‡ªå·±çš„æˆå‘˜èµ‹å€¼
 	}
 
 	public U getDob() {
@@ -40,7 +28,7 @@ class Child<T, U> extends Father<T> {
 	}
 }
 
-class Father<T> { // ¶¨ÒåÒ»¸ö·ºĞÍÀà
+class Father<T> { // å®šä¹‰ä¸€ä¸ªæ³›å‹ç±»
 	T t;
 
 	public Father(T t) {

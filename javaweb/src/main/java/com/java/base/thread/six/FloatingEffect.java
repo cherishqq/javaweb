@@ -1,5 +1,6 @@
 package com.java.base.thread.six;
 
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -15,22 +16,22 @@ import javax.swing.SwingUtilities;
 
 
 public class FloatingEffect extends Object {
-	private Component comp;// ´´½¨Ò»¸öComponent¶ÔÏó
-	// ¶¨ÒåÏÔÊ¾Î»ÖÃµÄX¡¢Y×ø±êµã
+	private Component comp;// åˆ›å»ºä¸€ä¸ªComponentå¯¹è±¡
+	// å®šä¹‰æ˜¾ç¤ºä½ç½®çš„Xã€Yåæ ‡ç‚¹
 	private int initX;
 	private int initY;
-	// ¶¨ÒåÆ«ÒÆÎ»ÖÃµÄX¡¢Y×ø±êµã
+	// å®šä¹‰åç§»ä½ç½®çš„Xã€Yåæ ‡ç‚¹
 	private int offsetX;
 	private int offsetY;
-	// ±êÖ¾ÊÇ·ñÊÇµÚÒ»´ÎÖ´ĞĞ
+	// æ ‡å¿—æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡æ‰§è¡Œ
 	private boolean firstTime;
-	// ÉùÃ÷Ò»¸öÊµÏÖRunnable½Ó¿ÚµÄÄäÃûÄÚ²¿Àà¶ÔÏó
+	// å£°æ˜ä¸€ä¸ªå®ç°Runnableæ¥å£çš„åŒ¿åå†…éƒ¨ç±»å¯¹è±¡
 	private Runnable runable;
-	// ÉùÃ÷Ò»¸öÏß³Ì¶ÔÏó
+	// å£°æ˜ä¸€ä¸ªçº¿ç¨‹å¯¹è±¡
 	private Thread thread;
-	// ±êÊ¶ÊÇ·ñÍ£Ö¹¸¡¶¯
+	// æ ‡è¯†æ˜¯å¦åœæ­¢æµ®åŠ¨
 	private volatile boolean flag;
-	// ¹¹Ôì·½·¨£¬ÎªÆä³ÉÔ±±äÁ¿³õÊ¼»¯
+	// æ„é€ æ–¹æ³•ï¼Œä¸ºå…¶æˆå‘˜å˜é‡åˆå§‹åŒ–
 	public FloatingEffect(Component comp, int initX, int initY, int offsetX,
 			int offsetY) {
 		this.comp = comp;
@@ -45,7 +46,7 @@ public class FloatingEffect extends Object {
 			}
 		};
 		flag = true;
-		Runnable r = new Runnable() {// ÊµÏÖRunnable½Ó¿ÚµÄÄäÃûÄÚ²¿Àà
+		Runnable r = new Runnable() {// å®ç°Runnableæ¥å£çš„åŒ¿åå†…éƒ¨ç±»
 			public void run() {
 				try {
 					floatING();
@@ -55,10 +56,10 @@ public class FloatingEffect extends Object {
 				}
 			}
 		};
-		thread = new Thread(r);// Ïß³ÌÊµÀı»¯
-		thread.start();// Æô¶¯Ïß³Ì
+		thread = new Thread(r);// çº¿ç¨‹å®ä¾‹åŒ–
+		thread.start();// å¯åŠ¨çº¿ç¨‹
 	}
-	private void floatING() {// Ö´ĞĞÆ¯¸¡
+	private void floatING() {// æ‰§è¡Œæ¼‚æµ®
 		while (flag) {
 			try {
 				Thread.sleep(200);
@@ -70,11 +71,11 @@ public class FloatingEffect extends Object {
 			}
 		}
 	}
-	private void newPosition() {// ¸üĞÂĞÂµÄ×ø±êÖµ
-		if (!comp.isVisible()) {// ÅĞ¶Ï´Ë×é¼şÔÚÆä¸¸ÈİÆ÷ÄÚÊÇ·ñ¿É¼û
+	private void newPosition() {// æ›´æ–°æ–°çš„åæ ‡å€¼
+		if (!comp.isVisible()) {// åˆ¤æ–­æ­¤ç»„ä»¶åœ¨å…¶çˆ¶å®¹å™¨å†…æ˜¯å¦å¯è§
 			return;
 		}
-		Component parent = comp.getParent();// »ñµÃ´Ë×é¼şµÄ¸¸¼¶
+		Component parent = comp.getParent();// è·å¾—æ­¤ç»„ä»¶çš„çˆ¶çº§
 		if (parent == null) {
 			return;
 		}
@@ -97,7 +98,7 @@ public class FloatingEffect extends Object {
 		newX = newX % parentSize.width;
 		newY = newY % parentSize.height;
 		if (newX < 0) {
-			// ÈÆµ½ÁíÒ»²à
+			// ç»•åˆ°å¦ä¸€ä¾§
 			newX += parentSize.width;
 		}
 		if (newY < 0) {
@@ -106,10 +107,10 @@ public class FloatingEffect extends Object {
 		comp.setLocation(newX, newY);
 		parent.repaint();
 	}
-	public static void main(String[] args) {// Ö´ĞĞ¸Ã³ÌĞòµÄÖ÷ÈëÖĞ
-		Component[] comp = new Component[6];// ´´½¨Ò»¸öComponent×é¼şÊı×é
-		comp[0] = new CryptoService("ĞÒ¸£");
-		comp[1] = new CryptoService("¿ìÀÖ");
+	public static void main(String[] args) {// æ‰§è¡Œè¯¥ç¨‹åºçš„ä¸»å…¥ä¸­
+		Component[] comp = new Component[6];// åˆ›å»ºä¸€ä¸ªComponentç»„ä»¶æ•°ç»„
+		comp[0] = new CryptoService("å¹¸ç¦");
+		comp[1] = new CryptoService("å¿«ä¹");
 		comp[2] = new ImageShow("E:\\tupian\\1.jpg", 30);
 		comp[3] = new ImageShow("E:\\tupian\\1.jpg", 30);
 		comp[4] = new ImageShow("E:\\tupian\\2.jpg", 100);
@@ -125,27 +126,27 @@ public class FloatingEffect extends Object {
 			int yOff = 2 - (int) (5 * Math.random());
 			new FloatingEffect(comp[i], x, y, xOff, yOff);
 		}
-		JFrame f = new JFrame("Æ¯¸¡Ğ§¹û");
+		JFrame f = new JFrame("æ¼‚æµ®æ•ˆæœ");
 		f.setContentPane(p);
 		f.setSize(400, 300);
 		f.setVisible(true);
 	}
 }
-class ImageShow extends JComponent {// ÆäÀàµÄÖ÷
-	private Dimension size;// ÏÔÊ¾Í¼ÏñµÄ³ß´ç
-	private volatile int imgLength;// »æÖÆÍ¼ÏñµÄ´óĞ¡
-	private Thread thread;// ÉùÃ÷Ò»¸öÏß³Ì¶ÔÏó
-	private Image im;// ÉùÃ÷Ò»¸öÍ¼Ïñ¶ÔÏó
-	private static String imgUrl = "";// ±íÊ¾Í¼Æ¬ËùÊ¾´ÅÅÌµÄÎ»ÖÃ
+class ImageShow extends JComponent {// å…¶ç±»çš„ä¸»
+	private Dimension size;// æ˜¾ç¤ºå›¾åƒçš„å°ºå¯¸
+	private volatile int imgLength;// ç»˜åˆ¶å›¾åƒçš„å¤§å°
+	private Thread thread;// å£°æ˜ä¸€ä¸ªçº¿ç¨‹å¯¹è±¡
+	private Image im;// å£°æ˜ä¸€ä¸ªå›¾åƒå¯¹è±¡
+	private static String imgUrl = "";// è¡¨ç¤ºå›¾ç‰‡æ‰€ç¤ºç£ç›˜çš„ä½ç½®
 	public ImageShow(String image, int n) {
 		imgUrl = image;
 		imgLength = 0;
 		size = new Dimension(n, n);
 		creatImage();
-		setMinimumSize(size);// ÉèÖÃ´Ë×é¼şµÄ×îĞ¡³ß´ç
-		setPreferredSize(size);// ÉèÖÃ´Ë×é¼şµÄÊ×ÏÈ³ß´ç
-		setMaximumSize(size);// ÉèÖÃ´Ë×é¼şµÄ×î´ó³ß´ç
-		setSize(size);// µ÷Õû×é¼şµÄ´óĞ¡
+		setMinimumSize(size);// è®¾ç½®æ­¤ç»„ä»¶çš„æœ€å°å°ºå¯¸
+		setPreferredSize(size);// è®¾ç½®æ­¤ç»„ä»¶çš„é¦–å…ˆå°ºå¯¸
+		setMaximumSize(size);// è®¾ç½®æ­¤ç»„ä»¶çš„æœ€å¤§å°ºå¯¸
+		setSize(size);// è°ƒæ•´ç»„ä»¶çš„å¤§å°
 		Runnable r = new Runnable() {
 			public void run() {
 				try {
@@ -158,22 +159,22 @@ class ImageShow extends JComponent {// ÆäÀàµÄÖ÷
 		thread = new Thread(r, "ImageShow");
 		thread.start();
 	}
-	private void creatImage() {// »ñÈ¡Í¼Æ¬¶ÔÏó
+	private void creatImage() {// è·å–å›¾ç‰‡å¯¹è±¡
 		ImageIcon ic = new ImageIcon(imgUrl);
 		im = ic.getImage();
 	}
-	public void paint(Graphics g) {// »æÖÆÍ¼Ïñ
+	public void paint(Graphics g) {// ç»˜åˆ¶å›¾åƒ
 		g.drawImage(im, imgLength, imgLength + 2, this);
 	}
-	private void showING() {// ÏÔÊ¾Í¼Ïó
+	private void showING() {// æ˜¾ç¤ºå›¾è±¡
 		while (true) {
 			try {
-				Thread.sleep(300); // ĞİÃß3ºÁÃë
+				Thread.sleep(300); // ä¼‘çœ 3æ¯«ç§’
 				imgLength = imgLength + 1;
-				if (imgLength > 30) {// Èç¹ûÍ¼Ïó±ß¿òµÄ³¤¶È´óÓÚ30
-					imgLength = 0;// ±ß¿òÉèÎª0
+				if (imgLength > 30) {// å¦‚æœå›¾è±¡è¾¹æ¡†çš„é•¿åº¦å¤§äº30
+					imgLength = 0;// è¾¹æ¡†è®¾ä¸º0
 				}
-				repaint();// ÖØĞÂ»æÖÆÍ¼Ïñ
+				repaint();// é‡æ–°ç»˜åˆ¶å›¾åƒ
 			} catch (InterruptedException x) {
 				Thread.currentThread().interrupt();
 			}

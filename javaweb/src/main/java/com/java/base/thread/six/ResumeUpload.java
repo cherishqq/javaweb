@@ -1,5 +1,6 @@
 package com.java.base.thread.six;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -12,11 +13,11 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-//JavaÊµÏÖÍøÂçÎÄ¼ş´«Êä,ÔÚ¿Í»§¶ËÇëÇóWeb·şÎñÆ÷´«ÊäÖ¸¶¨ÎÄ¼ş£¬²¢½«ÎÄ¼ş±£´æ¡£
+//Javaå®ç°ç½‘ç»œæ–‡ä»¶ä¼ è¾“,åœ¨å®¢æˆ·ç«¯è¯·æ±‚WebæœåŠ¡å™¨ä¼ è¾“æŒ‡å®šæ–‡ä»¶ï¼Œå¹¶å°†æ–‡ä»¶ä¿å­˜ã€‚
 public class ResumeUpload {
-	private String downSource = "http://kent.dl.sourceforge.net/sourceforge/jamper/Sample.zip"; // ¶¨ÒåWebµØÖ·ºÍÎÄ¼şÃû
-	private String savePath = "d:\\temp"; // ¶¨Òå´æÎÄ¼şÂ·¾¶
-	private String saveName = "ººÒÇYY×ÖÌå.zip"; // ¶¨ÒåÎÄ¼şÃû
+	private String downSource = "http://kent.dl.sourceforge.net/sourceforge/jamper/Sample.zip"; // å®šä¹‰Webåœ°å€å’Œæ–‡ä»¶å
+	private String savePath = "d:\\temp"; // å®šä¹‰å­˜æ–‡ä»¶è·¯å¾„
+	private String saveName = "æ±‰ä»ªYYå­—ä½“.zip"; // å®šä¹‰æ–‡ä»¶å
 	public ResumeUpload() {
 		try {
 			FileInfo bean = new FileInfo(downSource, savePath, saveName, 5);
@@ -30,17 +31,17 @@ public class ResumeUpload {
 		new ResumeUpload();
 	}
 }
-class FTPthread extends Thread { // ´«ÊäÎÄ¼şÏß³ÌÀà
-	FileInfo siteInfoBean = null; // ÎÄ¼şĞÅÏ¢Bean
+class FTPthread extends Thread { // ä¼ è¾“æ–‡ä»¶çº¿ç¨‹ç±»
+	FileInfo siteInfoBean = null; // æ–‡ä»¶ä¿¡æ¯Bean
 	long[] nPos;
-	long[] startPos; // ¿ªÊ¼Î»ÖÃ
-	long[] endPos; // ½áÊøÎ»ÖÃ
-	FilePart[] fileSplitterFetch; // ×ÓÏß³Ì¶ÔÏó
-	long nFileLength; // ÎÄ¼ş³¤¶È
-	boolean bFirst = true; // ÊÇ·ñµÚÒ»´ÎÈ¡ÎÄ¼ş
-	boolean bStop = false; // Í£Ö¹±êÖ¾
-	File tmpFile; // ÎÄ¼ş´«ÊäÁÙÊ±ĞÅÏ¢
-	DataOutputStream output; // Êä³öµ½ÎÄ¼şµÄÊä³öÁ÷
+	long[] startPos; // å¼€å§‹ä½ç½®
+	long[] endPos; // ç»“æŸä½ç½®
+	FilePart[] fileSplitterFetch; // å­çº¿ç¨‹å¯¹è±¡
+	long nFileLength; // æ–‡ä»¶é•¿åº¦
+	boolean bFirst = true; // æ˜¯å¦ç¬¬ä¸€æ¬¡å–æ–‡ä»¶
+	boolean bStop = false; // åœæ­¢æ ‡å¿—
+	File tmpFile; // æ–‡ä»¶ä¼ è¾“ä¸´æ—¶ä¿¡æ¯
+	DataOutputStream output; // è¾“å‡ºåˆ°æ–‡ä»¶çš„è¾“å‡ºæµ
 	public FTPthread(FileInfo bean) throws IOException {
 		siteInfoBean = bean;
 		tmpFile = new File(bean.getSFilePath() + File.separator
@@ -54,11 +55,11 @@ class FTPthread extends Thread { // ´«ÊäÎÄ¼şÏß³ÌÀà
 		}
 	}
 	public void run() {
-		// »ñµÃÎÄ¼ş³¤¶È
-		// ·Ö¸îÎÄ¼ş
-		// ÊµÀıPartCacth
-		// Æô¶¯PartCacthÏß³Ì
-		// µÈ´ı×ÓÏß³Ì·µ»Ø
+		// è·å¾—æ–‡ä»¶é•¿åº¦
+		// åˆ†å‰²æ–‡ä»¶
+		// å®ä¾‹PartCacth
+		// å¯åŠ¨PartCacthçº¿ç¨‹
+		// ç­‰å¾…å­çº¿ç¨‹è¿”å›
 		try {
 			if (bFirst) {
 				nFileLength = getFileSize();
@@ -76,20 +77,20 @@ class FTPthread extends Thread { // ´«ÊäÎÄ¼şÏß³ÌÀà
 					endPos[endPos.length - 1] = nFileLength;
 				}
 			}
-			// Æô¶¯×ÓÏß³Ì
+			// å¯åŠ¨å­çº¿ç¨‹
 			fileSplitterFetch = new FilePart[startPos.length];
 			for (int i = 0; i < startPos.length; i++) {
 				fileSplitterFetch[i] = new FilePart(siteInfoBean.getSSiteURL(),
 						siteInfoBean.getSFilePath() + File.separator
 								+ siteInfoBean.getSFileName(), startPos[i],
 						endPos[i], i);
-				AddInform.log("Thread " + i + " , ¿ªÊ¼Î»ÖÃ = " + startPos[i]
-						+ ", ½áÊøÎ»ÖÃ = " + endPos[i]);
+				AddInform.log("Thread " + i + " , å¼€å§‹ä½ç½® = " + startPos[i]
+						+ ", ç»“æŸä½ç½® = " + endPos[i]);
 				fileSplitterFetch[i].start();
 			}
-			// µÈ´ı×ÓÏß³Ì½áÊø
+			// ç­‰å¾…å­çº¿ç¨‹ç»“æŸ
 			// int count = 0;
-			// ÊÇ·ñ½áÊøwhileÑ­»·
+			// æ˜¯å¦ç»“æŸwhileå¾ªç¯
 			boolean breakWhile = false;
 			while (!bStop) {
 				writeInform();
@@ -104,12 +105,12 @@ class FTPthread extends Thread { // ´«ÊäÎÄ¼şÏß³ÌÀà
 				if (breakWhile)
 					break;
 			}
-			System.out.println("ÎÄ¼ş´«Êä½áÊø£¡");
+			System.out.println("æ–‡ä»¶ä¼ è¾“ç»“æŸï¼");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	// »ñµÃÎÄ¼ş³¤¶È
+	// è·å¾—æ–‡ä»¶é•¿åº¦
 	public long getFileSize() {
 		int nFileLength = -1;
 		try {
@@ -120,7 +121,7 @@ class FTPthread extends Thread { // ´«ÊäÎÄ¼şÏß³ÌÀà
 			int responseCode = httpConnection.getResponseCode();
 			if (responseCode >= 400) {
 				processErrorCode(responseCode);
-				return -2; // -2 ÎªWeb·şÎñÆ÷ÏìÓ¦´íÎó
+				return -2; // -2 ä¸ºWebæœåŠ¡å™¨å“åº”é”™è¯¯
 			}
 			String sHeader;
 			for (int i = 1;; i++) {
@@ -142,7 +143,7 @@ class FTPthread extends Thread { // ´«ÊäÎÄ¼şÏß³ÌÀà
 		AddInform.log(nFileLength);
 		return nFileLength;
 	}
-	// ±£´æ´«ÊäĞÅÏ¢£¨ÎÄ¼şÖ¸ÕëÎ»ÖÃ£©
+	// ä¿å­˜ä¼ è¾“ä¿¡æ¯ï¼ˆæ–‡ä»¶æŒ‡é’ˆä½ç½®ï¼‰
 	private void writeInform() {
 		try {
 			output = new DataOutputStream(new FileOutputStream(tmpFile));
@@ -153,10 +154,10 @@ class FTPthread extends Thread { // ´«ÊäÎÄ¼şÏß³ÌÀà
 			}
 			output.close();
 		} catch (Exception e) {
-			System.out.println("±£´æ´«ÊäĞÅÏ¢Ê§°Ü");
+			System.out.println("ä¿å­˜ä¼ è¾“ä¿¡æ¯å¤±è´¥");
 		}
 	}
-	// ¶ÁÈ¡±£´æµÄÏÂÔØĞÅÏ¢£¨ÎÄ¼şÖ¸ÕëÎ»ÖÃ£©
+	// è¯»å–ä¿å­˜çš„ä¸‹è½½ä¿¡æ¯ï¼ˆæ–‡ä»¶æŒ‡é’ˆä½ç½®ï¼‰
 	private void readInform() {
 		try {
 			DataInputStream input = new DataInputStream(new FileInputStream(
@@ -169,33 +170,33 @@ class FTPthread extends Thread { // ´«ÊäÎÄ¼şÏß³ÌÀà
 				endPos[i] = input.readLong();
 			}
 			input.close();
-			// ÅĞ¶ÏÃ¿¿éµÄÎÄ¼ş¿ªÊ¼Î»ÖÃÊÇ·ñ´óÓÚ½áÊøÎ»ÖÃ
+			// åˆ¤æ–­æ¯å—çš„æ–‡ä»¶å¼€å§‹ä½ç½®æ˜¯å¦å¤§äºç»“æŸä½ç½®
 			for (int i = 0; i < startPos.length; i++) {
 				if (startPos[i] > endPos[i]) {
 					startPos[i] = endPos[i];
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("¶ÁÈ¡±£´æµÄÏÂÔØĞÅÏ¢Ê§°Ü");
+			System.out.println("è¯»å–ä¿å­˜çš„ä¸‹è½½ä¿¡æ¯å¤±è´¥");
 		}
 	}
 	private void processErrorCode(int nErrorCode) {
 		System.err.println("Error Code : " + nErrorCode);
 	}
-	// Í£Ö¹ÎÄ¼ş´«Êä
+	// åœæ­¢æ–‡ä»¶ä¼ è¾“
 	public void doStop() {
 		bStop = true;
 		for (int i = 0; i < startPos.length; i++)
 			fileSplitterFetch[i].splitterStop();
 	}
 }
-class FileInfo { // ¶¨Òå»ñÈ¡ºÍÉèÖÃÏà¹ØÎÄ¼şĞÅÏ¢Àà
-	private String sSiteURL; // ¶¨ÒåURL±äÁ¿
-	private String sFilePath; // ¶¨Òå´æÎÄ¼şÂ·¾¶±äÁ¿
-	private String sFileName; // ¶¨ÒåÎÄ¼şÃû±äÁ¿
-	private int nSplitter; // ¶¨Òå´«ÊäÎÄ¼ş¼ÆÊıÖµ
+class FileInfo { // å®šä¹‰è·å–å’Œè®¾ç½®ç›¸å…³æ–‡ä»¶ä¿¡æ¯ç±»
+	private String sSiteURL; // å®šä¹‰URLå˜é‡
+	private String sFilePath; // å®šä¹‰å­˜æ–‡ä»¶è·¯å¾„å˜é‡
+	private String sFileName; // å®šä¹‰æ–‡ä»¶åå˜é‡
+	private int nSplitter; // å®šä¹‰ä¼ è¾“æ–‡ä»¶è®¡æ•°å€¼
 	public FileInfo() {
-		this("", "", "", 5); // ÉèÖÃ´«ÊäÎÄ¼ş¼ÆÊıÖµ
+		this("", "", "", 5); // è®¾ç½®ä¼ è¾“æ–‡ä»¶è®¡æ•°å€¼
 	}
 	public FileInfo(String sURL, String sPath, String sName, int nSpiltter) {
 		sSiteURL = sURL;
@@ -229,12 +230,12 @@ class FileInfo { // ¶¨Òå»ñÈ¡ºÍÉèÖÃÏà¹ØÎÄ¼şĞÅÏ¢Àà
 	}
 }
 class FilePart extends Thread {
-	String sURL; // ¶¨ÒåÎÄ¼ş´«ÊäÊ±Ê¹ÓÃµÄ±äÁ¿
-	long startPos; // ·Ö¶ÎÎÄ¼ş´«Êä¿ªÊ¼Î»ÖÃ
-	long endPos; // ·Ö¶ÎÎÄ¼ş´«Êä½áÊøÎ»ÖÃ
-	int nThreadID; // ×ÓÏß³ÌID
-	boolean bDownOver = false; // Íê³ÉÎÄ¼ş´«Êä
-	boolean bStop = false; // Í£Ö¹ÎÄ¼ş´«Êä
+	String sURL; // å®šä¹‰æ–‡ä»¶ä¼ è¾“æ—¶ä½¿ç”¨çš„å˜é‡
+	long startPos; // åˆ†æ®µæ–‡ä»¶ä¼ è¾“å¼€å§‹ä½ç½®
+	long endPos; // åˆ†æ®µæ–‡ä»¶ä¼ è¾“ç»“æŸä½ç½®
+	int nThreadID; // å­çº¿ç¨‹ID
+	boolean bDownOver = false; // å®Œæˆæ–‡ä»¶ä¼ è¾“
+	boolean bStop = false; // åœæ­¢æ–‡ä»¶ä¼ è¾“
 	SaveFile fileAccess = null;
 	public FilePart(String sURL, String sName, long nStart, long nEnd, int id)
 			throws IOException {
@@ -264,7 +265,7 @@ class FilePart extends Thread {
 				AddInform.log("Thread " + nThreadID + " is over!");
 				bDownOver = true;
 			} catch (Exception e) {
-				System.out.println(getName() + " Ïß³ÌÔËĞĞÒì³£");
+				System.out.println(getName() + " çº¿ç¨‹è¿è¡Œå¼‚å¸¸");
 			}
 		}
 		bDownOver = true;
@@ -282,7 +283,7 @@ class FilePart extends Thread {
 		bStop = true;
 	}
 }
-class SaveFile implements Serializable { // ¶¨Òå·ÃÎÊÎÄ¼şÀà
+class SaveFile implements Serializable { // å®šä¹‰è®¿é—®æ–‡ä»¶ç±»
 	RandomAccessFile oSavedFile;
 	long nPos;
 	public SaveFile() throws IOException {
@@ -299,12 +300,12 @@ class SaveFile implements Serializable { // ¶¨Òå·ÃÎÊÎÄ¼şÀà
 			oSavedFile.write(b, nStart, nLen);
 			n = nLen;
 		} catch (IOException e) {
-			System.out.println("Í¬²½´æ´¢ĞÅÏ¢Òì³£");
+			System.out.println("åŒæ­¥å­˜å‚¨ä¿¡æ¯å¼‚å¸¸");
 		}
 		return n;
 	}
 }
- class AddInform { // ¶¨ÒåÊä³öÌáÊ¾ĞÅÏ¢¼°Ïß³ÌsleepÀà
+ class AddInform { // å®šä¹‰è¾“å‡ºæç¤ºä¿¡æ¯åŠçº¿ç¨‹sleepç±»
 	public AddInform() {
 	}
 	public static void sleep(int nSecond) {

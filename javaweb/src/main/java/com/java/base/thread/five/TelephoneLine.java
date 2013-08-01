@@ -1,9 +1,9 @@
 package com.java.base.thread.five;
 
 public class TelephoneLine extends Object {
-	private InterNIC iNIC;// ÉùÃ÷Íø¼ÊÍøÂçĞÅÏ¢ÖĞĞÄ¶ÔÏó
-	private CallCenter[] serviceList;// ´´½¨Ò»¸ö¿Í·ş¶ÔÏóÊı×é
-	public TelephoneLine(int numOfLine) {// ¹¹Ôì·½·¨£¬ÆäÖĞnumOfLine±íÊ¾ÏßÂ·µÄ¸öÊı
+	private InterNIC iNIC;// å£°æ˜ç½‘é™…ç½‘ç»œä¿¡æ¯ä¸­å¿ƒå¯¹è±¡
+	private CallCenter[] serviceList;// åˆ›å»ºä¸€ä¸ªå®¢æœå¯¹è±¡æ•°ç»„
+	public TelephoneLine(int numOfLine) {// æ„é€ æ–¹æ³•ï¼Œå…¶ä¸­numOfLineè¡¨ç¤ºçº¿è·¯çš„ä¸ªæ•°
 		numOfLine = Math.max(1, numOfLine);
 		iNIC = new InterNIC(numOfLine);
 		serviceList = new CallCenter[numOfLine];
@@ -11,11 +11,11 @@ public class TelephoneLine extends Object {
 			serviceList[i] = new CallCenter(iNIC);
 		}
 	}
-	public void execute(Runnable target) throws InterruptedException {// Ö´ĞĞÈÎÎñ
+	public void execute(Runnable target) throws InterruptedException {// æ‰§è¡Œä»»åŠ¡
 		CallCenter Service = (CallCenter) iNIC.remove();
 		Service.process(target);
 	}
-	public void StopServiceOfID() {// Ä³¸öIDµÄ¿Í·şÍ£Ö¹·şÎñ
+	public void StopServiceOfID() {// æŸä¸ªIDçš„å®¢æœåœæ­¢æœåŠ¡
 		try {
 			Object[] idle = iNIC.removeAll();
 			for (int i = 0; i < idle.length; i++) {
@@ -25,7 +25,7 @@ public class TelephoneLine extends Object {
 			Thread.currentThread().interrupt();
 		}
 	}
-	public void StopServiceAll() {// È«²¿¿Í·şÍ£Ö¹·şÎñ
+	public void StopServiceAll() {// å…¨éƒ¨å®¢æœåœæ­¢æœåŠ¡
 		StopServiceOfID();
 		try {
 			Thread.sleep(250);

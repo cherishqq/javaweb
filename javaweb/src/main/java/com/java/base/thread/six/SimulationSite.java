@@ -1,5 +1,6 @@
 package com.java.base.thread.six;
 
+
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.FlowLayout;
@@ -16,21 +17,21 @@ import java.util.Date;
 import java.util.List;
 
 
-public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³¡¾°
-	//¶¨ÒåÈ«¾Ö³ÉÔ±³£Á¿
+public class SimulationSite extends Frame implements ActionListener {//æ¨¡æ‹Ÿç°åœºåœºæ™¯
+	//å®šä¹‰å…¨å±€æˆå‘˜å¸¸é‡
 	protected static final int num_agents=10;
 	protected static final int num_initial_agents=6;
 	protected static final int max_customer_delay=9000;
 	protected static final int max_teller_break=1000;
 	protected static final int max_no_customers=2000;
-	//´´½¨Button×é¼ş
-	private Button open = new Button("¿ªÃÅ");
-	private Button close = new Button("¹ØÃÅ");
-	private Button add = new Button("»¶Ó­¹âÁÙ");
-	private Button del = new Button("ÇëÂı×ß");
+	//åˆ›å»ºButtonç»„ä»¶
+	private Button open = new Button("å¼€é—¨");
+	private Button close = new Button("å…³é—¨");
+	private Button add = new Button("æ¬¢è¿å…‰ä¸´");
+	private Button del = new Button("è¯·æ…¢èµ°");
 	private Bank bank = new Bank();
 	private Finance supermarket = new Finance("");
-	//Ìí¼Ó´°¿Ú¹Ø±ÕÊÂ¼ş
+	//æ·»åŠ çª—å£å…³é—­äº‹ä»¶
 	private class WindowCloser extends WindowAdapter{
 		public void windowClosing(WindowEvent e){
 			bank.stop();
@@ -38,7 +39,7 @@ public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³
 			System.exit(0);
 		}
 	}
-	public SimulationSite(){//¹¹Ôì·½·¨£¬½øĞĞ×é¼ş³õÊ¼»¯ºÍ²¼¾Ö
+	public SimulationSite(){//æ„é€ æ–¹æ³•ï¼Œè¿›è¡Œç»„ä»¶åˆå§‹åŒ–å’Œå¸ƒå±€
 		super("SimulationSite");
 		Panel buttons = new Panel();
 		buttons.setLayout(new FlowLayout());
@@ -61,7 +62,7 @@ public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³
 		bank.start();
 		supermarket.start();
 	}
-	public void actionPerformed(ActionEvent e) {//Îªµ¥»÷°´Å¤×öÊÂ¼ş¼àÌı
+	public void actionPerformed(ActionEvent e) {//ä¸ºå•å‡»æŒ‰æ‰­åšäº‹ä»¶ç›‘å¬
 		// TODO Auto-generated method stub
 		if(e.getSource()==open){
 			bank.openDoor();
@@ -77,19 +78,19 @@ public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³
 			supermarket.retireAgent();
 		}
 	}
-	public static void main(String[] args){//±¾³ÌĞòµÄÈë¿Ú´¦
+	public static void main(String[] args){//æœ¬ç¨‹åºçš„å…¥å£å¤„
 		SimulationSite sl = new SimulationSite();
 	}
 }
  class Finance extends Panel implements Runnable {
 	protected Penson[] person = new Penson[SimulationSite.num_agents];
 	protected Label[] labelAgent = new Label[SimulationSite.num_agents];
-	protected Label labelQueue = new Label("ÒÑ·şÎñµÄ¹Ë¿ÍÊı:0");
+	protected Label labelQueue = new Label("å·²æœåŠ¡çš„é¡¾å®¢æ•°:0");
 	protected Label labelServed = new Label("Customers servers:0");
 	protected Label labelWait = new Label("Customers wait:0");
 	protected int numAgents = SimulationSite.num_initial_agents;
-	protected int numCustomer = 0;// ¹Ë¿ÍÊı
-	protected long totalWait = 0L;// µÈ´ı¹Ë¿ÍÊı
+	protected int numCustomer = 0;// é¡¾å®¢æ•°
+	protected long totalWait = 0L;// ç­‰å¾…é¡¾å®¢æ•°
 	private Thread thread = null;
 	private boolean doorIsOpen = false;
 	public Finance(String title) {
@@ -103,18 +104,18 @@ public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³
 	public  Customer requestCustomerFor(int id) {
 		return null;
 	}
-	public void checkoutCustomer(int handled, long waitTime) {// ¸üĞÂ¹Ë¿ÍµÄÊıÁ¿£¬ºÍÕıÔÚµÈ´ıµÄ×ÜÈËÊı
+	public void checkoutCustomer(int handled, long waitTime) {// æ›´æ–°é¡¾å®¢çš„æ•°é‡ï¼Œå’Œæ­£åœ¨ç­‰å¾…çš„æ€»äººæ•°
 		numCustomer++;
 		totalWait += waitTime;
 	}
-	public void addAgent() {// Ôö¼ÓÈËÔ±
+	public void addAgent() {// å¢åŠ äººå‘˜
 		if (numAgents < SimulationSite.num_agents) {
 			person[numAgents] = new Penson(this, numAgents);
 			person[numAgents].start();
 			numAgents++;
 		}
 	}
-	public void retireAgent() {// ¼õÉÙÈËÔ±
+	public void retireAgent() {// å‡å°‘äººå‘˜
 		if (numAgents > 1) {
 			person[numAgents - 1].setRunING();
 			numAgents--;
@@ -124,9 +125,9 @@ public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³
 		if (thread == null) {
 			thread = new Thread(this);
 			doorIsOpen = true;
-			thread.start();// Æô¶¯µ±Ç°Ïß³Ì
+			thread.start();// å¯åŠ¨å½“å‰çº¿ç¨‹
 			for (int i = 0; i < numAgents; i++) {
-				person[i].start();// Æô¶¯PersonÀàÖĞµÄÏß³Ì
+				person[i].start();// å¯åŠ¨Personç±»ä¸­çš„çº¿ç¨‹
 			}
 		}
 	}
@@ -137,13 +138,13 @@ public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³
 			person[i].setRunING();
 		}
 	}
-	public void openDoor() {// ÓªÒµ
+	public void openDoor() {// è¥ä¸š
 		doorIsOpen = true;
 	}
-	public void closeDoor() {// ´òìÈ
+	public void closeDoor() {// æ‰“çƒŠ
 		doorIsOpen = false;
 	}
-	public void run() {// ÖØĞ´RunnableµÄrun·½·¨
+	public void run() {// é‡å†™Runnableçš„runæ–¹æ³•
 		while (thread == Thread.currentThread()) {
 			try {
 				thread.sleep((int) Math.random()
@@ -158,7 +159,7 @@ public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³
 			}
 		}
 	}
-	private void setup(String title) {// ÉèÖÃ×´Ì¬
+	private void setup(String title) {// è®¾ç½®çŠ¶æ€
 		Panel agentPanel = new Panel();
 		agentPanel.setLayout(new GridLayout(SimulationSite.num_agents + 3, 1));
 		for (int i = 0; i < SimulationSite.num_agents; i++) {
@@ -177,33 +178,33 @@ public class SimulationSite extends Frame implements ActionListener {//Ä£ÄâÏÖ³¡³
 		add("North", new Label(title));
 	}
 }
-class Penson extends Thread {// ´´½¨Ò»¸öThreadÀàµÄ×ÓÀàPensonÀà
-	private boolean running = false;// ÊÇ·ñÍ£Ö¹ÔËĞĞµÄ±êÖ¾
+class Penson extends Thread {// åˆ›å»ºä¸€ä¸ªThreadç±»çš„å­ç±»Pensonç±»
+	private boolean running = false;// æ˜¯å¦åœæ­¢è¿è¡Œçš„æ ‡å¿—
 	private Finance bn = null;
-	private int id = -1;// ¿Í»§id
-	private int numCustomers = 0;// ¹Ë¿ÍÊıÁ¿
+	private int id = -1;// å®¢æˆ·id
+	private int numCustomers = 0;// é¡¾å®¢æ•°é‡
 	public Penson(Finance _bn, int _id) {
 		this.bn = _bn;
 		this.id = _id;
 	}
 	public void start() {
 		running = true;
-		super.start();// Æô¶¯Ïß³Ì
+		super.start();// å¯åŠ¨çº¿ç¨‹
 	}
-	public void setRunING() {// ÉèÖÃÖ´ĞĞ×´Ì¬
+	public void setRunING() {// è®¾ç½®æ‰§è¡ŒçŠ¶æ€
 		running = false;
 	}
-	public int getNum() {// »ñÈ¡¹Ë¿ÍÊıÁ¿
+	public int getNum() {// è·å–é¡¾å®¢æ•°é‡
 		return numCustomers;
 	}
-	private void releaseCustomer(Customer customer) {// ÊÍ·Å¹Ë¿Í¶ÔÏó
+	private void releaseCustomer(Customer customer) {// é‡Šæ”¾é¡¾å®¢å¯¹è±¡
 		numCustomers++;
 		bn.checkoutCustomer(numCustomers, customer.getWaitTime(new Date()));
 	}
-	public void run() {// ÖØĞ´ThreadµÄrun·½·¨
+	public void run() {// é‡å†™Threadçš„runæ–¹æ³•
 		while (running) {
 			try {
-				sleep((int) (Math.random() * SimulationSite.max_teller_break) + 1000);// ËæÃæĞİÃß
+				sleep((int) (Math.random() * SimulationSite.max_teller_break) + 1000);// éšé¢ä¼‘çœ 
 				Customer customer = bn.requestCustomerFor(id);
 				if (customer != null) {
 					sleep(customer.getDelayTime());
@@ -218,44 +219,44 @@ class Penson extends Thread {// ´´½¨Ò»¸öThreadÀàµÄ×ÓÀàPensonÀà
 class Bank extends Finance implements Runnable {
 	private ObjectQueue queue = null;
 	public Bank() {
-		super("ÖĞ¹ú±±¾©ÒøĞĞ");// µ÷ÓÃ¸¸ÀàµÄ´ø²Î¹¹Ôì·½·¨
-		queue = new ObjectQueue();// ´´½¨ObjectQueue¶ÔÏó
+		super("ä¸­å›½åŒ—äº¬é“¶è¡Œ");// è°ƒç”¨çˆ¶ç±»çš„å¸¦å‚æ„é€ æ–¹æ³•
+		queue = new ObjectQueue();// åˆ›å»ºObjectQueueå¯¹è±¡
 	}
-	public void updateDisplay() {// ¸üĞÂÏÔÊ¾
-		labelServed.setText("ÒÑ·şÎñµÄ¹Ë¿ÍÊı:" + numCustomer);// ÉèÖÃ±êÇ©µÄÏÔÊ¾ÄÚÈİ
+	public void updateDisplay() {// æ›´æ–°æ˜¾ç¤º
+		labelServed.setText("å·²æœåŠ¡çš„é¡¾å®¢æ•°:" + numCustomer);// è®¾ç½®æ ‡ç­¾çš„æ˜¾ç¤ºå†…å®¹
 		if (numCustomer != 0) {
-			labelWait.setText("Æ½¾ùµÈ´ı:" + (totalWait / numCustomer));
+			labelWait.setText("å¹³å‡ç­‰å¾…:" + (totalWait / numCustomer));
 			for (int i = 0; i < numAgents; i++) {
-				labelAgent[i].setText("¹Ë¿Í:" + i + ": ÒÑ·şÎñ" + person[i].getNum());
+				labelAgent[i].setText("é¡¾å®¢:" + i + ": å·²æœåŠ¡" + person[i].getNum());
 			}
 			for (int i = numAgents; i < SimulationSite.num_agents; i++) {
-				labelAgent[i].setText("¹Ë¿Í:" + i + ": Î´·şÎñ");
-				labelQueue.setText("ÕıÔÚµÈ´ıµÄ¹Ë¿ÍÊı:" + queue.getSize());
+				labelAgent[i].setText("é¡¾å®¢:" + i + ": æœªæœåŠ¡");
+				labelQueue.setText("æ­£åœ¨ç­‰å¾…çš„é¡¾å®¢æ•°:" + queue.getSize());
 			}
 		}
 	}
-	public void generateCustomer() {// Ôö¼ÓĞÂµÄ¹Ë¿Í£¬±íÊ¾ÓÖÓĞĞÂµÄ¹Ë¿Í¹âÁÙ
+	public void generateCustomer() {// å¢åŠ æ–°çš„é¡¾å®¢ï¼Œè¡¨ç¤ºåˆæœ‰æ–°çš„é¡¾å®¢å…‰ä¸´
 		queue.insert(new Customer());
 	}
-	public Customer requestCustomerFor(int id) {// ±íÊ¾ÓĞ¹Ë¿Í·¢³öÏë½øĞĞ·şÎñµÄĞèÇó
+	public Customer requestCustomerFor(int id) {// è¡¨ç¤ºæœ‰é¡¾å®¢å‘å‡ºæƒ³è¿›è¡ŒæœåŠ¡çš„éœ€æ±‚
 		return queue.requestCustomer();
 	}
 }
-//class SimulationSite extends Frame implements ActionListener {// Ä£ÄâÏÖ³¡³¡¾°
-//	// ¶¨ÒåÈ«¾Ö³ÉÔ±³£Á¿
+//class SimulationSite extends Frame implements ActionListener {// æ¨¡æ‹Ÿç°åœºåœºæ™¯
+//	// å®šä¹‰å…¨å±€æˆå‘˜å¸¸é‡
 //	protected static final int num_agents = 10;
 //	protected static final int num_initial_agents = 6;
 //	protected static final int max_customer_delay = 9000;
 //	protected static final int max_teller_break = 1000;
 //	protected static final int max_no_customers = 2000;
-//	// ´´½¨Button×é¼ş
-//	private Button open = new Button("¿ªÃÅ");
-//	private Button close = new Button("¹ØÃÅ");
-//	private Button add = new Button("»¶Ó­¹âÁÙ");
-//	private Button del = new Button("ÇëÂı×ß");
+//	// åˆ›å»ºButtonç»„ä»¶
+//	private Button open = new Button("å¼€é—¨");
+//	private Button close = new Button("å…³é—¨");
+//	private Button add = new Button("æ¬¢è¿å…‰ä¸´");
+//	private Button del = new Button("è¯·æ…¢èµ°");
 //	private Bank bank = new Bank();
 //	private Hypermarket supermarket = new Hypermarket();
-//	// Ìí¼Ó´°¿Ú¹Ø±ÕÊÂ¼ş
+//	// æ·»åŠ çª—å£å…³é—­äº‹ä»¶
 //	private class WindowCloser extends WindowAdapter {
 //		public void windowClosing(WindowEvent e) {
 //			bank.stop();
@@ -263,7 +264,7 @@ class Bank extends Finance implements Runnable {
 //			System.exit(0);
 //		}
 //	}
-//	public SimulationSite() {// ¹¹Ôì·½·¨£¬½øĞĞ×é¼ş³õÊ¼»¯ºÍ²¼¾Ö
+//	public SimulationSite() {// æ„é€ æ–¹æ³•ï¼Œè¿›è¡Œç»„ä»¶åˆå§‹åŒ–å’Œå¸ƒå±€
 //		super("SimulationSite");
 //		Panel buttons = new Panel();
 //		buttons.setLayout(new FlowLayout());
@@ -286,7 +287,7 @@ class Bank extends Finance implements Runnable {
 //		bank.start();
 //		supermarket.start();
 //	}
-//	public void actionPerformed(ActionEvent e) {// Îªµ¥»÷°´Å¤×öÊÂ¼ş¼àÌı
+//	public void actionPerformed(ActionEvent e) {// ä¸ºå•å‡»æŒ‰æ‰­åšäº‹ä»¶ç›‘å¬
 //		// TODO Auto-generated method stub
 //		if (e.getSource() == open) {
 //			bank.openDoor();
@@ -302,19 +303,19 @@ class Bank extends Finance implements Runnable {
 //			supermarket.retireAgent();
 //		}
 //	}
-//	public static void main(String[] args) {// ±¾³ÌĞòµÄÈë¿Ú´¦
+//	public static void main(String[] args) {// æœ¬ç¨‹åºçš„å…¥å£å¤„
 //		SimulationSite sl = new SimulationSite();
 //	}
 //}
-class ObjectQueue {// Ïß³Ì¶ÓÁĞ
+class ObjectQueue {// çº¿ç¨‹é˜Ÿåˆ—
 	private List customers = new ArrayList();
-	private synchronized Object performAction(String cmd, Object obj) {// »ñÈ¡¶ÔÏó
-		if (cmd.equals("insert")) {// Ôö¼Ó·½·¨µÄ²Ù×÷Á÷³Ì
+	private synchronized Object performAction(String cmd, Object obj) {// è·å–å¯¹è±¡
+		if (cmd.equals("insert")) {// å¢åŠ æ–¹æ³•çš„æ“ä½œæµç¨‹
 			if (customers.isEmpty())
 				customers.add(obj);
 			notify();
 			return null;
-		} else if (cmd.equals("size")) {// »ñÈ¡ÈİÁ¿
+		} else if (cmd.equals("size")) {// è·å–å®¹é‡
 			return new Integer(customers.size());
 		} else if (cmd.equals("retrieve")) {
 			while (customers.size() == 0) {
@@ -331,25 +332,25 @@ class ObjectQueue {// Ïß³Ì¶ÓÁĞ
 		}
 		return null;
 	}
-	public void insert(Customer c) {// Ôö¼Ó²Ù×÷
+	public void insert(Customer c) {// å¢åŠ æ“ä½œ
 		performAction("insert", c);
 	}
-	public int getSize() {// »ñÈ¡ÈİÁ¿
+	public int getSize() {// è·å–å®¹é‡
 		return (((Integer) performAction("size", null)).intValue());
 	}
-	public Customer requestCustomer() {// ÇëÇó·şÎñ
+	public Customer requestCustomer() {// è¯·æ±‚æœåŠ¡
 		return (Customer) performAction("retrieve", null);
 	}
 }
-class Customer {// ¹Ë¿ÍÀà
-	private Date date;// ÉùÃ÷Ò»¸öÈÕÆÚÀàµÄ¶ÔÏó
-	public Customer() {// ¹¹Ôì·½·¨£¬Îªdate¶ÔÏó³õÊ¼»¯
+class Customer {// é¡¾å®¢ç±»
+	private Date date;// å£°æ˜ä¸€ä¸ªæ—¥æœŸç±»çš„å¯¹è±¡
+	public Customer() {// æ„é€ æ–¹æ³•ï¼Œä¸ºdateå¯¹è±¡åˆå§‹åŒ–
 		date = new Date();
 	}
-	public int getDelayTime() {// »ñÈ¡³¬Ê±µÄÊ±¼ä
+	public int getDelayTime() {// è·å–è¶…æ—¶çš„æ—¶é—´
 		return (int) (Math.random() * SimulationSite.max_customer_delay);
 	}
-	public long getWaitTime(Date now) {// »ñÈ¡µÈ´ıµÄÊ±¼ä
+	public long getWaitTime(Date now) {// è·å–ç­‰å¾…çš„æ—¶é—´
 		return now.getTime() - date.getTime();
 	}
 }

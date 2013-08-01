@@ -2,10 +2,10 @@ package com.java.base.thread.two;
 
 public class SyncExample {
 	public static void main(String[] args) {
-		SyncThread t1 = new SyncThread(); // ´´½¨SyncThreadÀàµÄÊµÀı¶ÔÏó
-		new Thread(t1, "Ïß³Ì1").start(); // ´´½¨Ïß³Ì²¢Æô¶¯Ëü
-		new Thread(t1, "Ïß³Ì2").start(); // ´´½¨Ïß³Ì²¢Æô¶¯Ëü
-		System.out.println(t1.Perform()); // µ÷ÓÃSyncThreadÀàµÄÍ¬²½·½·¨call()
+		SyncThread t1 = new SyncThread(); // åˆ›å»ºSyncThreadç±»çš„å®ä¾‹å¯¹è±¡
+		new Thread(t1, "çº¿ç¨‹1").start(); // åˆ›å»ºçº¿ç¨‹å¹¶å¯åŠ¨å®ƒ
+		new Thread(t1, "çº¿ç¨‹2").start(); // åˆ›å»ºçº¿ç¨‹å¹¶å¯åŠ¨å®ƒ
+		System.out.println(t1.Perform()); // è°ƒç”¨SyncThreadç±»çš„åŒæ­¥æ–¹æ³•call()
 	}
 
 }
@@ -15,23 +15,23 @@ class SyncThread implements Runnable {
 
 	private int y = 5;
 
-	// ¶¨ÒåSyncThreadµÄÍ¬²½·½·¨
-	public synchronized void run() { // ÖØĞ´Runnable½Ó¿ÚµÄrun()£¬²¢ÉùÃ÷³Ésynchronized
+	// å®šä¹‰SyncThreadçš„åŒæ­¥æ–¹æ³•
+	public synchronized void run() { // é‡å†™Runnableæ¥å£çš„run()ï¼Œå¹¶å£°æ˜æˆsynchronized
 		for (int i = 0; i < 4; i++) {
 			x++;
 			y++;
 			try {
-				Thread.sleep(200); // µ±Ç°ÔËĞĞµÄÏß³ÌĞİÃß200ºÁÃë
+				Thread.sleep(200); // å½“å‰è¿è¡Œçš„çº¿ç¨‹ä¼‘çœ 200æ¯«ç§’
 			} catch (InterruptedException e) {
-				System.out.println("Ïß³Ì³ö´íÁË");
+				System.out.println("çº¿ç¨‹å‡ºé”™äº†");
 			}
 			System.out.println(Thread.currentThread().getName() + " x=" + x
 					+ ",y=" + y);
 		}
 	}
 
-	public synchronized String Perform() { // ×Ô¶¨Òå·½·¨£¬²¢ÉùÃ÷³Ésynchronized
+	public synchronized String Perform() { // è‡ªå®šä¹‰æ–¹æ³•ï¼Œå¹¶å£°æ˜æˆsynchronized
 		String name = Thread.currentThread().getName();
-		return "µ±Ç°ÕıÔÚÔËĞĞµÄÏß³Ì£º " + name;
+		return "å½“å‰æ­£åœ¨è¿è¡Œçš„çº¿ç¨‹ï¼š " + name;
 	}
 }

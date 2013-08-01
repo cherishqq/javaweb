@@ -1,60 +1,61 @@
 package com.java.base.thread.one;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Relay extends Thread {
 	private DateFormat df = new SimpleDateFormat("ss:SS");
-	public static void main(String[] args) { 	// java³ÌĞòÖ÷Èë¿Ú´¦
-		Relay relay = new Relay();		// ÊµÀı»¯¶ÔÏó
-		relay.start(); 					// Æô¶¯Ïß³Ì
+	public static void main(String[] args) { 	// javaç¨‹åºä¸»å…¥å£å¤„
+		Relay relay = new Relay();		// å®ä¾‹åŒ–å¯¹è±¡
+		relay.start(); 					// å¯åŠ¨çº¿ç¨‹
 		try {
-			relay.join(); 				// µÈ´ıÏß³ÌÔËĞĞ½áÊø
-		} catch (InterruptedException e) {	// ²¶»ñ»½ĞÑÒì³£
-			System.out.println(" ÊÕµ½ÃüÁî£¬×¼±¸ÉÏ³¡£º" + e.getMessage());
+			relay.join(); 				// ç­‰å¾…çº¿ç¨‹è¿è¡Œç»“æŸ
+		} catch (InterruptedException e) {	// æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println(" æ”¶åˆ°å‘½ä»¤ï¼Œå‡†å¤‡ä¸Šåœºï¼š" + e.getMessage());
 		}
-		relay.incident(); 				// µ÷ÓÃ·½·¨ÅĞ¶ÏÊÇ·ñ»½ĞÑ
+		relay.incident(); 				// è°ƒç”¨æ–¹æ³•åˆ¤æ–­æ˜¯å¦å”¤é†’
 	}
 	public void incident() {
-		Thread.currentThread().interrupt(); 	// »½ĞÑµ±Ç°Ïß³Ì
+		Thread.currentThread().interrupt(); 	// å”¤é†’å½“å‰çº¿ç¨‹
 		while (true) {
-			if (Thread.currentThread().isInterrupted()) { // ÅĞ¶Ïµ±Ç°Ïß³ÌÊÇ·ñ±»»½ĞÑ
-				System.out.print(df.format(new Date()) + "	ÏÖÔÚÊÇ·ñÕıÔÚ×¼±¸ÉÏ³¡? ");
-				System.out.println(Thread.currentThread().isInterrupted() ? "ÊÇ"
-						: "Ã»ÓĞ");
+			if (Thread.currentThread().isInterrupted()) { // åˆ¤æ–­å½“å‰çº¿ç¨‹æ˜¯å¦è¢«å”¤é†’
+				System.out.print(df.format(new Date()) + "	ç°åœ¨æ˜¯å¦æ­£åœ¨å‡†å¤‡ä¸Šåœº? ");
+				System.out.println(Thread.currentThread().isInterrupted() ? "æ˜¯"
+						: "æ²¡æœ‰");
 				try {
-					Thread.currentThread().sleep(3000); // Ïß³ÌĞİÃß3Ãë
-				} catch (InterruptedException e) {		// ²¶»ñ»½ĞÑÒì³£
-					System.out.println(df.format(new Date()) + " ÊÕµ½ÃüÁî£¬Í£Ö¹ĞİÏ¢£º"
+					Thread.currentThread().sleep(3000); // çº¿ç¨‹ä¼‘çœ 3ç§’
+				} catch (InterruptedException e) {		// æ•è·å”¤é†’å¼‚å¸¸
+					System.out.println(df.format(new Date()) + " æ”¶åˆ°å‘½ä»¤ï¼Œåœæ­¢ä¼‘æ¯ï¼š"
 							+ e.getMessage());
 				}
-				System.out.print(df.format(new Date()) + "	±ÈÈü½áÊøºóÊÇ·ñ²Î¼ÓÏÂÒ»ÂÖ±ÈÈü? ");
-				System.out.println(Thread.currentThread().isInterrupted() ? "ÊÇ"
-						: "²»²Î¼Ó");
+				System.out.print(df.format(new Date()) + "	æ¯”èµ›ç»“æŸåæ˜¯å¦å‚åŠ ä¸‹ä¸€è½®æ¯”èµ›? ");
+				System.out.println(Thread.currentThread().isInterrupted() ? "æ˜¯"
+						: "ä¸å‚åŠ ");
 			}
 		}
 	}
 	public void run() {
-		System.out.println("µÚÒ»³¡±ÈÈü½áÊøµÄÊ±¼äÎª£º" + df.format(new Date()));
-		System.out.println("ĞİÏ¢5Ğ¡Ê±");
+		System.out.println("ç¬¬ä¸€åœºæ¯”èµ›ç»“æŸçš„æ—¶é—´ä¸ºï¼š" + df.format(new Date()));
+		System.out.println("ä¼‘æ¯5å°æ—¶");
 		try {
-			sleep(2000); 				// Ïß³ÌĞİÃß2Ãë ÔÚ³ÌĞò¼ÙÉè1ÃëÖÓ=1Ğ¡Ê±
-		} catch (InterruptedException e) { 	// ²¶»ñ»½ĞÑÒì³£
-			System.out.println(df.format(new Date()) + "ÊÕµ½ÃüÁî£¬×¼±¸ÉÏ³¡£º"
+			sleep(2000); 				// çº¿ç¨‹ä¼‘çœ 2ç§’ åœ¨ç¨‹åºå‡è®¾1ç§’é’Ÿ=1å°æ—¶
+		} catch (InterruptedException e) { 	// æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println(df.format(new Date()) + "æ”¶åˆ°å‘½ä»¤ï¼Œå‡†å¤‡ä¸Šåœºï¼š"
 					+ e.getMessage());
 		}
-		System.out.print(df.format(new Date()) + "	ÔÚĞİÏ¢µÄ¹ı³ÌÖĞÊÇ·ñÓÖ²Î¼ÓÆäËûµÄ±ÈÈü? ");
+		System.out.print(df.format(new Date()) + "	åœ¨ä¼‘æ¯çš„è¿‡ç¨‹ä¸­æ˜¯å¦åˆå‚åŠ å…¶ä»–çš„æ¯”èµ›? ");
 		try {
-			sleep(2000); 				// Ïß³ÌĞİÃß2Ãë
-		} catch (InterruptedException e) { 	// ²¶»ñ»½ĞÑÒì³£
-			System.out.println(df.format(new Date()) + "ÊÕµ½ÃüÁî£¬×¼±¸ÉÏ³¡£º"
+			sleep(2000); 				// çº¿ç¨‹ä¼‘çœ 2ç§’
+		} catch (InterruptedException e) { 	// æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println(df.format(new Date()) + "æ”¶åˆ°å‘½ä»¤ï¼Œå‡†å¤‡ä¸Šåœºï¼š"
 					+ e.getMessage());
 		}
-		System.out.println(!isAlive() ? "²Î¼Ó±ÈÈü" : "Ã»ÓĞ²Î¼ÓÆäËûµÄ±ÈÈü"); // Ïß³ÌÊÇ·ñ¼¤»î,false±í²»ÊÇ¼¤»îµÄ
-		interrupt();// »½ĞÑÏß³Ì
-		System.out.print(df.format(new Date()) + " ĞİÏ¢ÖĞ£¬Ìæ²¹¶ÓÔ±ÊÜÉË£¬ÊÇ·ñ²Î¼Ó±ÈÈü? ");
-		System.out.println(isAlive() ? "²Î¼Ó±ÈÈü" : "²»²Î¼Ó±ÈÈü"); // Ïß³ÌÊÇ·ñ¼¤»î
+		System.out.println(!isAlive() ? "å‚åŠ æ¯”èµ›" : "æ²¡æœ‰å‚åŠ å…¶ä»–çš„æ¯”èµ›"); // çº¿ç¨‹æ˜¯å¦æ¿€æ´»,falseè¡¨ä¸æ˜¯æ¿€æ´»çš„
+		interrupt();// å”¤é†’çº¿ç¨‹
+		System.out.print(df.format(new Date()) + " ä¼‘æ¯ä¸­ï¼Œæ›¿è¡¥é˜Ÿå‘˜å—ä¼¤ï¼Œæ˜¯å¦å‚åŠ æ¯”èµ›? ");
+		System.out.println(isAlive() ? "å‚åŠ æ¯”èµ›" : "ä¸å‚åŠ æ¯”èµ›"); // çº¿ç¨‹æ˜¯å¦æ¿€æ´»
 	}
 	
 }

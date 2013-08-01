@@ -1,40 +1,41 @@
 package com.java.base.thread.two;
 
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class DeadLock extends Frame {
-	protected static final String[] names = { "One", "Two" };// ´´½¨Ò»¸ö×Ö·û´®Êý×é£¬ÓÃÓÚ´æ·ÅÏß³ÌµÄÃû×Ö
+	protected static final String[] names = { "One", "Two" };// åˆ›å»ºä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„ï¼Œç”¨äºŽå­˜æ”¾çº¿ç¨‹çš„åå­—
 
-	private int accounts[] = { 1000, 1000 };// ´æÈëÕËºÅ
+	private int accounts[] = { 1000, 1000 };// å­˜å…¥è´¦å·
 
-	// ´´½¨TextArea×é¼þ
+	// åˆ›å»ºTextAreaç»„ä»¶
 	private TextArea info = new TextArea(5, 40);
 
 	private TextArea status = new TextArea(5, 40);
 
-	public DeadLock() {// ¹¹Ôì·½·¨
-		super("ÖÂÃüµÄËÀËø£¡");// µ÷ÓÃ¸¸ÀàFrameµÄ´ø²Î¹¹Ôì·½·¨
+	public DeadLock() {// æž„é€ æ–¹æ³•
+		super("è‡´å‘½çš„æ­»é”ï¼");// è°ƒç”¨çˆ¶ç±»Frameçš„å¸¦å‚æž„é€ æ–¹æ³•
 		this.setLayout(new GridLayout(2, 1));
-		add(makePanel(info, "ÕËºÅ"));
-		add(makePanel(status, "Ïß³Ì"));
+		add(makePanel(info, "è´¦å·"));
+		add(makePanel(status, "çº¿ç¨‹"));
 		validate();
 		pack();
 		show();
-		// ´´½¨DeadLockThread¶ÔÏó
+		// åˆ›å»ºDeadLockThreadå¯¹è±¡
 		DeadLockThread A = new DeadLockThread(0, this, status);
 		DeadLockThread B = new DeadLockThread(1, this, status);
-		this.addWindowListener(new WindowAdapter() {// Ìí¼Óµ¥»÷ÊÂ¼þ¼àÌý
+		this.addWindowListener(new WindowAdapter() {// æ·»åŠ å•å‡»äº‹ä»¶ç›‘å¬
 					public void windowClosing(WindowEvent e) {
 						System.exit(0);
 					}
 				});
 	}
 
-	public synchronized void transfer(int from, int into, int amount) {// ×ªÕË
-		info.append("\nÕÊ»§ One:$" + accounts[0]);// ½«¸ø¶¨ÎÄ±¾×·¼Óµ½ÎÄ±¾ÇøµÄµ±Ç°ÎÄ±¾
-		info.append("\nÕÊ»§ Two:$" + accounts[1]);
-		info.append("\n>=$" + amount + "´Ó" + names[from] + "µ½" + names[into]);
+	public synchronized void transfer(int from, int into, int amount) {// è½¬è´¦
+		info.append("\nå¸æˆ· One:$" + accounts[0]);// å°†ç»™å®šæ–‡æœ¬è¿½åŠ åˆ°æ–‡æœ¬åŒºçš„å½“å‰æ–‡æœ¬
+		info.append("\nå¸æˆ· Two:$" + accounts[1]);
+		info.append("\n>=$" + amount + "ä»Ž" + names[from] + "åˆ°" + names[into]);
 		while (accounts[from] < amount) {
 			try {
 				wait();
@@ -48,7 +49,7 @@ public class DeadLock extends Frame {
 		}
 	}
 
-	private Panel makePanel(TextArea ta, String title) {// ´´½¨Ãæ°å£¬°´Ñ¡ÔñµÄ²¼¾Ö·½Ê½½«×é¼þ½øÐÐ²¼¾Ö
+	private Panel makePanel(TextArea ta, String title) {// åˆ›å»ºé¢æ¿ï¼ŒæŒ‰é€‰æ‹©çš„å¸ƒå±€æ–¹å¼å°†ç»„ä»¶è¿›è¡Œå¸ƒå±€
 		Panel p = new Panel();
 		p.setLayout(new BorderLayout());
 		p.add("North", new Label(title));
@@ -56,12 +57,12 @@ public class DeadLock extends Frame {
 		return p;
 	}
 
-	public static void main(String[] args) {// ±¾³ÌÐòµÄÖ÷·½·¨
+	public static void main(String[] args) {// æœ¬ç¨‹åºçš„ä¸»æ–¹æ³•
 		DeadLock dl = new DeadLock();
 	}
 }
 
-class DeadLockThread extends Thread {// ËÀËøÏß³Ì
+class DeadLockThread extends Thread {// æ­»é”çº¿ç¨‹
 	private DeadLock dl;
 
 	private int id;
@@ -78,8 +79,8 @@ class DeadLockThread extends Thread {// ËÀËøÏß³Ì
 	public void run() {
 		while (true) {
 			int amount = (int) (1500 * Math.random());
-			display.append("\nThread" + DeadLock.names[id] + "½« $" + amount
-					+ "´æÈë" + DeadLock.names[(1 - id)]);
+			display.append("\nThread" + DeadLock.names[id] + "å°† $" + amount
+					+ "å­˜å…¥" + DeadLock.names[(1 - id)]);
 			try {
 				sleep(20);
 			} catch (InterruptedException e) {

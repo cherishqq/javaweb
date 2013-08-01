@@ -1,8 +1,8 @@
 package com.java.base.generic.three;
 
-//无限界的擦拭
+//鏃犻檺鐣岀殑鎿︽嫮
 public class UnBorderWipe<T> {
-	// 下面所有的T将被Object所代替
+	// 涓嬮潰鎵�鏈夌殑T灏嗚Object鎵�浠ｆ浛
 	T ob;
 
 	UnBorderWipe(T ob) {

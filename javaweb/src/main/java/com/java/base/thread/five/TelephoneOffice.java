@@ -1,5 +1,6 @@
 package com.java.base.thread.five;
 
+
 public class TelephoneOffice extends Object {
 	public static Runnable makeRunnable(
 				final String name, 
@@ -8,13 +9,13 @@ public class TelephoneOffice extends Object {
 		return new Runnable() {
 				public void run() {
 					try {
-						System.out.println(name +": ÇëÇó²¦ºÅ£¬ÕıÔÚÁ¬½ÓÖĞ¡­");
+						System.out.println(name +": è¯·æ±‚æ‹¨å·ï¼Œæ­£åœ¨è¿æ¥ä¸­â€¦");
 						Thread.sleep(firstDelay);
-						System.out.println(name + ": ÕıÔÚÍ¨»°ÖĞ¡­");
+						System.out.println(name + ": æ­£åœ¨é€šè¯ä¸­â€¦");
 						Thread.sleep(2000);
-						System.out.println(name + ": Í¨Óï½áÊø");
+						System.out.println(name + ": é€šè¯­ç»“æŸ");
 					} catch ( InterruptedException ix ) {
-						System.out.println(name + ": ÍøÂçÒì³£");
+						System.out.println(name + ": ç½‘ç»œå¼‚å¸¸");
 						return;
 					} catch ( Exception x ) {
 						x.printStackTrace();
@@ -28,15 +29,15 @@ public class TelephoneOffice extends Object {
 	public static void main(String[] args) {
 		try {
 			TelephoneLine pool = new TelephoneLine(3);
-			Runnable zs = makeRunnable("ÕÅÈı", 3000);
+			Runnable zs = makeRunnable("å¼ ä¸‰", 3000);
 			pool.execute(zs);
-			Runnable ls = makeRunnable("ÀîËÄ", 1000);
+			Runnable ls = makeRunnable("æå››", 1000);
 			pool.execute(ls);
-			Runnable nql = makeRunnable("ÄôÇìÁÁ", 2000);
+			Runnable nql = makeRunnable("è‚åº†äº®", 2000);
 			pool.execute(nql);
-			Runnable zxh = makeRunnable("ÕÅĞ¡ºì", 60000);
+			Runnable zxh = makeRunnable("å¼ å°çº¢", 60000);
 			pool.execute(zxh);
-			Runnable yjp = makeRunnable("Òü¼ÌÆ½", 1000);
+			Runnable yjp = makeRunnable("å°¹ç»§å¹³", 1000);
 			pool.execute(yjp);
 			pool.StopServiceOfID();
 			Thread.sleep(2000);

@@ -1,49 +1,50 @@
 package com.java.base.thread.one;
-public class Transformer {						// ±¾³ÌĞòµÄ²âÊÔÀà
-	public static void main(String[] args) { 		// java³ÌĞòÖ´ĞĞÈë¿Ú´¦
-		Defensor defensor = new Defensor(); 	// Ä¬ÈÏÇé¿öÏÂ¸¸ÀàDefensorÊÇÆÕÍ¨Ïß³Ì
-		defensor.start(); 					// Æô¶¯DefensorÀàÏß³Ì
+
+public class Transformer {						// æœ¬ç¨‹åºçš„æµ‹è¯•ç±»
+	public static void main(String[] args) { 		// javaç¨‹åºæ‰§è¡Œå…¥å£å¤„
+		Defensor defensor = new Defensor(); 	// é»˜è®¤æƒ…å†µä¸‹çˆ¶ç±»Defensoræ˜¯æ™®é€šçº¿ç¨‹
+		defensor.start(); 					// å¯åŠ¨Defensorç±»çº¿ç¨‹
 		try {
 			Thread.sleep(500);
-		} catch (InterruptedException e) { 		// ²¶»ñ±»»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
+		} catch (InterruptedException e) { 		// æ•è·è¢«å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
 		}
 	}
 }
-class Defensor extends Thread { 				// ²Ù×÷ÊØ»¤ÉñÏß³ÌµÄÀà
+class Defensor extends Thread { 				// æ“ä½œå®ˆæŠ¤ç¥çº¿ç¨‹çš„ç±»
 	public void run() {
-		System.out.print("µ±°ÔÌì»¢ÔÚÏ®»÷µØÇòµÄÎ£ÄÑ¹ØÍ·£¬ÊØ»¤ÉñÊÇ·ñ²ÉÈ¡×ÔÎÒ±£»¤? ");
-		System.out.println(this.isDaemon() ? "ÊÇ" : "Ã»ÓĞ");// ²âÊÔ¸ÃÏß³ÌÊÇ·ñÎªÊØ»¤Ïß³Ì¡£
-		System.out.println("ÊØ»¤ÉñDefensorÊÇ»úÆ÷ÎÀ±øµÄ×éºÏÕ½Ê¿£¬¸öĞÔÉÆÁ¼£¬Ô¸ÒâÎşÉü×Ô¼ºÈ¥±£»¤ÈËÀà");
+		System.out.print("å½“éœ¸å¤©è™åœ¨è¢­å‡»åœ°çƒçš„å±éš¾å…³å¤´ï¼Œå®ˆæŠ¤ç¥æ˜¯å¦é‡‡å–è‡ªæˆ‘ä¿æŠ¤? ");
+		System.out.println(this.isDaemon() ? "æ˜¯" : "æ²¡æœ‰");// æµ‹è¯•è¯¥çº¿ç¨‹æ˜¯å¦ä¸ºå®ˆæŠ¤çº¿ç¨‹ã€‚
+		System.out.println("å®ˆæŠ¤ç¥Defensoræ˜¯æœºå™¨å«å…µçš„ç»„åˆæˆ˜å£«ï¼Œä¸ªæ€§å–„è‰¯ï¼Œæ„¿æ„ç‰ºç‰²è‡ªå·±å»ä¿æŠ¤äººç±»");
 		Human people = new Human();
-		people.setDaemon(true); // ÉèÖÃÊØ»¤Ïß³Ì£¬ÔÚ±¾³ÌĞòÖĞ½«Æä×ÓÀàpeopleÉèÖÃÎªÊØ»¤Ïß³ÌÒ²¾ÍÊÇ±»±£»¤µÄ¶ÔÏó
-		people.start();			// Æô¶¯ÊØ»¤Ïß³Ì
+		people.setDaemon(true); // è®¾ç½®å®ˆæŠ¤çº¿ç¨‹ï¼Œåœ¨æœ¬ç¨‹åºä¸­å°†å…¶å­ç±»peopleè®¾ç½®ä¸ºå®ˆæŠ¤çº¿ç¨‹ä¹Ÿå°±æ˜¯è¢«ä¿æŠ¤çš„å¯¹è±¡
+		people.start();			// å¯åŠ¨å®ˆæŠ¤çº¿ç¨‹
 		try {
-			Thread.sleep(1000); // ĞİÃß1Ãë
-		} catch (InterruptedException e) { 	// ²¶»ñ»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
-		} finally { 						// ÄÚÈİ×ÜÖ´ĞĞ
-			System.out.println("ÔÚÃæ¶ÔÎ£ÏÕµÄÊ±ºò£¬ÊØºòÉñÉáÉíº´ÎÀµØÇò£¬±£»¤ÈËÀàµÄ°²È«");
+			Thread.sleep(1000); // ä¼‘çœ 1ç§’
+		} catch (InterruptedException e) { 	// æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
+		} finally { 						// å†…å®¹æ€»æ‰§è¡Œ
+			System.out.println("åœ¨é¢å¯¹å±é™©çš„æ—¶å€™ï¼Œå®ˆå€™ç¥èˆèº«æå«åœ°çƒï¼Œä¿æŠ¤äººç±»çš„å®‰å…¨");
 		}
-		System.out.println("ÊØºòÉñÌ«Î°´óÁË...");
+		System.out.println("å®ˆå€™ç¥å¤ªä¼Ÿå¤§äº†...");
 	}
 }
 class Human extends Thread {
 	public void run() {
-		System.out.print("ÈËÀàµÄ°²È«ÊÇ·ñ±»±£»¤£¿");
-		System.out.println(this.isDaemon() ? "ÊÇ" : "Ã»ÓĞ");// ÅĞ¶Ï´ËÏß³ÌÊÇ·ñÊÇÊØ»¤Ïß³Ì
-		System.out.println("ÏÖÔÚÓĞ5´¦³¡ËùµÄÈËÃÇÕı´¦ÓÚÎ£ÏÕÖ®ÖĞ£¡£¡£¡");
+		System.out.print("äººç±»çš„å®‰å…¨æ˜¯å¦è¢«ä¿æŠ¤ï¼Ÿ");
+		System.out.println(this.isDaemon() ? "æ˜¯" : "æ²¡æœ‰");// åˆ¤æ–­æ­¤çº¿ç¨‹æ˜¯å¦æ˜¯å®ˆæŠ¤çº¿ç¨‹
+		System.out.println("ç°åœ¨æœ‰5å¤„åœºæ‰€çš„äººä»¬æ­£å¤„äºå±é™©ä¹‹ä¸­ï¼ï¼ï¼");
 		int i = 0;
 		try {
-			while (i < 5) { 			// ½øĞĞ5´ÎÑ­»·
-				System.out.println("µÚ" + (1 + i++) + "´¦³¡ËùµÄÈËÀà");
-				Thread.sleep(200); 	// ĞİÃß0.2Ãë
+			while (i < 5) { 			// è¿›è¡Œ5æ¬¡å¾ªç¯
+				System.out.println("ç¬¬" + (1 + i++) + "å¤„åœºæ‰€çš„äººç±»");
+				Thread.sleep(200); 	// ä¼‘çœ 0.2ç§’
 			}
-		} catch (InterruptedException e) { // ²¶»ñ»½ĞÑÒì³£
-			System.out.println("»½ĞÑÒì³£:" + e.getMessage());
-		} finally { 						// ÄÚÈİ×ÜÖ´ĞĞ
-			System.out.println("ÊØºòÉñ¾¡ĞÄ¾¡Á¦£¬°ïÖúÈËÀà°²È«µÄ¶ã¹ı°ÔÌì»¢µÄ·è¿ñÏ®»÷");
+		} catch (InterruptedException e) { // æ•è·å”¤é†’å¼‚å¸¸
+			System.out.println("å”¤é†’å¼‚å¸¸:" + e.getMessage());
+		} finally { 						// å†…å®¹æ€»æ‰§è¡Œ
+			System.out.println("å®ˆå€™ç¥å°½å¿ƒå°½åŠ›ï¼Œå¸®åŠ©äººç±»å®‰å…¨çš„èº²è¿‡éœ¸å¤©è™çš„ç–¯ç‹‚è¢­å‡»");
 		}
-		System.out.println("ÖÕÓÚÍÑÀëÎ£ÏÕÁË¡«¡«¡«");
+		System.out.println("ç»ˆäºè„±ç¦»å±é™©äº†ï½ï½ï½");
 	}
 }

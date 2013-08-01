@@ -1,5 +1,6 @@
 package com.java.base.thread.two;
 
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,35 +8,35 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class SavingOffice extends Frame implements ActionListener {
-	private Label label = new Label("×ªÕËÒÑÍê³É:0");
+	private Label label = new Label("è½¬è´¦å·²å®Œæˆ:0");
 
-	// ´´½¨AWT¶àĞĞÎÄ±¾×é¼ş
+	// åˆ›å»ºAWTå¤šè¡Œæ–‡æœ¬ç»„ä»¶
 	private TextArea area = new TextArea();
 
-	// ´´½¨AWT°´Å¤×é¼ş
-	private Button display = new Button("ÏÔÊ¾ÕÊ»§");
+	// åˆ›å»ºAWTæŒ‰æ‰­ç»„ä»¶
+	private Button display = new Button("æ˜¾ç¤ºå¸æˆ·");
 
-	private Button start = new Button("ÖØĞÂÆô¶¯");
+	private Button start = new Button("é‡æ–°å¯åŠ¨");
 
-	private Button stop = new Button("Í£Ö¹");
+	private Button stop = new Button("åœæ­¢");
 
-	// ÉùÃ÷ÕËºÅµÄ¸öÊı
+	// å£°æ˜è´¦å·çš„ä¸ªæ•°
 	protected final static int num_accounts = 8;
 
-	// ¶¨ÒåÀË·ĞµÄÊ±¼ä
+	// å®šä¹‰æµªæ²¸çš„æ—¶é—´
 	private final static int waste_time = 1;
 
-	// ´´½¨Ò»¸öintĞÍÊı×é£¬ÓÃÓÚ´æÈëÕËºÅµÄ³õÊ¼½ğ¶î
+	// åˆ›å»ºä¸€ä¸ªintå‹æ•°ç»„ï¼Œç”¨äºå­˜å…¥è´¦å·çš„åˆå§‹é‡‘é¢
 	private int accounts[] = new int[num_accounts];
 
-	// ´´½¨Ò»¸öCustomerÊı×é£¬ÓÃÓÚ´æ·ÅCustomerÊµÀı»¯¶ÔÏó
+	// åˆ›å»ºä¸€ä¸ªCustomeræ•°ç»„ï¼Œç”¨äºå­˜æ”¾Customerå®ä¾‹åŒ–å¯¹è±¡
 	private Customer customer[] = new Customer[num_accounts];
 
-	// ±í·¨×ªÕËµÄ½ğ¶î
+	// è¡¨æ³•è½¬è´¦çš„é‡‘é¢
 	private int count = 0;
 
-	public SavingOffice() {// ¹¹Ôì·½·¨£¬ÎªÆäAWT³ÉÔ±±äÁ¿½øĞĞ³õÊ¼»¯
-		super("ÎÒµÄÃØÃÜĞ¡½ğ¿â");
+	public SavingOffice() {// æ„é€ æ–¹æ³•ï¼Œä¸ºå…¶AWTæˆå‘˜å˜é‡è¿›è¡Œåˆå§‹åŒ–
+		super("æˆ‘çš„ç§˜å¯†å°é‡‘åº“");
 		Panel btn_Panel = new Panel();
 		btn_Panel.setLayout(new FlowLayout());
 		btn_Panel.add(display);
@@ -49,8 +50,8 @@ public class SavingOffice extends Frame implements ActionListener {
 		add("South", btn_Panel);
 		add("Center", area);
 		for (int i = 0; i < accounts.length; i++)
-			accounts[i] = 50000;// Ã¿¸öÕË»§ÉÏµÄ³õÊ¼½ğ¶îÎª5ÍòÔª
-		start();// ÊÇÆÕÍ¨µÄ·½·¨£¬²¢·ÇÏß³ÌµÄstart·½·¨
+			accounts[i] = 50000;// æ¯ä¸ªè´¦æˆ·ä¸Šçš„åˆå§‹é‡‘é¢ä¸º5ä¸‡å…ƒ
+		start();// æ˜¯æ™®é€šçš„æ–¹æ³•ï¼Œå¹¶éçº¿ç¨‹çš„startæ–¹æ³•
 		validate();
 		setSize(300, 300);
 		setVisible(true);
@@ -61,7 +62,7 @@ public class SavingOffice extends Frame implements ActionListener {
 		});
 	}
 
-	public void transfer(int from, int into, int amount) {// ½øĞĞ×ªÕË
+	public void transfer(int from, int into, int amount) {// è¿›è¡Œè½¬è´¦
 		if ((accounts[from] >= amount) && (from != into)) {
 			int newAmountFrom = accounts[from] - amount;
 			int newAmountTo = accounts[into] + amount;
@@ -70,22 +71,22 @@ public class SavingOffice extends Frame implements ActionListener {
 			accounts[into] = newAmountTo;
 
 		}
-		label.setText("×ªÕËÍê³É£º" + count++);
+		label.setText("è½¬è´¦å®Œæˆï¼š" + count++);
 	}
 
-	public void start() {// Æô¶¯³ÌĞò
+	public void start() {// å¯åŠ¨ç¨‹åº
 		stop();
 		for (int i = 0; i < accounts.length; i++)
 			customer[i] = new Customer(i, this);
 	}
 
-	private void stop() {// Í£Ö¹
+	private void stop() {// åœæ­¢
 		for (int i = 0; i < accounts.length; i++)
 			if (customer[i] != null)
 				customer[i].setFlagValue();
 	}
 
-	private void wastrSomeTime() {// ´¦ÓÚµÈ´ıĞİÃßÖĞ
+	private void wastrSomeTime() {// å¤„äºç­‰å¾…ä¼‘çœ ä¸­
 		try {
 			Thread.sleep(waste_time);
 		} catch (InterruptedException ie) {
@@ -93,17 +94,17 @@ public class SavingOffice extends Frame implements ActionListener {
 		}
 	}
 
-	private void showAccounts() {// ÏÔÊ¾½ğ¶î
+	private void showAccounts() {// æ˜¾ç¤ºé‡‘é¢
 		int sum = 0;
 		for (int i = 0; i < accounts.length; i++) {
 			sum += accounts[i];
-			area.append("\nÕÊ»§ " + i + "£º$" + accounts[i]);
+			area.append("\nå¸æˆ· " + i + "ï¼š$" + accounts[i]);
 		}
-		area.append("\n×Ü½ğ¶î£º$" + sum);
-		area.append("\n×ªÕË×Ü´ÎÊı£º" + count + "\n");
+		area.append("\næ€»é‡‘é¢ï¼š$" + sum);
+		area.append("\nè½¬è´¦æ€»æ¬¡æ•°ï¼š" + count + "\n");
 	}
 
-	public void actionPerformed(ActionEvent ae) {// Îªbutton×é¼şÌí±ğÊÂ¼ş¼àÌı
+	public void actionPerformed(ActionEvent ae) {// ä¸ºbuttonç»„ä»¶æ·»åˆ«äº‹ä»¶ç›‘å¬
 		if (ae.getSource() == display)
 			showAccounts();
 		else if (ae.getSource() == start)
@@ -117,7 +118,7 @@ public class SavingOffice extends Frame implements ActionListener {
 	}
 }
 
-class Customer extends Thread {// ¹Ë¿ÍÀà
+class Customer extends Thread {// é¡¾å®¢ç±»
 	private SavingOffice bank = null;
 
 	private int id = -1;
@@ -132,14 +133,14 @@ class Customer extends Thread {// ¹Ë¿ÍÀà
 
 	public void start() {
 		flag = true;
-		super.start();// Æô¶¯Ïß³Ì
+		super.start();// å¯åŠ¨çº¿ç¨‹
 	}
 
-	public void setFlagValue() {// ÉèÖÃÎª²»×ªÕË×´Ì¬
+	public void setFlagValue() {// è®¾ç½®ä¸ºä¸è½¬è´¦çŠ¶æ€
 		flag = false;
 	}
 
-	public void run() {// ÔËĞĞ¸ÃÏß³Ì
+	public void run() {// è¿è¡Œè¯¥çº¿ç¨‹
 		while (flag) {
 			int into = (int) (SavingOffice.num_accounts * Math.random());
 			int amount = (int) (1000 * Math.random());

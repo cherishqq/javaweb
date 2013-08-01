@@ -1,5 +1,6 @@
 package com.java.base.thread.six;
 
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -9,11 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
-//¼à¿ØÄÚ´æ
+//ç›‘æ§å†…å­˜
 public class Memory extends JFrame {
 	private JPanel panel;
 	private BorderLayout layout = new BorderLayout();
-	// ´´½¨JProgressBar¶ÔÏó²¢ÊµÀı»¯
+	// åˆ›å»ºJProgressBarå¯¹è±¡å¹¶å®ä¾‹åŒ–
 	private JProgressBar bar_1 = new JProgressBar();
 	private JLabel label_1 = new JLabel();
 	private JLabel label_2 = new JLabel();
@@ -21,10 +22,10 @@ public class Memory extends JFrame {
 		panel = (JPanel) this.getContentPane();
 		panel.setLayout(layout);
 		this.setSize(new Dimension(305, 215));
-		this.setTitle("ÄÚ´æµÄÊ¹ÓÃÇé¿ö");
+		this.setTitle("å†…å­˜çš„ä½¿ç”¨æƒ…å†µ");
 		label_1.setFont(new java.awt.Font("Dialog", 0, 14));
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setText("×Ô¶¨ÒåÈÎÎñ¹ÜÀíÆ÷");
+		label_1.setText("è‡ªå®šä¹‰ä»»åŠ¡ç®¡ç†å™¨");
 		bar_1.setOrientation(JProgressBar.VERTICAL);
 		bar_1.setFont(new java.awt.Font("Dialog", 0, 14));
 		bar_1.setToolTipText("");
@@ -65,13 +66,13 @@ class ProgressThread extends Thread {
 		while (true) {
 			totle = (int) (Runtime.getRuntime().totalMemory() / 1024);
 			free = (int) (Runtime.getRuntime().freeMemory() / 1024);
-			jl.setText("¿ÉÓÃÄÚ´æ"
+			jl.setText("å¯ç”¨å†…å­˜"
 					+ (int) (Runtime.getRuntime().freeMemory() / 1024) + "K"
-					+ " ×Ü¹²·ÖÅäµÄÄÚ´æ£º"
+					+ " æ€»å…±åˆ†é…çš„å†…å­˜ï¼š"
 					+ (int) (Runtime.getRuntime().totalMemory() / 1024) + "K");
 			status = (int) (free * 100 / totle);
 			jpb.setValue(status);
-			jpb.setString("¿ÉÓÃÄÚ´æ£º" + status + "%");
+			jpb.setString("å¯ç”¨å†…å­˜ï¼š" + status + "%");
 			try {
 				this.sleep(1000);
 			} catch (InterruptedException e) {

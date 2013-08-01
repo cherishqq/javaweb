@@ -1,35 +1,36 @@
 package com.java.base.thread.four;
 
+
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimerThread {
-	public static void main(String[] args) { // java³ÌĞòÖ÷Èë¿Ú´¦
-		Timer timer = new Timer(); // ´´½¨¶¨Ê±Æ÷Àà
+	public static void main(String[] args) { // javaç¨‹åºä¸»å…¥å£å¤„
+		Timer timer = new Timer(); // åˆ›å»ºå®šæ—¶å™¨ç±»
 		TimerTask tt1 = new MyTask(1);
-		timer.schedule(tt1, 200); // 0.2ÃëºóÖ´ĞĞÈÎÎñ
+		timer.schedule(tt1, 200); // 0.2ç§’åæ‰§è¡Œä»»åŠ¡
 		TimerTask tt2 = new MyTask(2);
-		timer.schedule(tt2, 500, 1000); // 0.5ÃëºóÖ´ĞĞÈÎÎñ²¢Ã¿¸ö1ÃëÖ´ĞĞÒ»´Î
+		timer.schedule(tt2, 500, 1000); // 0.5ç§’åæ‰§è¡Œä»»åŠ¡å¹¶æ¯ä¸ª1ç§’æ‰§è¡Œä¸€æ¬¡
 		TimerTask tt3 = new MyTask(3);
 		Date date = new Date(System.currentTimeMillis() + 1000);
-		timer.schedule(tt3, date); // ÔÚÖ¸¶¨Ê±¼ä1ÃëºóÖ´ĞĞÈÎÎñ
+		timer.schedule(tt3, date); // åœ¨æŒ‡å®šæ—¶é—´1ç§’åæ‰§è¡Œä»»åŠ¡
 		try {
-			Thread.sleep(3000); // ĞİÃß3ÃëÖÓ
-		} catch (InterruptedException e) { // ²¶»ñÀ¹½ØÒì³£
-			System.out.println("³öÏÖ´íÎó£º" + e.getMessage());
+			Thread.sleep(3000); // ä¼‘çœ 3ç§’é’Ÿ
+		} catch (InterruptedException e) { // æ•è·æ‹¦æˆªå¼‚å¸¸
+			System.out.println("å‡ºç°é”™è¯¯ï¼š" + e.getMessage());
 		}
-		timer.cancel(); // ÖÕÖ¹¶¨Ê±Æ÷È¡Ïû¶¨Ê±Æ÷ÖĞµÄÈÎÎñ
-		System.out.println("ÈÎÎñ¶¨Ê±Æ÷ÒÑ¾­±»È¡Ïû");
+		timer.cancel(); // ç»ˆæ­¢å®šæ—¶å™¨å–æ¶ˆå®šæ—¶å™¨ä¸­çš„ä»»åŠ¡
+		System.out.println("ä»»åŠ¡å®šæ—¶å™¨å·²ç»è¢«å–æ¶ˆ");
 	}
 }
-class MyTask extends TimerTask { // ¼Ì³ĞÊ±¼äÈÎÎñÀàÖ´ĞĞÈÎÎñ
-	private int taskID = 0; // ÈÎÎñ±àºÅ
-	public MyTask(int id) { // ´ø²ÎÊıµÄ¹¹Ôì·½·¨½øĞĞ³õÊ¼»¯
+class MyTask extends TimerTask { // ç»§æ‰¿æ—¶é—´ä»»åŠ¡ç±»æ‰§è¡Œä»»åŠ¡
+	private int taskID = 0; // ä»»åŠ¡ç¼–å·
+	public MyTask(int id) { // å¸¦å‚æ•°çš„æ„é€ æ–¹æ³•è¿›è¡Œåˆå§‹åŒ–
 		this.taskID = id;
 	}
-	public void run() { // ÊµÏÖTimerTaskÖĞµÄ·½·¨
-		System.out.println("¿ªÊ¼Ö´ĞĞÎÒµÄµÚ" + this.taskID + "¸öÈÎÎñ £¬Ö´ĞĞÊ±¼äÎª"
+	public void run() { // å®ç°TimerTaskä¸­çš„æ–¹æ³•
+		System.out.println("å¼€å§‹æ‰§è¡Œæˆ‘çš„ç¬¬" + this.taskID + "ä¸ªä»»åŠ¡ ï¼Œæ‰§è¡Œæ—¶é—´ä¸º"
 				+ new Date().toLocaleString());
 	}
 }

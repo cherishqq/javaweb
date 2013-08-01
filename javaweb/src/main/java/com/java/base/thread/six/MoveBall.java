@@ -1,5 +1,6 @@
 package com.java.base.thread.six;
 
+
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -9,12 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MoveBall extends Frame implements ActionListener {
-	// ´´½¨3¸ö°´Å¤×é¼ş£¬·Ö±ğ´ú±í¿ªÊ¼¡¢Í£Ö¹ºÍÍË³ö
-	private Button quit = new Button("ÍË³ö");
-	private Button start = new Button("¿ªÊ¼");
-	private Button stop = new Button("Í£Ö¹");
+	// åˆ›å»º3ä¸ªæŒ‰æ‰­ç»„ä»¶ï¼Œåˆ†åˆ«ä»£è¡¨å¼€å§‹ã€åœæ­¢å’Œé€€å‡º
+	private Button quit = new Button("é€€å‡º");
+	private Button start = new Button("å¼€å§‹");
+	private Button stop = new Button("åœæ­¢");
 	private DrawBall balls[] = new DrawBall[20];
-	// ¹¹Ôì·½·¨£¬¶Ô¸÷×é¼ş½øĞĞ³õÊ¼»¯
+	// æ„é€ æ–¹æ³•ï¼Œå¯¹å„ç»„ä»¶è¿›è¡Œåˆå§‹åŒ–
 	public MoveBall() {
 		super();
 		setLayout(new FlowLayout());
@@ -34,39 +35,39 @@ public class MoveBall extends Frame implements ActionListener {
 			balls[i] = new DrawBall(this, x, y);
 		}
 	}
-	public void actionPerformed(ActionEvent e) {// ÎªButtonÌí¼ÓÊÂ¼ş´¦Àí
-		if (e.getSource() == stop) {// µ¥»÷Í£Ö¹°´Å¤
+	public void actionPerformed(ActionEvent e) {// ä¸ºButtonæ·»åŠ äº‹ä»¶å¤„ç†
+		if (e.getSource() == stop) {// å•å‡»åœæ­¢æŒ‰æ‰­
 			for (int i = 0; i < balls.length; i++) {
 				balls[i].setRun();
 			}
 		}
-		if (e.getSource() == start) {// µ¥»÷¿ªÊ¼°´Å¤
+		if (e.getSource() == start) {// å•å‡»å¼€å§‹æŒ‰æ‰­
 			for (int i = 0; i < balls.length; i++) {
 				balls[i].setRun();
 				balls[i] = new DrawBall(this, balls[i].x, balls[i].y);
 			}
 		}
-		if (e.getSource() == quit) {// µ¥»÷ÍË³ö°´Å¤
+		if (e.getSource() == quit) {// å•å‡»é€€å‡ºæŒ‰æ‰­
 			System.exit(0);
 		}
 	}
-	public void paint(Graphics g) {// »æÖÆ×é¼ş
+	public void paint(Graphics g) {// ç»˜åˆ¶ç»„ä»¶
 		for (int i = 0; i < balls.length; i++)
 			if (balls[i] != null)
 				balls[i].paintBall(g);
 	}
-	public static void main(String[] args) {// ³ÌĞòµÄÈë¿Ú´¦
+	public static void main(String[] args) {// ç¨‹åºçš„å…¥å£å¤„
 		MoveBall t = new MoveBall();
 	}
 }
-class DrawBall extends Thread {// »æ»­Öé×Ó
-	// ÀûÓÃËæ»úÊı»ñÈ¡»æÖÆÖé×ÓµÄÎ»ÖÃ
+class DrawBall extends Thread {// ç»˜ç”»ç å­
+	// åˆ©ç”¨éšæœºæ•°è·å–ç»˜åˆ¶ç å­çš„ä½ç½®
 	private int a = 2 * (1 - 2 * (int) Math.round(Math.random()));
 	private int b = 2 * (1 - 2 * (int) Math.round(Math.random()));
-	private boolean running = false;// ¿ØÖÆÊÇ·ñ»æÖÆÖé×ÓµÄ±êÖ¾
-	private MoveBall table = null;// ÉùÃ÷Ò»¸öMoveBall¶ÔÏó
-	protected int x, y;// ¶¨ÒåXY×ø±êµã
-	public DrawBall(MoveBall _table, int _x, int _y) {// ¹¹Ôì·½·¨£¬¸øÆä³ÉÔ±±äÁ¿¸³³õÖµ
+	private boolean running = false;// æ§åˆ¶æ˜¯å¦ç»˜åˆ¶ç å­çš„æ ‡å¿—
+	private MoveBall table = null;// å£°æ˜ä¸€ä¸ªMoveBallå¯¹è±¡
+	protected int x, y;// å®šä¹‰XYåæ ‡ç‚¹
+	public DrawBall(MoveBall _table, int _x, int _y) {// æ„é€ æ–¹æ³•ï¼Œç»™å…¶æˆå‘˜å˜é‡èµ‹åˆå€¼
 		table = _table;
 		x = _x;
 		y = _y;
@@ -74,12 +75,12 @@ class DrawBall extends Thread {// »æ»­Öé×Ó
 	}
 	public void start() {
 		running = true;
-		super.start();// Æô¶¯Ïß³Ì
+		super.start();// å¯åŠ¨çº¿ç¨‹
 	}
 	public void setRun() {
 		running = false;
 	}
-	public void run() {// ÖØĞ´ThreadÀàµÄrun·½·¨
+	public void run() {// é‡å†™Threadç±»çš„runæ–¹æ³•
 		while (running) {
 			move();
 			try {
@@ -90,11 +91,11 @@ class DrawBall extends Thread {// »æ»­Öé×Ó
 			table.repaint();
 		}
 	}
-	public void paintBall(Graphics g) {// ×Ô¶¨Òå»æÖÆÖé×ÓµÄ·½·¨
+	public void paintBall(Graphics g) {// è‡ªå®šä¹‰ç»˜åˆ¶ç å­çš„æ–¹æ³•
 		g.setColor(Color.red);
 		g.fillOval(x, y, 20, 20);
 	}
-	private void move() {// Öé×ÓÔÚ¹ö¶¯
+	private void move() {// ç å­åœ¨æ»šåŠ¨
 		x += a;
 		y += b;
 		if ((x > table.getSize().width) || (x < 0)) {

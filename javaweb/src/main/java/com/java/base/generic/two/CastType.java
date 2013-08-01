@@ -1,27 +1,20 @@
 package com.java.base.generic.two;
 
-
-/**
- * Ö»Òª´æÔÚ¼Ì³Ğ¹ØÏµ,¾Í¿ÉÒÔ×ª»»,ºÍ²ÎÊıÃ»ÓĞ¹ØÏµ
- * @author Derek.pan
- *
- */
-
-//Ç¿ÖÆÀàĞÍ×ª»»
+//å¼ºåˆ¶ç±»å‹è½¬æ¢
 public class CastType {
 	public static void main(String args[]) {
 		Father<Double> father = new Father<Double>(1.0);
-		Child<Double, String> child = new Child<Double, String>(200.0, "ÖĞ¹úÄúºÃ");
-		// ÊÔÍ¼½«×ÓÀà¶ÔÏó×ª»»³É¸¸Àà£¬ÕıÈ·
+		Child<Double, String> child = new Child<Double, String>(200.0, "ä¸­å›½æ‚¨å¥½");
+		// è¯•å›¾å°†å­ç±»å¯¹è±¡è½¬æ¢æˆçˆ¶ç±»ï¼Œæ­£ç¡®
 		if ((Father<Double>) child instanceof Father)
-			System.out.println("×ÓÀà¶ÔÏó×ª»»³É¸¸Ç×¶ÔÏó.");
-		// ÊÔÍ¼½«¸¸Àà¶ÔÏó×ª»»³É×ÓÀà£¬´íÎó
+			System.out.println("å­ç±»å¯¹è±¡è½¬æ¢æˆçˆ¶äº²å¯¹è±¡.");
+		// è¯•å›¾å°†çˆ¶ç±»å¯¹è±¡è½¬æ¢æˆå­ç±»ï¼Œé”™è¯¯
 		try {
 			if ((Child<Double, String>) father instanceof Child)
-				System.out.println("¸¸Àà¶ÔÏó×ª»»³É×ÓÇ×¶ÔÏó.");
+				System.out.println("çˆ¶ç±»å¯¹è±¡è½¬æ¢æˆå­äº²å¯¹è±¡.");
 		} catch (Exception e) {
 			System.out.println(e);
-			System.out.println("·¢ÉúÒì³£µÄÔ­Òò£º¸¸Àà¶ÔÏó²»ÄÜÇ¿ÖÆ×ª»»³É×ÓÇ×¶ÔÏó.");
+			System.out.println("å‘ç”Ÿå¼‚å¸¸çš„åŸå› ï¼šçˆ¶ç±»å¯¹è±¡ä¸èƒ½å¼ºåˆ¶è½¬æ¢æˆå­äº²å¯¹è±¡.");
 
 		}
 	}

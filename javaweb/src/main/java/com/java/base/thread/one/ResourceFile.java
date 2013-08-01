@@ -1,5 +1,6 @@
 package com.java.base.thread.one;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,51 +9,51 @@ import java.util.List;
 import java.util.Random;
 
 public class ResourceFile {
-	private static boolean isStop = false;			// ±êÊ¶Ïß³ÌÊÇ·ñÍ£Ö¹
-	private static List taskList = new ArrayList();	// ´´½¨¼¯ºÏÁĞ±í¶ÔÏó
+	private static boolean isStop = false;			// æ ‡è¯†çº¿ç¨‹æ˜¯å¦åœæ­¢
+	private static List taskList = new ArrayList();	// åˆ›å»ºé›†åˆåˆ—è¡¨å¯¹è±¡
 	private static DateFormat dateFormat = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
-	private class SearchDownload extends Thread {// ´´½¨Ä£ÄâËÑË÷×ÊÔ´²¢ÏÂÔØÎÄ¼şÀà
+	private class SearchDownload extends Thread {// åˆ›å»ºæ¨¡æ‹Ÿæœç´¢èµ„æºå¹¶ä¸‹è½½æ–‡ä»¶ç±»
 		private String[] file = new String[] { "51Upload_Setup.exe",
 				"eclipse-SDK-3.2.1-win32.zip", "EditPlus.rar" };
-		// ´´½¨Ä£ÄâÏÂÔØÊ±ËùËÑË÷µÄ×ÊÔ´ÄÚÈİ
-		private String[] resource = new String[] { "¿ªÊ¼Á¬½Ó......",
-				"¿ªÊ¼ËÑË÷ºòÑ¡×ÊÔ´......", "Ã»ËÑË÷µ½ºòÑ¡×ÊÔ´£¬ÉÔºóÖØÊÔËÑË÷",
-				"Ô­Ê¼×ÊÔ´Á¬½Ó³É¹¦£¬µÃµ½µÄÎÄ¼ş³¤¶È£º 7725816", "¿ªÊ¼´´½¨ÎÄ¼ş......",
-				"ÎÄ¼ş´´½¨³É¹¦£¬¿ªÊ¼ÏÂÔØÊı¾İ......", "ÓÃ»§È¡ÏûÏÂÔØ" };
-		int sum = 0;//ÏÂÔØÒ»¸öÈÎÎñÊ±ÓÃµÄ×ÜÊ±¼ä
-		int time = 0;//ËÑË÷Ò»¸ö×ÊÔ´Ê±ÓÃµÄÊ±¼ä
-		public void run() {// ÊµÏÖÏß³ÌÀàµÄ·½·¨
+		// åˆ›å»ºæ¨¡æ‹Ÿä¸‹è½½æ—¶æ‰€æœç´¢çš„èµ„æºå†…å®¹
+		private String[] resource = new String[] { "å¼€å§‹è¿æ¥......",
+				"å¼€å§‹æœç´¢å€™é€‰èµ„æº......", "æ²¡æœç´¢åˆ°å€™é€‰èµ„æºï¼Œç¨åé‡è¯•æœç´¢",
+				"åŸå§‹èµ„æºè¿æ¥æˆåŠŸï¼Œå¾—åˆ°çš„æ–‡ä»¶é•¿åº¦ï¼š 7725816", "å¼€å§‹åˆ›å»ºæ–‡ä»¶......",
+				"æ–‡ä»¶åˆ›å»ºæˆåŠŸï¼Œå¼€å§‹ä¸‹è½½æ•°æ®......", "ç”¨æˆ·å–æ¶ˆä¸‹è½½" };
+		int sum = 0;//ä¸‹è½½ä¸€ä¸ªä»»åŠ¡æ—¶ç”¨çš„æ€»æ—¶é—´
+		int time = 0;//æœç´¢ä¸€ä¸ªèµ„æºæ—¶ç”¨çš„æ—¶é—´
+		public void run() {// å®ç°çº¿ç¨‹ç±»çš„æ–¹æ³•
 			for (int i = 0; i < file.length; i++) {
-				System.out.println("¿ªÊ¼ÏÂÔØµÚ" + (i + 1) + "¸öÎÄ¼ş");
+				System.out.println("å¼€å§‹ä¸‹è½½ç¬¬" + (i + 1) + "ä¸ªæ–‡ä»¶");
 				try {
 					for (int j = 0; j < resource.length; j++) {
 						System.out.println(dateFormat.format(new Date()) + " "
 								+ resource[j]);
-						time = new Random().nextInt(100);	// »ñµÃËæ»úÉú³ÉµÄÃëÊı
-						Thread.sleep(time);				// Ïß³ÌĞİÃßµÈ´ı
+						time = new Random().nextInt(100);	// è·å¾—éšæœºç”Ÿæˆçš„ç§’æ•°
+						Thread.sleep(time);				// çº¿ç¨‹ä¼‘çœ ç­‰å¾…
 						sum = sum + time;
 					}
-					System.out.println(dateFormat.format(new Date()) + " ÏÂÔØÎÄ¼ş"
-							+ file[i] + "ÓÃÊ±" + sum + " ºÁÃë. ");
-					Thread.sleep(time);	// Ïß³ÌĞİÃßµÈ´ı
-				} catch (Exception e) {	// ²¶»ñÒì³£
-					System.out.println("ÏÂÔØÎÄ¼ş³ö´í£º" + e.getMessage());
+					System.out.println(dateFormat.format(new Date()) + " ä¸‹è½½æ–‡ä»¶"
+							+ file[i] + "ç”¨æ—¶" + sum + " æ¯«ç§’. ");
+					Thread.sleep(time);	// çº¿ç¨‹ä¼‘çœ ç­‰å¾…
+				} catch (Exception e) {	// æ•è·å¼‚å¸¸
+					System.out.println("ä¸‹è½½æ–‡ä»¶å‡ºé”™ï¼š" + e.getMessage());
 				}
-				synchronized (taskList) {	// ÊµÏÖÍ¬²½
+				synchronized (taskList) {	// å®ç°åŒæ­¥
 					System.out.println(dateFormat.format(new Date()) + " "
-							+ file[i] + "ÎÄ¼şÒÑÏÂÔØÍê±Ï£¡");
-					taskList.add(file[i]);	// ½«ÎÄ¼şÌí¼Óµ½¼¯ºÏÁĞ±íÖĞ
-					taskList.notify();	// Í¨±¨ËùÓĞµÈ´ıµÄfileListµÄÏß³Ì
+							+ file[i] + "æ–‡ä»¶å·²ä¸‹è½½å®Œæ¯•ï¼");
+					taskList.add(file[i]);	// å°†æ–‡ä»¶æ·»åŠ åˆ°é›†åˆåˆ—è¡¨ä¸­
+					taskList.notify();	// é€šæŠ¥æ‰€æœ‰ç­‰å¾…çš„fileListçš„çº¿ç¨‹
 				}
 				sum = 0;
 			}
-			isStop = true;				// ÖØĞÂÉèÖÃ±êÊ¶
-			System.out.println(dateFormat.format(new Date()) + " ÏÂÔØÏß³Ì¡¡ÍË³ö");
+			isStop = true;				// é‡æ–°è®¾ç½®æ ‡è¯†
+			System.out.println(dateFormat.format(new Date()) + " ä¸‹è½½çº¿ç¨‹ã€€é€€å‡º");
 		}
 	}
-	public static void main(String[] args) {	// java³ÌĞòÖ÷Èë¿Ú´¦
-		ResourceFile text = new ResourceFile();	// ÊµÀı»¯¶ÔÏó
-		text.new SearchDownload().start();		// ÊµÀı»¯ÄÚ²¿Àà²¢Æô¶¯Ïß³Ì
+	public static void main(String[] args) {	// javaç¨‹åºä¸»å…¥å£å¤„
+		ResourceFile text = new ResourceFile();	// å®ä¾‹åŒ–å¯¹è±¡
+		text.new SearchDownload().start();		// å®ä¾‹åŒ–å†…éƒ¨ç±»å¹¶å¯åŠ¨çº¿ç¨‹
 	}
 }

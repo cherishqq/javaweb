@@ -2,40 +2,37 @@ package com.java.base.generic.one;
 
 import java.util.Date;
 
-
-
-
 public class MyFirstGeneric<T> {
-	T t; //tµÄÀàĞÍÊÇT,ÏÖÔÚ²»ÄÜ¾ßÌåÈ·¶¨ËüµÄÀàĞÍ£¬ĞèÒªµ½´´½¨¶ÔÏóÊ±²ÅÄÜÈ·¶¨
+	T t; //tçš„ç±»å‹æ˜¯T,ç°åœ¨ä¸èƒ½å…·ä½“ç¡®å®šå®ƒçš„ç±»å‹ï¼Œéœ€è¦åˆ°åˆ›å»ºå¯¹è±¡æ—¶æ‰èƒ½ç¡®å®š
 
-	public MyFirstGeneric(T t) {// ´´½¨¸ÃÀàµÄ¹¹Ôì·½·¨ÎªT¶ÔÏó¸³Öµ
+	public MyFirstGeneric(T t) {// åˆ›å»ºè¯¥ç±»çš„æ„é€ æ–¹æ³•ä¸ºTå¯¹è±¡èµ‹å€¼
 		this.t = t;
 	}
 
-	// Õâ¸ö·½·¨µÄ·µ»ØÀàĞÍÒ²ÊÇT
+	// è¿™ä¸ªæ–¹æ³•çš„è¿”å›ç±»å‹ä¹Ÿæ˜¯T
 	T getT() {
 		return t;
 	}
 
-	// ÏÔÊ¾TµÄÀàĞÍ
+	// æ˜¾ç¤ºTçš„ç±»å‹
 	void printType() {
 		System.out.println("Type of T is:" + t.getClass().getName());
 	}
 
 	public static void main(String args[]) {
-		// ÉùÃ÷Ò»¸öStringÀàĞÍµÄGeneric±äÁ¿
+		// å£°æ˜ä¸€ä¸ªStringç±»å‹çš„Genericå˜é‡
 		MyFirstGeneric<String> str;
-		// ´´½¨Ò»¸öStringÀàĞÍµÄGeneric¶ÔÏó
-		str = new MyFirstGeneric<String>("ÕâÊÇÒ»¸ö¼òµ¥µÄ·ºĞÍÊµÀı");
-		// Êä³öËüµÄÒ»Ğ©ĞÅÏ¢
+		// åˆ›å»ºä¸€ä¸ªStringç±»å‹çš„Genericå¯¹è±¡
+		str = new MyFirstGeneric<String>("è¿™æ˜¯ä¸€ä¸ªç®€å•çš„æ³›å‹å®ä¾‹");
+		// è¾“å‡ºå®ƒçš„ä¸€äº›ä¿¡æ¯
 		str.printType();
 		String string = str.getT();
 		System.out.println("\tstring=" + string);
-		// ÉùÃ÷Ò»¸öDateÀàĞÍµÄGeneric±äÁ¿
+		// å£°æ˜ä¸€ä¸ªDateç±»å‹çš„Genericå˜é‡
 		MyFirstGeneric<Date> sobj;
-		// ´´½¨Ò»¸öDateÀàĞÍµÄGeneric¶ÔÏó
+		// åˆ›å»ºä¸€ä¸ªDateç±»å‹çš„Genericå¯¹è±¡
 		sobj = new MyFirstGeneric<Date>(new Date());
-		// Êä³öËüµÄÒ»Ğ©ĞÅÏ¢
+		// è¾“å‡ºå®ƒçš„ä¸€äº›ä¿¡æ¯
 		sobj.printType();
 		String time = sobj.getT().toGMTString();
 		System.out.println("\ttime=" + time);

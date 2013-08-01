@@ -1,7 +1,7 @@
 package com.java.base.thread.one;
 
-public class ThreadAction {// ²Ù×÷²é¿´JVMĞéÄâ»úÖĞËùµÄÏß³ÌºÍÏß³Ì×éµÄÀà
-	// ÏÔÊ¾Ïß³ÌĞÅÏ¢
+public class ThreadAction {// æ“ä½œæŸ¥çœ‹JVMè™šæ‹Ÿæœºä¸­æ‰€çš„çº¿ç¨‹å’Œçº¿ç¨‹ç»„çš„ç±»
+	// æ˜¾ç¤ºçº¿ç¨‹ä¿¡æ¯
 	private static void threadMessage(Thread thread, String index) {
 		if (thread == null)
 			return;
@@ -10,45 +10,45 @@ public class ThreadAction {// ²Ù×÷²é¿´JVMĞéÄâ»úÖĞËùµÄÏß³ÌºÍÏß³Ì×éµÄÀà
 				+ (thread.isDaemon() ? " Daemon" : "")
 				+ (thread.isAlive() ? "" : " Inactive"));
 	}
-	// ÏÔÊ¾Ïß³Ì×éĞÅÏ¢
+	// æ˜¾ç¤ºçº¿ç¨‹ç»„ä¿¡æ¯
 	private static void threadGroupMessage(ThreadGroup group, String index) {
 		if (group == null)
-			return; // ÅĞ¶ÏÏß³Ì×é
-		int count = group.activeCount(); // »ñµÃ»î¶¯µÄÏß³ÌÊı
-		// »ñµÃ»î¶¯µÄÏß³Ì×éÊı
+			return; // åˆ¤æ–­çº¿ç¨‹ç»„
+		int count = group.activeCount(); // è·å¾—æ´»åŠ¨çš„çº¿ç¨‹æ•°
+		// è·å¾—æ´»åŠ¨çš„çº¿ç¨‹ç»„æ•°
 		int countGroup = group.activeGroupCount();
-		// ¸ù¾İ»î¶¯µÄÏß³ÌÊı´´½¨Ö¸¶¨¸öÊıµÄÏß³ÌÊı×é
+		// æ ¹æ®æ´»åŠ¨çš„çº¿ç¨‹æ•°åˆ›å»ºæŒ‡å®šä¸ªæ•°çš„çº¿ç¨‹æ•°ç»„
 		Thread[] threads = new Thread[count];
-		// ¸ù¾İ»î¶¯µÄÏß³Ì×éÊı´´½¨Ö¸¶¨¸öÊıµÄÏß³Ì×éÊı×é
+		// æ ¹æ®æ´»åŠ¨çš„çº¿ç¨‹ç»„æ•°åˆ›å»ºæŒ‡å®šä¸ªæ•°çš„çº¿ç¨‹ç»„æ•°ç»„
 		ThreadGroup[] groups = new ThreadGroup[countGroup];
-		group.enumerate(threads, false); // °ÑËùÓĞ»î¶¯×Ó×éµÄÒıÓÃ¸´ÖÆµ½Ö¸¶¨Êı×éÖĞ£¬false±íÊ¾²»°üÀ¨¶Ô×Ó×éµÄËùÓĞ»î¶¯×Ó×éµÄÒıÓÃ
+		group.enumerate(threads, false); // æŠŠæ‰€æœ‰æ´»åŠ¨å­ç»„çš„å¼•ç”¨å¤åˆ¶åˆ°æŒ‡å®šæ•°ç»„ä¸­ï¼Œfalseè¡¨ç¤ºä¸åŒ…æ‹¬å¯¹å­ç»„çš„æ‰€æœ‰æ´»åŠ¨å­ç»„çš„å¼•ç”¨
 		group.enumerate(groups, false);
 		System.out.println(index + "ThreadGroupName-" + group.getName()
 				+ "MaxPriority- " + group.getMaxPriority()
 				+ (group.isDaemon() ? " Daemon" : ""));
-		// Ñ­»·ÏÔÊ¾µ±Ç°»î¶¯µÄÏß³ÌĞÅÏ¢
+		// å¾ªç¯æ˜¾ç¤ºå½“å‰æ´»åŠ¨çš„çº¿ç¨‹ä¿¡æ¯
 		for (int i = 0; i < count; i++)
 			threadMessage(threads[i], index + "    ");
 		for (int i = 0; i < countGroup; i++)
-			// Ñ­»·ÏÔÊ¾µ±Ç°»î¶¯µÄÏß³Ì×éĞÅÏ¢
-			threadGroupMessage(groups[i], index + "    ");// µİ¹éµ÷ÓÃ·½·¨
+			// å¾ªç¯æ˜¾ç¤ºå½“å‰æ´»åŠ¨çš„çº¿ç¨‹ç»„ä¿¡æ¯
+			threadGroupMessage(groups[i], index + "    ");// é€’å½’è°ƒç”¨æ–¹æ³•
 	}
-	public static void threadsList() { // ÕÒµ½¸ùÏß³Ì×é²¢ÁĞ³öËüµİ¹éµÄĞÅÏ¢
-		ThreadGroup currentThreadGroup; // µ±Ç°Ïß³Ì×é
-		ThreadGroup rootThreadGroup; // ¸ùÏß³Ì×é
+	public static void threadsList() { // æ‰¾åˆ°æ ¹çº¿ç¨‹ç»„å¹¶åˆ—å‡ºå®ƒé€’å½’çš„ä¿¡æ¯
+		ThreadGroup currentThreadGroup; // å½“å‰çº¿ç¨‹ç»„
+		ThreadGroup rootThreadGroup; // æ ¹çº¿ç¨‹ç»„
 		ThreadGroup parent;
-		// »ñµÃµ±Ç°»î¶¯µÄÏß³Ì×é
+		// è·å¾—å½“å‰æ´»åŠ¨çš„çº¿ç¨‹ç»„
 		currentThreadGroup = Thread.currentThread().getThreadGroup();
-		rootThreadGroup = currentThreadGroup; // »ñµÃ¸ùÏß³Ì×é
-		parent = rootThreadGroup.getParent(); // »ñµÃ¸ùÏß³Ì
-		while (parent != null) { // Ñ­»·¶Ô¸ùÏß³Ì×éÖØĞÂ¸³Öµ
+		rootThreadGroup = currentThreadGroup; // è·å¾—æ ¹çº¿ç¨‹ç»„
+		parent = rootThreadGroup.getParent(); // è·å¾—æ ¹çº¿ç¨‹
+		while (parent != null) { // å¾ªç¯å¯¹æ ¹çº¿ç¨‹ç»„é‡æ–°èµ‹å€¼
 			rootThreadGroup = parent;
 			parent = parent.getParent();
 		}
-		threadGroupMessage(rootThreadGroup, ""); // ÏÔÊ¾¸ùÏß³Ì×é
+		threadGroupMessage(rootThreadGroup, ""); // æ˜¾ç¤ºæ ¹çº¿ç¨‹ç»„
 	}
-	public static void main(String[] args) { // java³ÌĞòÖ÷Èë¿Ú´¦
-		System.out.println("²é¿´JVMÖĞËùÓĞµÄÏß³ÌµÄ»î¶¯×´¿öÈçÏÂ£º");
-		ThreadAction.threadsList(); // µ÷ÓÃ·½·¨ÏÔÊ¾ËùÓĞÏß³ÌµÄĞÅÏ¢
+	public static void main(String[] args) { // javaç¨‹åºä¸»å…¥å£å¤„
+		System.out.println("æŸ¥çœ‹JVMä¸­æ‰€æœ‰çš„çº¿ç¨‹çš„æ´»åŠ¨çŠ¶å†µå¦‚ä¸‹ï¼š");
+		ThreadAction.threadsList(); // è°ƒç”¨æ–¹æ³•æ˜¾ç¤ºæ‰€æœ‰çº¿ç¨‹çš„ä¿¡æ¯
 	}
 }

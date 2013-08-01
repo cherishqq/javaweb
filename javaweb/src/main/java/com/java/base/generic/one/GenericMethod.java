@@ -2,31 +2,23 @@ package com.java.base.generic.one;
 
 import java.util.Date;
 
-//·ºĞÍ·½·¨µÄÊ¹ÓÃÊ¾Àı
+//æ³›å‹æ–¹æ³•çš„ä½¿ç”¨ç¤ºä¾‹
 public class GenericMethod {
-	// ¶¨Òå·ºĞÍ·½·¨£¬ÓĞÒ»¸öĞÎÊ½²ÎÊıÓÃÀàĞÍ²ÎÊıTÀ´¶¨Òå
+	// å®šä¹‰æ³›å‹æ–¹æ³•ï¼Œæœ‰ä¸€ä¸ªå½¢å¼å‚æ•°ç”¨ç±»å‹å‚æ•°Tæ¥å®šä¹‰
 	public static <T> void genericMethods(T t, char n) {
-		T t1 = t; // ¾Ö²¿±äÁ¿Ò²¿ÉÒÔÓÃÀàĞÍ²ÎÊıTÀ´¶¨Òå
-		System.out.println("[1] " + n + "µÄ¶ÔÏóÀàĞÍÎª£º" + t1.getClass().getName());
-	}
-	
-	
-	// by derek
-	// <T> ±ØĞë¼ÓÉÏÕâ¸ö,·ñÔòÔÚ²ÎÊıÖĞÖ±½ÓÊ¹ÓÃ T, »á±¨´í
-	public static <T> void cc(T t){
-		
+		T t1 = t; // å±€éƒ¨å˜é‡ä¹Ÿå¯ä»¥ç”¨ç±»å‹å‚æ•°Tæ¥å®šä¹‰
+		System.out.println("[1] " + n + "çš„å¯¹è±¡ç±»å‹ä¸ºï¼š" + t1.getClass().getName());
 	}
 
 	public static <T> void genericMethods(T t) {
-		System.out.println("\n[2] " + t + "µÄ¶ÔÏóÀàĞÍÎª£º" + t.getClass().getName());
+		System.out.println("\n[2] " + t + "çš„å¯¹è±¡ç±»å‹ä¸ºï¼š" + t.getClass().getName());
 	}
 
 	public static void main(String args[]) {
 		Date date = new Date();
 		Character k = new Character('A');
-		// ÓÃÁ½ÖÖ²»Í¬µÄ·½·¨µ÷ÓÃ·ºĞÍ·½·¨
+		// ç”¨ä¸¤ç§ä¸åŒçš„æ–¹æ³•è°ƒç”¨æ³›å‹æ–¹æ³•
 		GenericMethod.<Character> genericMethods(k, 'B');
-		GenericMethod.genericMethods("pan");
 		genericMethods(date);
 	}
 

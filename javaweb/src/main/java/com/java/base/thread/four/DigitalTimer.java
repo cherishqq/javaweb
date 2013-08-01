@@ -16,12 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-public class DigitalTimer extends JLabel implements ActionListener {// Êı×Ö¼ÆÊ±Æ÷
-	private volatile String value;// ÒªÔÚÎÄ±¾¿òÖĞÏÔÊ¾µÄÄÚÈİ
-	private Thread thread;// ÉùÃ÷Ò»¸öÏß³Ì
-	private volatile boolean isStop;// ±êÊ¶ÊÇ·ñÍ£Ö¹¼ÆÊ±
-	Runnable r = null;//ÉùÃ÷Ò»¸öRunnable×ÓÀàµÄ¶ÔÏó
-	public DigitalTimer() {// ¹¹Ôì·½·¨ÎªSwing×é¼ş³õÊ¼»¯
+public class DigitalTimer extends JLabel implements ActionListener {// æ•°å­—è®¡æ—¶å™¨
+	private volatile String value;// è¦åœ¨æ–‡æœ¬æ¡†ä¸­æ˜¾ç¤ºçš„å†…å®¹
+	private Thread thread;// å£°æ˜ä¸€ä¸ªçº¿ç¨‹
+	private volatile boolean isStop;// æ ‡è¯†æ˜¯å¦åœæ­¢è®¡æ—¶
+	Runnable r = null;//å£°æ˜ä¸€ä¸ªRunnableå­ç±»çš„å¯¹è±¡
+	public DigitalTimer() {// æ„é€ æ–¹æ³•ä¸ºSwingç»„ä»¶åˆå§‹åŒ–
 		setBorder(BorderFactory.createLineBorder(Color.blue));
 		setHorizontalAlignment(SwingConstants.RIGHT);
 		this.setForeground(Color.red);
@@ -33,7 +33,7 @@ public class DigitalTimer extends JLabel implements ActionListener {// Êı×Ö¼ÆÊ±Æ
 		value = "0.0";
 		setText(value);
 		isStop = true;
-		r = new Runnable() {// ´´½¨Ò»¸öÊµÏÖRunnable½Ó¿ÚÄÚ²¿Àà¶ÔÏó
+		r = new Runnable() {// åˆ›å»ºä¸€ä¸ªå®ç°Runnableæ¥å£å†…éƒ¨ç±»å¯¹è±¡
 			public void run() {
 				try {
 					startTime();
@@ -42,14 +42,14 @@ public class DigitalTimer extends JLabel implements ActionListener {// Êı×Ö¼ÆÊ±Æ
 				}
 			}
 		};
-		thread = new Thread(r, "Stopwatch");// ¸ù¾İRunnable¶ÔÏóÀ´´´½¨Ò»¸öÏß³Ì
-		thread.start();// Æô¶¯Ïß³Ì
+		thread = new Thread(r, "Stopwatch");// æ ¹æ®Runnableå¯¹è±¡æ¥åˆ›å»ºä¸€ä¸ªçº¿ç¨‹
+		thread.start();// å¯åŠ¨çº¿ç¨‹
 	}
-	private void startTime() {// ¿ªÊ¼¼ÆÊ±
-		long startTime = System.currentTimeMillis();// Ïß³Ì¿ªÊ¼ÔËĞĞµÄÊ±¼ä
-		int n = 0;// Ò»¸öÊ±¼äÁ¿
-		long sleepTime = 100;// Ïß³ÌÕıÔÚĞİÃßµÄÊ±¼ä
-		long nextSleepTime = 100;// ½ÓÏÂÀ´×¼±¸ĞİÃßµÄÊ±¼ä
+	private void startTime() {// å¼€å§‹è®¡æ—¶
+		long startTime = System.currentTimeMillis();// çº¿ç¨‹å¼€å§‹è¿è¡Œçš„æ—¶é—´
+		int n = 0;// ä¸€ä¸ªæ—¶é—´é‡
+		long sleepTime = 100;// çº¿ç¨‹æ­£åœ¨ä¼‘çœ çš„æ—¶é—´
+		long nextSleepTime = 100;// æ¥ä¸‹æ¥å‡†å¤‡ä¼‘çœ çš„æ—¶é—´
 		DecimalFormat format = new DecimalFormat("0.0");
 		Runnable updateText = new Runnable() {
 			public void run() {
@@ -60,62 +60,62 @@ public class DigitalTimer extends JLabel implements ActionListener {// Êı×Ö¼ÆÊ±Æ
 			try {
 				Thread.sleep(nextSleepTime);
 				n++;
-				long nowTime = System.currentTimeMillis();// »ñÈ¡ÏµÍ³µÄµ±Ç°Ê±¼ä
-				long elapsedTime = nowTime - startTime;// ¾­¹ıµÄÊ±¼ä=µ±Ç°Ê±¼ä-¿ªÊ¼Ê±¼ä
+				long nowTime = System.currentTimeMillis();// è·å–ç³»ç»Ÿçš„å½“å‰æ—¶é—´
+				long elapsedTime = nowTime - startTime;// ç»è¿‡çš„æ—¶é—´=å½“å‰æ—¶é—´-å¼€å§‹æ—¶é—´
 				nextSleepTime = sleepTime + ((n * 100) - elapsedTime);
 				if (nextSleepTime < 0) {
 					nextSleepTime = 0;
 				}
 				value = format.format(elapsedTime / 1000.0);
 				System.out.println(value);
-				SwingUtilities.invokeAndWait(updateText);// Ê¹¸ÃÏß³ÌÔÚSwing×é¼şÉÏÍ¬²½Ö´ĞĞ
+				SwingUtilities.invokeAndWait(updateText);// ä½¿è¯¥çº¿ç¨‹åœ¨Swingç»„ä»¶ä¸ŠåŒæ­¥æ‰§è¡Œ
 			} catch (InterruptedException ix) {
-				return;// Í£Ö¹ÔËĞĞ
+				return;// åœæ­¢è¿è¡Œ
 			} catch (InvocationTargetException x) {
 				x.printStackTrace();
 			}
 		}
 	}
-	public void endTime() {// ½áÊø¼ÆÊ±
+	public void endTime() {// ç»“æŸè®¡æ—¶
 		isStop = false;
-		thread.interrupt();// ÖĞ¶ÏÏß³Ì
+		thread.interrupt();// ä¸­æ–­çº¿ç¨‹
 	}
 	public boolean isAlive() {
-		return thread.isAlive();// ÅĞ¶Ï¸ÃÏß³ÌÊÇ·ñÊÇ»î¶¯µÄ
+		return thread.isAlive();// åˆ¤æ–­è¯¥çº¿ç¨‹æ˜¯å¦æ˜¯æ´»åŠ¨çš„
 	}
 	public static void main(String[] args) {
-		DigitalTimer dt = new DigitalTimer();// ´´½¨Ò»¸ö±¾ÀàµÄÊµÀı»¯¶ÔÏó
-		JPanel p = new JPanel(new FlowLayout());// ´´½¨Ò»¸öÃæ°å¶ÔÏó£¬Æä²¼¾Ö·½Ê½ÎªÁ÷²¼¾Ö
-		p.add(dt);// ½«Àà¶ÔÏóÌí¼Óµ½Ãæ°åÖĞ
-		JFrame frame = new JFrame("Êı×Ö¼ÆÊ±Æ÷");// ´´½¨Ò»¸ö¿ò¼Ü
-		// ´´½¨2¸öJButton°´Å¤£¬Æä×÷ÓÃÊÇ¿ªÊ¼¼ÆÊ±ºÍÍ£Ö¹¼ÆÊ±¡£²¢ÎªÆäÌí¼ÓÏàÓ¦µÄÊÂ¼ş´¦Àí
+		DigitalTimer dt = new DigitalTimer();// åˆ›å»ºä¸€ä¸ªæœ¬ç±»çš„å®ä¾‹åŒ–å¯¹è±¡
+		JPanel p = new JPanel(new FlowLayout());// åˆ›å»ºä¸€ä¸ªé¢æ¿å¯¹è±¡ï¼Œå…¶å¸ƒå±€æ–¹å¼ä¸ºæµå¸ƒå±€
+		p.add(dt);// å°†ç±»å¯¹è±¡æ·»åŠ åˆ°é¢æ¿ä¸­
+		JFrame frame = new JFrame("æ•°å­—è®¡æ—¶å™¨");// åˆ›å»ºä¸€ä¸ªæ¡†æ¶
+		// åˆ›å»º2ä¸ªJButtonæŒ‰æ‰­ï¼Œå…¶ä½œç”¨æ˜¯å¼€å§‹è®¡æ—¶å’Œåœæ­¢è®¡æ—¶ã€‚å¹¶ä¸ºå…¶æ·»åŠ ç›¸åº”çš„äº‹ä»¶å¤„ç†
 		JButton b1 = new JButton();
-		b1.setText("¿ªÊ¼");// Îª½ÓÅ¤ÉèÖÃÎÄ±¾ÎÄ×Ö
-		b1.setBounds(20, 40, 60, 20);// ÉèÖÃ°´Å¤µÄ´óĞ¡
-		b1.setActionCommand("start");// ÉèÖÃ¼¤·¢´Ë°´Å¤µÄÊÂ¼şÃüÁîÃû³Æ
-		b1.addActionListener(dt);// Ìí¼Ó¼àÌıÊÂ¼ş
+		b1.setText("å¼€å§‹");// ä¸ºæ¥æ‰­è®¾ç½®æ–‡æœ¬æ–‡å­—
+		b1.setBounds(20, 40, 60, 20);// è®¾ç½®æŒ‰æ‰­çš„å¤§å°
+		b1.setActionCommand("start");// è®¾ç½®æ¿€å‘æ­¤æŒ‰æ‰­çš„äº‹ä»¶å‘½ä»¤åç§°
+		b1.addActionListener(dt);// æ·»åŠ ç›‘å¬äº‹ä»¶
 		JButton b2 = new JButton();
-		b2.setText("Í£Ö¹");
+		b2.setText("åœæ­¢");
 		b2.setBounds(80, 40, 60, 20);
-		b2.setActionCommand("end");// ÉèÖÃ¼¤·¢´Ë°´Å¤µÄÊÂ¼şÃüÁîÃû³Æ
-		b2.addActionListener(dt);// Ìí¼Ó¼àÌıÊÂ¼ş
-		frame.setContentPane(p);// ÔÚ¸Ã¿ò¼ÜÖĞÌí¼ÓÃæ°å
-		frame.add(b1);// ÔÚ¸Ã¿ò¼ÜÖĞÌí¼Ó°´Å¤×é¼ş
+		b2.setActionCommand("end");// è®¾ç½®æ¿€å‘æ­¤æŒ‰æ‰­çš„äº‹ä»¶å‘½ä»¤åç§°
+		b2.addActionListener(dt);// æ·»åŠ ç›‘å¬äº‹ä»¶
+		frame.setContentPane(p);// åœ¨è¯¥æ¡†æ¶ä¸­æ·»åŠ é¢æ¿
+		frame.add(b1);// åœ¨è¯¥æ¡†æ¶ä¸­æ·»åŠ æŒ‰æ‰­ç»„ä»¶
 		frame.add(b2);
-		frame.setSize(250, 100);// ÉèÖÃ¿ò¼ÜµÄ´óĞ¡
-		frame.setVisible(true);// ÉèÖÃ¿ò¼ÜÎª¿É¼û
+		frame.setSize(250, 100);// è®¾ç½®æ¡†æ¶çš„å¤§å°
+		frame.setVisible(true);// è®¾ç½®æ¡†æ¶ä¸ºå¯è§
 	}
-	public void actionPerformed(ActionEvent e) {// ÊÂ¼ş´¦Àí
-		if (e.getActionCommand().equals("start")) {// Èç¹û¼¤·¢¿ªÊ¼°´Å¤
-			if (!isAlive()) {// ÅĞ¶ÏÈç¹ûµ±Ç°µÄÏß³Ì²»´¦ÓÚ¿É»î¶¯×´Ì¬
-				isStop = true;// ½«×´Ì¬ÉèÖÃÎªtrue
-				thread = new Thread(r, "Stopwatch");// ÖØĞÂ¸ù¾İRunnable¶ÔÏóÀ´´´½¨Ò»¸öĞÂµÄÏß³Ì
-				thread.start();// Æô¶¯ĞÂÏß³Ì
+	public void actionPerformed(ActionEvent e) {// äº‹ä»¶å¤„ç†
+		if (e.getActionCommand().equals("start")) {// å¦‚æœæ¿€å‘å¼€å§‹æŒ‰æ‰­
+			if (!isAlive()) {// åˆ¤æ–­å¦‚æœå½“å‰çš„çº¿ç¨‹ä¸å¤„äºå¯æ´»åŠ¨çŠ¶æ€
+				isStop = true;// å°†çŠ¶æ€è®¾ç½®ä¸ºtrue
+				thread = new Thread(r, "Stopwatch");// é‡æ–°æ ¹æ®Runnableå¯¹è±¡æ¥åˆ›å»ºä¸€ä¸ªæ–°çš„çº¿ç¨‹
+				thread.start();// å¯åŠ¨æ–°çº¿ç¨‹
 			} else {
 				startTime();
 			}
-		} else if (e.getActionCommand().equals("end")) {// Èç¹û¼¤·¢Í£Ö¹°´Å¤
-			endTime();// Ôòµ÷ÓÃendTime·½·¨£¬ÖĞ¶Ïµ±Ç°ÕıÔÚÔËĞĞµÄÏß³Ì
+		} else if (e.getActionCommand().equals("end")) {// å¦‚æœæ¿€å‘åœæ­¢æŒ‰æ‰­
+			endTime();// åˆ™è°ƒç”¨endTimeæ–¹æ³•ï¼Œä¸­æ–­å½“å‰æ­£åœ¨è¿è¡Œçš„çº¿ç¨‹
 		}
 	}
 }

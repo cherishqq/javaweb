@@ -2,23 +2,23 @@ package com.java.base.generic.one;
 
 import java.util.*;
 
-//Í¨Åä·û²ÎÊıÊ¹ÓÃÊ¾Àı
+//é€šé…ç¬¦å‚æ•°ä½¿ç”¨ç¤ºä¾‹
 public class Wildcard {
 	public static void main(String args[]) {
-		Integer Ints[] = { 1, 2, 3, 4, 5 };// ¶¨ÒåInteger¶ÔÏóÊı×é²¢³õÊ¼»¯
-		Symbol<Integer> integer = new Symbol<Integer>(Ints);// ´´½¨Integer·ºĞÍ¶ÔÏó
-		Double Dous[] = { 1.1, 2.2, 3.3, 4.4, 5.5 };// ¶¨ÒåDouble¶ÔÏóÊı×é²¢³õÊ¼»¯
-		Symbol<Double> douObject = new Symbol<Double>(Dous);// ´´½¨Double·ºĞÍ¶ÔÏó
-		douObject.printMessage(integer); // integerºÍdouObjectµÄÀàĞÍ²»ÏàÍ¬
-		List<String> list1 = new ArrayList<String>();// ¶¨ÒåÒ»¸öList·ºĞÍ¶ÔÏó£¬Ìí¼ÓµÄÔªËØÊÇStringÀàĞÍµÄ
-		// ÏòList¶ÔÏóÖĞÌí¼ÓÔªËØ
+		Integer Ints[] = { 1, 2, 3, 4, 5 };// å®šä¹‰Integerå¯¹è±¡æ•°ç»„å¹¶åˆå§‹åŒ–
+		Symbol<Integer> integer = new Symbol<Integer>(Ints);// åˆ›å»ºIntegeræ³›å‹å¯¹è±¡
+		Double Dous[] = { 1.1, 2.2, 3.3, 4.4, 5.5 };// å®šä¹‰Doubleå¯¹è±¡æ•°ç»„å¹¶åˆå§‹åŒ–
+		Symbol<Double> douObject = new Symbol<Double>(Dous);// åˆ›å»ºDoubleæ³›å‹å¯¹è±¡
+		douObject.printMessage(integer); // integerå’ŒdouObjectçš„ç±»å‹ä¸ç›¸åŒ
+		List<String> list1 = new ArrayList<String>();// å®šä¹‰ä¸€ä¸ªListæ³›å‹å¯¹è±¡ï¼Œæ·»åŠ çš„å…ƒç´ æ˜¯Stringç±»å‹çš„
+		// å‘Listå¯¹è±¡ä¸­æ·»åŠ å…ƒç´ 
 		list1.add("String");
-		list1.add("ÄãºÃ");
-		list1.add("ÊÀ½çÕæ´ó°¡");
-		List<?> list2 = list1;// ÉùÃ÷Ò»¸öListÁĞ±íÖĞÔªËØÎªÈÎºÎÀàĞÍµÄ·ºĞÍ¶ÔÏó£¬²¢½«list1¸³¸ølist2
-		System.out.println("ÁĞ±íList¶ÔÏólist2ÖĞµÄÔªËØÈçÏÂ£º");
+		list1.add("ä½ å¥½");
+		list1.add("ä¸–ç•ŒçœŸå¤§å•Š");
+		List<?> list2 = list1;// å£°æ˜ä¸€ä¸ªListåˆ—è¡¨ä¸­å…ƒç´ ä¸ºä»»ä½•ç±»å‹çš„æ³›å‹å¯¹è±¡ï¼Œå¹¶å°†list1èµ‹ç»™list2
+		System.out.println("åˆ—è¡¨Listå¯¹è±¡list2ä¸­çš„å…ƒç´ å¦‚ä¸‹ï¼š");
 		for (int i = 0; i < list2.size(); i++) {
-			System.out.println("\t" + list2.get(i));// ½«list2ÖĞµÄÔªËØÊä³ö
+			System.out.println("\t" + list2.get(i));// å°†list2ä¸­çš„å…ƒç´ è¾“å‡º
 		}
 	}
 
@@ -31,8 +31,8 @@ class Symbol<T extends Number> {
 		nums = obj;
 	}
 
-	void printMessage(Symbol<?> sb) { // ÕâÀïÊ¹ÓÃÁËÀàĞÍÍ¨Åä·û
-		System.out.println("¶ÔÏóĞÍ²ÎÊısbµÄ²ÎÊıÀàĞÍÊÇ£º" + sb.getClass().getName());
+	void printMessage(Symbol<?> sb) { // è¿™é‡Œä½¿ç”¨äº†ç±»å‹é€šé…ç¬¦
+		System.out.println("å¯¹è±¡å‹å‚æ•°sbçš„å‚æ•°ç±»å‹æ˜¯ï¼š" + sb.getClass().getName());
 	}
 
 }

@@ -1,28 +1,29 @@
 package com.java.base.thread.six;
 
+
 import java.applet.Applet;
 import java.awt.*;
 import java.util.Random;
 
 public class SnowVillage extends Applet implements Runnable {
 
-	Thread thread;// ÉùÃ÷Ö÷Ïß³Ì
+	Thread thread;// å£°æ˜ä¸»çº¿ç¨‹
 
-	Image off, images[];// ÉùÃ÷Í¼Æ¬¶ÔÏóºÍÍ¼Æ¬Êı×é
+	Image off, images[];// å£°æ˜å›¾ç‰‡å¯¹è±¡å’Œå›¾ç‰‡æ•°ç»„
 
-	Random random;// ÉùÃ÷Ò»¸öËæ»úÊı¶ÔÏó
+	Random random;// å£°æ˜ä¸€ä¸ªéšæœºæ•°å¯¹è±¡
 
-	int flag, sonwNum, wind, thread_1, size;// ÉùÃ÷Ò»Ğ©intĞÍ±äÁ¿
+	int flag, sonwNum, wind, thread_1, size;// å£°æ˜ä¸€äº›intå‹å˜é‡
 
-	int[] X, Y;// ÉùÃ÷Á½¸öintĞÍÊı×é£¬·Ö±ğ±íÊ¾XºÍY×ø±êµã
+	int[] X, Y;// å£°æ˜ä¸¤ä¸ªintå‹æ•°ç»„ï¼Œåˆ†åˆ«è¡¨ç¤ºXå’ŒYåæ ‡ç‚¹
 
-	long time = 0;// ±íÊ¾Ê±¼ä
+	long time = 0;// è¡¨ç¤ºæ—¶é—´
 
-	Dimension ds;// ÉùÃ÷Ò»¸öDimension¶ÔÏó
+	Dimension ds;// å£°æ˜ä¸€ä¸ªDimensionå¯¹è±¡
 
-	MediaTracker mt;// ÉùÃ÷Ò»¸öMediaTracker¶ÔÏó
+	MediaTracker mt;// å£°æ˜ä¸€ä¸ªMediaTrackerå¯¹è±¡
 
-	int getValue(String s1, int s2, int max, int min) {// »ñÈ¡HTML±ê¼ÇÖĞÃüÃû²ÎÊıµÄÖµ
+	int getValue(String s1, int s2, int max, int min) {// è·å–HTMLæ ‡è®°ä¸­å‘½åå‚æ•°çš„å€¼
 
 		String s = getParameter(s1);
 		if (s != null) {
@@ -39,15 +40,15 @@ public class SnowVillage extends Applet implements Runnable {
 
 	}
 
-	public void init() {// AppletĞ¡³ÌĞò³õÊ¼»¯
+	public void init() {// Appletå°ç¨‹åºåˆå§‹åŒ–
 		this.setSize(300, 200);
 		random = new Random();
 		ds = getSize();
-		off = createImage(ds.width, ds.height);// ´´½¨Ò»¸öÍ¼Ïó
-		sonwNum = getValue("sonwNum", 100, 500, 0);// »ñÈ¡Ñ©Æ¬µÄ¸öÊı
-		size = getValue("size", 3, 10, 3);// »ñÈ¡Ñ©Æ¬µÄ´óĞ¡
-		thread_1 = getValue("threadsleep", 80, 1000, 10);// »ñÈ¡ĞİÃßµÄÊ±¼ä
-		// »ñÈ¡»æÖÆÑ©Æ¬µÄXY×ø±êÖµ
+		off = createImage(ds.width, ds.height);// åˆ›å»ºä¸€ä¸ªå›¾è±¡
+		sonwNum = getValue("sonwNum", 100, 500, 0);// è·å–é›ªç‰‡çš„ä¸ªæ•°
+		size = getValue("size", 3, 10, 3);// è·å–é›ªç‰‡çš„å¤§å°
+		thread_1 = getValue("threadsleep", 80, 1000, 10);// è·å–ä¼‘çœ çš„æ—¶é—´
+		// è·å–ç»˜åˆ¶é›ªç‰‡çš„XYåæ ‡å€¼
 		X = new int[sonwNum];
 		Y = new int[sonwNum];
 		for (int i = 0; i < sonwNum; i++) {
@@ -72,24 +73,24 @@ public class SnowVillage extends Applet implements Runnable {
 
 	}
 
-	public void start() {// Æô¶¯Ğ¡³ÌĞò
+	public void start() {// å¯åŠ¨å°ç¨‹åº
 
 		if (thread == null) {
 
 			thread = new Thread(this);
-			thread.start();// Æô¶¯Ïß³Ì
+			thread.start();// å¯åŠ¨çº¿ç¨‹
 
 		}
 
 	}
 
-	public void stop() {// Í£Ö¹ÔËĞĞĞ¡³ÌĞò
+	public void stop() {// åœæ­¢è¿è¡Œå°ç¨‹åº
 
 		thread = null;
 
 	}
 
-	public void run() {// ÔËĞĞÏß³Ì
+	public void run() {// è¿è¡Œçº¿ç¨‹
 
 		while (thread != null) {
 
@@ -106,7 +107,7 @@ public class SnowVillage extends Applet implements Runnable {
 
 	}
 
-	public void snow(Graphics g) {// »æÖÆÑ©Æ¬
+	public void snow(Graphics g) {// ç»˜åˆ¶é›ªç‰‡
 
 		g.setColor(Color.white);
 		for (int i = 0; i < sonwNum; i++) {
@@ -131,7 +132,7 @@ public class SnowVillage extends Applet implements Runnable {
 
 	}
 
-	public void paint(Graphics g) {// »æÖÆ×é¼ş
+	public void paint(Graphics g) {// ç»˜åˆ¶ç»„ä»¶
 
 		off.getGraphics().setColor(Color.black);
 		off.getGraphics().fillRect(0, 0, ds.width, ds.height);
@@ -141,7 +142,7 @@ public class SnowVillage extends Applet implements Runnable {
 
 	}
 
-	public void update(Graphics g) {// ÖØĞÂ»æÖÆ×é¼ş
+	public void update(Graphics g) {// é‡æ–°ç»˜åˆ¶ç»„ä»¶
 
 		paint(g);
 

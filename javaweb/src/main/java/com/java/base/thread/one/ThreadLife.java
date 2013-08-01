@@ -1,77 +1,78 @@
 package com.java.base.thread.one;
 
+
 import java.util.Date;
 
 public class ThreadLife {
 	public void startY() {
-		ThreadY ty = new ThreadY();// ´´½¨ÊµÀı
-		ty.startThreadY(); // Æô¶¯ThreadYÏß³Ì
+		ThreadY ty = new ThreadY();// åˆ›å»ºå®ä¾‹
+		ty.startThreadY(); // å¯åŠ¨ThreadYçº¿ç¨‹
 		try {
-			Thread.sleep(1000); // µ±Ç°Ïß³ÌĞİÃßÒ»ÃëÖÓ
+			Thread.sleep(1000); // å½“å‰çº¿ç¨‹ä¼‘çœ ä¸€ç§’é’Ÿ
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		ty.stopThreadY(); // Í£Ö¹ThreadYÏß³Ì
+		ty.stopThreadY(); // åœæ­¢ThreadYçº¿ç¨‹
 	}
 
-	public void startX() { // ¿ªÊ¼µÚ¶ş¸ö
-		Runnable runnX = new ThreadX(); // ´´½¨ÊµÀı
-		Thread threadX = new Thread(runnX); // ½«ÊµÀı·ÅÈëÏß³ÌÖĞ
-		threadX.start(); // start·½·¨Æô¶¯Ïß³Ì
+	public void startX() { // å¼€å§‹ç¬¬äºŒä¸ª
+		Runnable runnX = new ThreadX(); // åˆ›å»ºå®ä¾‹
+		Thread threadX = new Thread(runnX); // å°†å®ä¾‹æ”¾å…¥çº¿ç¨‹ä¸­
+		threadX.start(); // startæ–¹æ³•å¯åŠ¨çº¿ç¨‹
 	}
 
-	public static void main(String[] args) { // java³ÌĞòÖ÷Èë¿Ú´¦
-		ThreadLife test = new ThreadLife(); // ÊµÀı»¯¶ÔÏó
-		test.startY(); // µ÷ÓÃ·½·¨
+	public static void main(String[] args) { // javaç¨‹åºä¸»å…¥å£å¤„
+		ThreadLife test = new ThreadLife(); // å®ä¾‹åŒ–å¯¹è±¡
+		test.startY(); // è°ƒç”¨æ–¹æ³•
 		test.startX();
 	}
 
 }
 
-class ThreadY extends Thread { // ¼Ì³Ğjava.lang.ThreadÀà¶¨ÒåÏß³Ì
-	private boolean isRunState = false; // ±ê¼ÇÏß³ÌÊÇ·ñĞèÒªÔËĞĞ
+class ThreadY extends Thread { // ç»§æ‰¿java.lang.Threadç±»å®šä¹‰çº¿ç¨‹
+	private boolean isRunState = false; // æ ‡è®°çº¿ç¨‹æ˜¯å¦éœ€è¦è¿è¡Œ
 
-	public void start() { // ¸²¸ÇÁË¸¸ÀàµÄstart·½·¨£¬
-		this.isRunState = true; // ½«isRunStateÖÃÎªture£¬±íÊ¾Ïß³ÌĞèÒªÔËĞĞ
+	public void start() { // è¦†ç›–äº†çˆ¶ç±»çš„startæ–¹æ³•ï¼Œ
+		this.isRunState = true; // å°†isRunStateç½®ä¸ºtureï¼Œè¡¨ç¤ºçº¿ç¨‹éœ€è¦è¿è¡Œ
 		super.start();
 	}
 
 	public void run() {
 		int i = 0;
 		try {
-			while (isRunState) { // Èç¹ûisRunStateÎªÕæ£¬ËµÃ÷Ïß³Ì»¹¿ÉÒÔ¼ÌĞøÔËĞĞ
+			while (isRunState) { // å¦‚æœisRunStateä¸ºçœŸï¼Œè¯´æ˜çº¿ç¨‹è¿˜å¯ä»¥ç»§ç»­è¿è¡Œ
 				this.setName("Thread-" + i++);
-				System.out.println("Ïß³ÌY£º" + this.getName() + " ÕıÔÚÔËĞĞ");
-				Thread.sleep(200); // sleep·½·¨½«µ±Ç°Ïß³ÌĞİÃß¡£
+				System.out.println("çº¿ç¨‹Yï¼š" + this.getName() + " æ­£åœ¨è¿è¡Œ");
+				Thread.sleep(200); // sleepæ–¹æ³•å°†å½“å‰çº¿ç¨‹ä¼‘çœ ã€‚
 			}
-		} catch (Exception e) { // ²¶»ñÒì³£
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
 		}
 
-		System.out.println(this.getName() + "ÔËĞĞ½áÊø...");
+		System.out.println(this.getName() + "è¿è¡Œç»“æŸ...");
 	}
 
-	public void setRunning(boolean isRunState) { // ÉèÖÃÏß³Ì
+	public void setRunning(boolean isRunState) { // è®¾ç½®çº¿ç¨‹
 		this.isRunState = isRunState;
 	}
 
-	public void startThreadY() { // Æô¶¯ThreadYÏß³Ì
-		System.out.println("Æô¶¯Ïß³ÌY...");
+	public void startThreadY() { // å¯åŠ¨ThreadYçº¿ç¨‹
+		System.out.println("å¯åŠ¨çº¿ç¨‹Y...");
 		this.start();
 	}
 
-	public void stopThreadY() { // Í£Ö¹ThreadYÏß³Ì
-		System.out.println("½áÊøÏß³ÌY...");
+	public void stopThreadY() { // åœæ­¢ThreadYçº¿ç¨‹
+		System.out.println("ç»“æŸçº¿ç¨‹Y...");
 		this.setRunning(false);
 	}
 
 }
 
-class ThreadX implements Runnable { // ÊµÏÖjava.lang.Runnable½Ó¿Ú¶¨ÒåÏß³Ì
-	private Date runDate; // Ïß³Ì±»ÔËĞĞµÄÊ±¿Ì
+class ThreadX implements Runnable { // å®ç°java.lang.Runnableæ¥å£å®šä¹‰çº¿ç¨‹
+	private Date runDate; // çº¿ç¨‹è¢«è¿è¡Œçš„æ—¶åˆ»
 
 	public void run() {
-		System.out.println("Ïß³ÌXÒÑ¾­Æô¶¯...");
+		System.out.println("çº¿ç¨‹Xå·²ç»å¯åŠ¨...");
 		this.runDate = new Date();
-		System.out.println("Æô¶¯Ê±¼ä:" + runDate.toLocaleString());
+		System.out.println("å¯åŠ¨æ—¶é—´:" + runDate.toLocaleString());
 	}
 }

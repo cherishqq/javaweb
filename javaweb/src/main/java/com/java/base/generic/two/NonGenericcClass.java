@@ -1,39 +1,39 @@
 package com.java.base.generic.two;
 
-//¼Ì³Ğ·Ç·ºĞÍÀàÊ¾Àı
+//ç»§æ‰¿éæ³›å‹ç±»ç¤ºä¾‹
 public class NonGenericcClass {
 	public static void main(String args[]) {
-		System.out.println("¼Ì³Ğ·Ç·ºĞÍÀàµÄÊµÏÖ·½·¨ÈçÏÂ£º");
+		System.out.println("ç»§æ‰¿éæ³›å‹ç±»çš„å®ç°æ–¹æ³•å¦‚ä¸‹ï¼š");
 		doNonGeneric<String> oa = new doNonGeneric<String>(
-				"doNonGenericÀàµÄÖµÎª: ", 125);
+				"doNonGenericç±»çš„å€¼ä¸º: ", 125);
 		System.out.print("\t" + oa.getOb());
 		System.out.println(oa.getNum());
 	}
 
 }
 
-class NonGeneric {// ´´½¨¸¸Àà¶ÔÏó£¬´ËÀà²¢²»ÊÇ·ºĞÍÀà
+class NonGeneric {// åˆ›å»ºçˆ¶ç±»å¯¹è±¡ï¼Œæ­¤ç±»å¹¶ä¸æ˜¯æ³›å‹ç±»
 	double num;
 
-	public NonGeneric(double n) {// ÉèÖÃ±äÁ¿numµÄÖµµÈÓÚ´«ÈëµÄ²ÎÊıÖµ
+	public NonGeneric(double n) {// è®¾ç½®å˜é‡numçš„å€¼ç­‰äºä¼ å…¥çš„å‚æ•°å€¼
 		num = n;
 	}
 
-	public NonGeneric() {// ÉèÖÃ±äÁ¿numµÄÄ¬ÈÏÖµÎª0.0
+	public NonGeneric() {// è®¾ç½®å˜é‡numçš„é»˜è®¤å€¼ä¸º0.0
 		num = 0.0;
 	}
 
-	public double getNum() {// ·µ»Ø±äÁ¿numµÄµ±Ç°Öµ
+	public double getNum() {// è¿”å›å˜é‡numçš„å½“å‰å€¼
 		return num;
 	}
 }
 
-class doNonGeneric<T> extends NonGeneric {// ¶¨ÒåÒ»¸ö¼Ì³ĞÓÚNonGenericµÄ×ÓÀà¡£¸ÃÀà±»ÉùÃ÷Îª·ºĞÍÀà
+class doNonGeneric<T> extends NonGeneric {// å®šä¹‰ä¸€ä¸ªç»§æ‰¿äºNonGenericçš„å­ç±»ã€‚è¯¥ç±»è¢«å£°æ˜ä¸ºæ³›å‹ç±»
 	T ob;
 
 	public doNonGeneric(T ob, double n) {
-		super(n);// ½«´«ÈëµÄ²ÎÊıÖµ¸³¸ø¸¸Àà
-		this.ob = ob;// ½«¶ÔÊıÀàĞÍ¸ø×Ô¼ºµÄ±äÁ¿¸³Öµ
+		super(n);// å°†ä¼ å…¥çš„å‚æ•°å€¼èµ‹ç»™çˆ¶ç±»
+		this.ob = ob;// å°†å¯¹æ•°ç±»å‹ç»™è‡ªå·±çš„å˜é‡èµ‹å€¼
 	}
 
 	public T getOb() {

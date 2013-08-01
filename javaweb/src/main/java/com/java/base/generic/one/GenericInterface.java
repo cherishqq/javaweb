@@ -1,32 +1,32 @@
 package com.java.base.generic.one;
 
-//·ºĞÍ½Ó¿ÚµÄÊ¹ÓÃÊ¾Àı
+//æ³›å‹æ¥å£çš„ä½¿ç”¨ç¤ºä¾‹
 public class GenericInterface {
 	public static void main(String args[]) {
 		Double doubleArrays[] = { 56.5, 58.127, 56.2, 5.569, 825.0, 12.36,
-				510.89 };// ´´½¨Ò»¸öDoubleÀàĞÍµÄÊı×é²¢³õÊ¼»¯
-		Character charArrays[] = { 'A', 'w', 'z', 'Z', 'b', 'u', 'x' };// ´´½¨Ò»¸öCharacterÀàĞÍµÄÊı×é²¢³õÊ¼»¯
+				510.89 };// åˆ›å»ºä¸€ä¸ªDoubleç±»å‹çš„æ•°ç»„å¹¶åˆå§‹åŒ–
+		Character charArrays[] = { 'A', 'w', 'z', 'Z', 'b', 'u', 'x' };// åˆ›å»ºä¸€ä¸ªCharacterç±»å‹çš„æ•°ç»„å¹¶åˆå§‹åŒ–
 		ComparableElement<Double> iob = new ComparableElement<Double>(
-				doubleArrays);// ´´½¨DoubleÀàĞÍµÄ·ºĞÍ¶ÔÏó
+				doubleArrays);// åˆ›å»ºDoubleç±»å‹çš„æ³›å‹å¯¹è±¡
 		ComparableElement<Character> cob = new ComparableElement<Character>(
-				charArrays);// ´´½¨CharacterÀàĞÍµÄ·ºĞÍ¶ÔÏó
-		// µ÷ÓÃMaxOrMin½Ó¿ÚÖĞµÄmin()ºÍmax()
-		System.out.println("ÔÚIntegerÊı×éÖĞ£¬ÇóÔªËØ×î´óÖµ£¬max= " + iob.max());
-		System.out.println("ÔÚIntegerÊı×éÖĞ£¬ÇóÔªËØ×îĞ¡ÖµÎª£¬min= " + iob.min());
-		System.out.println("ÔÚCharacterÊı×éÖĞ£¬ÇóÔªËØ×î´óÖµ£¬max= " + cob.max());
-		System.out.println("ÔÚCharacterÊı×éÖĞ£¬ÇóÔªËØ×îĞ¡ÖµÎª£¬min=  " + cob.min());
+				charArrays);// åˆ›å»ºCharacterç±»å‹çš„æ³›å‹å¯¹è±¡
+		// è°ƒç”¨MaxOrMinæ¥å£ä¸­çš„min()å’Œmax()
+		System.out.println("åœ¨Integeræ•°ç»„ä¸­ï¼Œæ±‚å…ƒç´ æœ€å¤§å€¼ï¼Œmax= " + iob.max());
+		System.out.println("åœ¨Integeræ•°ç»„ä¸­ï¼Œæ±‚å…ƒç´ æœ€å°å€¼ä¸ºï¼Œmin= " + iob.min());
+		System.out.println("åœ¨Characteræ•°ç»„ä¸­ï¼Œæ±‚å…ƒç´ æœ€å¤§å€¼ï¼Œmax= " + cob.max());
+		System.out.println("åœ¨Characteræ•°ç»„ä¸­ï¼Œæ±‚å…ƒç´ æœ€å°å€¼ä¸ºï¼Œmin=  " + cob.min());
 	}
 
 }
 
-interface MaxOrMin<T extends Comparable<T>> {// ´´½¨Ò»¸ö·ºĞÍ½Ó¿Ú
-	// ¶¨ÒåÁ½¸ö·ºĞÍ·½·¨£ºmin()ºÍmax()
+interface MaxOrMin<T extends Comparable<T>> {// åˆ›å»ºä¸€ä¸ªæ³›å‹æ¥å£
+	// å®šä¹‰ä¸¤ä¸ªæ³›å‹æ–¹æ³•ï¼šmin()å’Œmax()
 	T min();
 
 	T max();
 }
 
-// ÉùÃ÷Ò»¸öComparableElementÀà¼Ì³ĞÓÚComparableÀà²¢ÊµÏÖMaxOrMin½Ó¿Ú
+// å£°æ˜ä¸€ä¸ªComparableElementç±»ç»§æ‰¿äºComparableç±»å¹¶å®ç°MaxOrMinæ¥å£
 class ComparableElement<T extends Comparable<T>> implements MaxOrMin<T> {
 	T[] mm;
 
@@ -34,7 +34,7 @@ class ComparableElement<T extends Comparable<T>> implements MaxOrMin<T> {
 		mm = ob;
 	}
 
-	public T min() {// ÖØĞ´MaxOrMin½Ó¿ÚÖĞµÄmin()·½·¨£¬Çó³öÊı×éÖĞµÄ×îĞ¡Öµ
+	public T min() {// é‡å†™MaxOrMinæ¥å£ä¸­çš„min()æ–¹æ³•ï¼Œæ±‚å‡ºæ•°ç»„ä¸­çš„æœ€å°å€¼
 		T t = mm[0];
 		for (int i = 1; i < mm.length; ++i)
 			if (mm[i].compareTo(t) < 0)
@@ -42,7 +42,7 @@ class ComparableElement<T extends Comparable<T>> implements MaxOrMin<T> {
 		return t;
 	}
 
-	public T max() {// ÖØĞ´MaxOrMin½Ó¿ÚÖĞµÄmax()·½·¨£¬Çó³öÊı×éÖĞµÄ×î´óÖµ
+	public T max() {// é‡å†™MaxOrMinæ¥å£ä¸­çš„max()æ–¹æ³•ï¼Œæ±‚å‡ºæ•°ç»„ä¸­çš„æœ€å¤§å€¼
 		T t = mm[0];
 		for (int i = 1; i < mm.length; ++i)
 			if (mm[i].compareTo(t) > 0)

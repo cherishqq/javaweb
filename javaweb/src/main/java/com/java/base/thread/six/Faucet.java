@@ -1,18 +1,19 @@
 package com.java.base.thread.six;
 
+
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
 public class Faucet extends Applet implements Runnable {
-	final int Max = 1000;// Ë®µÎµÄ×î´ó¸öÊı
-	Drop d[];// ÉùÃ÷Ò»¸öË®µÎ¶ÔÏó
-	int width, height, X, Y;// ÉùÃ÷AppletĞ¡³ÌĞòµÄ¿íºÍ¸ß£¬¼°ÒÔXY×ø±êÖĞĞÄ
-	Image off;// ÉùÃ÷Ò»¸öÍ¼Æ¬¶ÔÏó
-	Graphics graphics;// ÉùÃ÷Ò»¸öGraphics¶ÔÏó
-	Thread thread;// ÉùÃ÷Ò»¸öÏß³Ì¶ÔÏó
-	public void init() {// AppletĞ¡³ÌĞò³õÊ¼»¯
+	final int Max = 1000;// æ°´æ»´çš„æœ€å¤§ä¸ªæ•°
+	Drop d[];// å£°æ˜ä¸€ä¸ªæ°´æ»´å¯¹è±¡
+	int width, height, X, Y;// å£°æ˜Appletå°ç¨‹åºçš„å®½å’Œé«˜ï¼ŒåŠä»¥XYåæ ‡ä¸­å¿ƒ
+	Image off;// å£°æ˜ä¸€ä¸ªå›¾ç‰‡å¯¹è±¡
+	Graphics graphics;// å£°æ˜ä¸€ä¸ªGraphicså¯¹è±¡
+	Thread thread;// å£°æ˜ä¸€ä¸ªçº¿ç¨‹å¯¹è±¡
+	public void init() {// Appletå°ç¨‹åºåˆå§‹åŒ–
 		this.setSize(300, 200);
 		setBackground(Color.gray);
 		width = getSize().width;
@@ -23,20 +24,20 @@ public class Faucet extends Applet implements Runnable {
 		off = createImage(width, height);
 		graphics = off.getGraphics();
 	}
-	public void start() {// ¿ªÊ¼Ö´ĞĞĞ¡³ÌĞò
+	public void start() {// å¼€å§‹æ‰§è¡Œå°ç¨‹åº
 		thread = new Thread(this);
 		thread.start();
 	}
-	public void stop() {// Í£Ö¹Ö´ĞĞĞ¡³ÌĞò
+	public void stop() {// åœæ­¢æ‰§è¡Œå°ç¨‹åº
 		thread = null;
 	}
-	public void update(Graphics g) {// ÖØĞÂ»æÖÆĞ¡³ÌĞò
+	public void update(Graphics g) {// é‡æ–°ç»˜åˆ¶å°ç¨‹åº
 		paint(g);
 	}
-	public void paint(Graphics g) {// »æÖÆ×é¼ş
+	public void paint(Graphics g) {// ç»˜åˆ¶ç»„ä»¶
 		g.drawImage(off, 0, 0, this);
 	}
-	public void run() {// ÔËĞĞÏß³Ì
+	public void run() {// è¿è¡Œçº¿ç¨‹
 		boolean reset = false;
 		int i, t = 0;
 		while (true) {
@@ -63,14 +64,14 @@ public class Faucet extends Applet implements Runnable {
 		}
 	}
 }
-class Drop {// Ë®µÎÀà
+class Drop {// æ°´æ»´ç±»
 	double X, Y;
 	double newX, newY;
 	int time;
 	public Drop() {
 		reset();
 	}
-	public void reset() {// ÖØĞÂÉèÖÃ»æÖÆË®µÎµÄÎ»ÖÃºÍ´óĞ¡
+	public void reset() {// é‡æ–°è®¾ç½®ç»˜åˆ¶æ°´æ»´çš„ä½ç½®å’Œå¤§å°
 		X = (int) (Math.random() * -40);
 		Y = (int) (Math.random() * 5 + 10);
 		newX = Math.random() * 3 + 1.0;

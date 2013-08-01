@@ -2,9 +2,9 @@ package com.java.base.generic.three;
 
 import java.util.Date;
 
-//有限界的擦拭
+//鏈夐檺鐣岀殑鎿︽嫮
 public class BorderWipe<T extends Date> {
-	// 下面所有的T将被String所代替
+	// 涓嬮潰鎵�鏈夌殑T灏嗚String鎵�浠ｆ浛
 	T date;
 
 	BorderWipe(T date) {

@@ -1,117 +1,118 @@
 package com.java.base.thread.two;
 
+
 public class ATMCashMachines {
-	public static void main(String[] args) { // java³ÌĞòÖ÷Èë¿Ú´¦
-		Bank bank = new Bank();// ÊµÀı»¯Bank¶ÔÏó
-		SyncBank sbank = new SyncBank();// ÊµÀı»¯SyncBank¶ÔÏó
-		System.out.println("1.´æ¡¢È¡Ïß³ÌÃ»ÓĞ²ÉÈ¡Í¬²½Ê±£¬Ö´ĞĞ´æÈ¡²Ù×÷Ê±£¬Æä¹¤×÷Á÷³ÌÈçÏÂ£º");
-		// ´æÇ®Ã»ÓĞ²ÉÓÃÍ¬²½»úÖÆ
+	public static void main(String[] args) { // javaç¨‹åºä¸»å…¥å£å¤„
+		Bank bank = new Bank();// å®ä¾‹åŒ–Bankå¯¹è±¡
+		SyncBank sbank = new SyncBank();// å®ä¾‹åŒ–SyncBankå¯¹è±¡
+		System.out.println("1.å­˜ã€å–çº¿ç¨‹æ²¡æœ‰é‡‡å–åŒæ­¥æ—¶ï¼Œæ‰§è¡Œå­˜å–æ“ä½œæ—¶ï¼Œå…¶å·¥ä½œæµç¨‹å¦‚ä¸‹ï¼š");
+		// å­˜é’±æ²¡æœ‰é‡‡ç”¨åŒæ­¥æœºåˆ¶
 		Thread putThread = new CashMachines(bank, "saveMoney");
-		// È¡Ç®Ã»ÓĞÍ¬²½»úÖÆ
+		// å–é’±æ²¡æœ‰åŒæ­¥æœºåˆ¶
 		Thread takeThread = new CashMachines(bank, "withdrawMoney");
-		putThread.start(); // Æô¶¯putThreadÏß³Ì
-		takeThread.start(); // Æô¶¯takeThreadÏß³Ì
+		putThread.start(); // å¯åŠ¨putThreadçº¿ç¨‹
+		takeThread.start(); // å¯åŠ¨takeThreadçº¿ç¨‹
 		try {
-			putThread.join(); // µÈ´ıÁ½Ïß³ÌÔËĞĞ½áÊø
+			putThread.join(); // ç­‰å¾…ä¸¤çº¿ç¨‹è¿è¡Œç»“æŸ
 			takeThread.join();
-		} catch (Exception e) { // ²¶»ñÒì³£
-			System.out.println("Á½Ïß³ÌÔËĞĞ³ö´í£º" + e.getMessage());
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
+			System.out.println("ä¸¤çº¿ç¨‹è¿è¡Œå‡ºé”™ï¼š" + e.getMessage());
 		}
 		System.out.println();
 		bank = new Bank();
-		System.out.println("2.´æ¡¢È¡Ïß³ÌÉèÖÃÎªÍ¬²½Ê±£¬Ö´ĞĞ´æÈ¡²Ù×÷Ê±£¬Æä¹¤×÷Á÷³ÌÈçÏÂ£º");
-		putThread = new CashMachines(sbank, "sync_SaveMoney"); // ´´½¨CashMachines¶ÔÏó£¬´æÇ®ÓĞÍ¬²½»úÖÆ
-		takeThread = new CashMachines(sbank, "sync_WithdrawMoney"); // È¡Ç®ÓĞÍ¬²½»úÖÆ
-		putThread.start(); // Æô¶¯Ïß³Ì
-		takeThread.start(); // Æô¶¯Ïß³Ì
+		System.out.println("2.å­˜ã€å–çº¿ç¨‹è®¾ç½®ä¸ºåŒæ­¥æ—¶ï¼Œæ‰§è¡Œå­˜å–æ“ä½œæ—¶ï¼Œå…¶å·¥ä½œæµç¨‹å¦‚ä¸‹ï¼š");
+		putThread = new CashMachines(sbank, "sync_SaveMoney"); // åˆ›å»ºCashMachineså¯¹è±¡ï¼Œå­˜é’±æœ‰åŒæ­¥æœºåˆ¶
+		takeThread = new CashMachines(sbank, "sync_WithdrawMoney"); // å–é’±æœ‰åŒæ­¥æœºåˆ¶
+		putThread.start(); // å¯åŠ¨çº¿ç¨‹
+		takeThread.start(); // å¯åŠ¨çº¿ç¨‹
 	}
 
 }
 
 class Bank {
-	private double curveMoney = 174.85; // ´æÈëÒøĞĞµÄÇ®Êı
+	private double curveMoney = 174.85; // å­˜å…¥é“¶è¡Œçš„é’±æ•°
 
-	public void saveMoney(double putThread) { // ´æÇ®Ã»ÓĞ²ÉÓÃÍ¬²½»úÖÆ
-		System.out.println("µ±Ç°ÕË»§ÖĞËùÊ£Óà¶îÎª" + this.curveMoney + "; ´æÈë½ğ¶îÎª: "
+	public void saveMoney(double putThread) { // å­˜é’±æ²¡æœ‰é‡‡ç”¨åŒæ­¥æœºåˆ¶
+		System.out.println("å½“å‰è´¦æˆ·ä¸­æ‰€å‰©ä½™é¢ä¸º" + this.curveMoney + "; å­˜å…¥é‡‘é¢ä¸º: "
 				+ putThread);
-		System.out.println("ÕıÔÚ²Ù×÷£¬ÇëÉÔºò......"); // ´æÇ®Ê±ÏÈµÈ´ı300ºÁÃë
+		System.out.println("æ­£åœ¨æ“ä½œï¼Œè¯·ç¨å€™......"); // å­˜é’±æ—¶å…ˆç­‰å¾…300æ¯«ç§’
 		try {
-			Thread.sleep(300); // Ïß³ÌĞİÃß
-		} catch (Exception e) { // ²¶»ñÒì³£
+			Thread.sleep(300); // çº¿ç¨‹ä¼‘çœ 
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
 			e.printStackTrace();
 		}
-		System.out.println("²Ù×÷³É¹¦£¬´æÈë½ğ¶î£º" + putThread);
+		System.out.println("æ“ä½œæˆåŠŸï¼Œå­˜å…¥é‡‘é¢ï¼š" + putThread);
 		this.curveMoney = this.curveMoney + putThread;
-		System.out.println("µ±Ç°Óà¶îÎª£º" + this.curveMoney + "Ôª");
+		System.out.println("å½“å‰ä½™é¢ä¸ºï¼š" + this.curveMoney + "å…ƒ");
 	}
 
-	public void withdrawMoney(double takeThread) { // È¡Ç®Ã»ÓĞÍ¬²½»úÖÆ
-		System.out.println("²éÑ¯Óà¶îÏÔÊ¾£¬µ±Ç°¿ÉÓÃÓà¶îÎª£º" + this.curveMoney + "; È¡³ö½ğ¶îÎª: "
+	public void withdrawMoney(double takeThread) { // å–é’±æ²¡æœ‰åŒæ­¥æœºåˆ¶
+		System.out.println("æŸ¥è¯¢ä½™é¢æ˜¾ç¤ºï¼Œå½“å‰å¯ç”¨ä½™é¢ä¸ºï¼š" + this.curveMoney + "; å–å‡ºé‡‘é¢ä¸º: "
 				+ takeThread);
-		System.out.println("ÕıÔÚ²Ù×÷£¬ÇëÉÔºò......"); // È¡Ç®Ê±ÏÈµÈ´ı500ºÁÃë
+		System.out.println("æ­£åœ¨æ“ä½œï¼Œè¯·ç¨å€™......"); // å–é’±æ—¶å…ˆç­‰å¾…500æ¯«ç§’
 		try {
-			Thread.sleep(500); // Ïß³ÌĞİÃß
-		} catch (Exception e) { // ²¶»ñÒì³£
+			Thread.sleep(500); // çº¿ç¨‹ä¼‘çœ 
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
 			e.printStackTrace();
 		}
-		System.out.println("²Ù×÷³É¹¦£¬È¡³ö½ğ¶î£º" + takeThread);
+		System.out.println("æ“ä½œæˆåŠŸï¼Œå–å‡ºé‡‘é¢ï¼š" + takeThread);
 		this.curveMoney = this.curveMoney - takeThread;
-		System.out.println("µ±Ç°Óà¶îÎª£º" + this.curveMoney + "Ôª");
+		System.out.println("å½“å‰ä½™é¢ä¸ºï¼š" + this.curveMoney + "å…ƒ");
 	}
 
 }
 
 class SyncBank {
-	private double curveMoney = 174.85; // ´æÈëÒøĞĞµÄÇ®Êı
+	private double curveMoney = 174.85; // å­˜å…¥é“¶è¡Œçš„é’±æ•°
 
-	public synchronized void sync_SaveMoney(double putThread) { // ´æÇ®ÓĞÍ¬²½»úÖÆ
-		System.out.println("µ±Ç°ÕË»§ÖĞËùÊ£Óà¶îÎª" + this.curveMoney + "; ´æÈë½ğ¶îÎª: "
+	public synchronized void sync_SaveMoney(double putThread) { // å­˜é’±æœ‰åŒæ­¥æœºåˆ¶
+		System.out.println("å½“å‰è´¦æˆ·ä¸­æ‰€å‰©ä½™é¢ä¸º" + this.curveMoney + "; å­˜å…¥é‡‘é¢ä¸º: "
 				+ putThread);
-		System.out.println("ÕıÔÚ²Ù×÷£¬ÇëÉÔºò......"); // ´æÇ®Ê±ÏÈµÈ´ı300ºÁÃë
+		System.out.println("æ­£åœ¨æ“ä½œï¼Œè¯·ç¨å€™......"); // å­˜é’±æ—¶å…ˆç­‰å¾…300æ¯«ç§’
 		try {
-			Thread.sleep(300); // Ïß³ÌĞİÃß
-		} catch (Exception e) { // ²¶»ñÒì³£
+			Thread.sleep(300); // çº¿ç¨‹ä¼‘çœ 
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
 			e.printStackTrace();
 		}
-		System.out.println("²Ù×÷³É¹¦£¬´æÈë½ğ¶î£º" + putThread);
+		System.out.println("æ“ä½œæˆåŠŸï¼Œå­˜å…¥é‡‘é¢ï¼š" + putThread);
 		this.curveMoney = this.curveMoney + putThread;
-		System.out.println("µ±Ç°Óà¶îÎª£º" + this.curveMoney + "Ôª");
+		System.out.println("å½“å‰ä½™é¢ä¸ºï¼š" + this.curveMoney + "å…ƒ");
 	}
 
-	public synchronized void sync_WithdrawMoney(double takeThread) {// È¡Ç®ÓĞÍ¬²½»úÖÆ
-		System.out.println("²éÑ¯Óà¶îÏÔÊ¾£¬µ±Ç°¿ÉÓÃÓà¶îÎª£º" + this.curveMoney + "; È¡³ö½ğ¶îÎª: "
+	public synchronized void sync_WithdrawMoney(double takeThread) {// å–é’±æœ‰åŒæ­¥æœºåˆ¶
+		System.out.println("æŸ¥è¯¢ä½™é¢æ˜¾ç¤ºï¼Œå½“å‰å¯ç”¨ä½™é¢ä¸ºï¼š" + this.curveMoney + "; å–å‡ºé‡‘é¢ä¸º: "
 				+ takeThread);
-		System.out.println("ÕıÔÚ²Ù×÷£¬ÇëÉÔºò......"); // È¡Ç®Ê±ÏÈµÈ´ı500ºÁÃë
+		System.out.println("æ­£åœ¨æ“ä½œï¼Œè¯·ç¨å€™......"); // å–é’±æ—¶å…ˆç­‰å¾…500æ¯«ç§’
 		try {
-			Thread.sleep(500); // Ïß³ÌĞİÃß
-		} catch (Exception e) { // ²¶»ñÒì³£
+			Thread.sleep(500); // çº¿ç¨‹ä¼‘çœ 
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
 			e.printStackTrace();
 		}
-		System.out.println("²Ù×÷³É¹¦£¬È¡³ö½ğ¶î£º" + takeThread);
+		System.out.println("æ“ä½œæˆåŠŸï¼Œå–å‡ºé‡‘é¢ï¼š" + takeThread);
 		this.curveMoney = this.curveMoney - takeThread;
-		System.out.println("µ±Ç°Óà¶îÎª£º" + this.curveMoney + "Ôª");
+		System.out.println("å½“å‰ä½™é¢ä¸ºï¼š" + this.curveMoney + "å…ƒ");
 	}
 }
 
-class CashMachines extends Thread { // ¼Ì³ĞThreadÀàÊµÏÖÏß³Ì·½·¨
-	private Bank bank = null; // ´ı·ÃÎÊµÄÕÊºÅ¶ÔÏó
+class CashMachines extends Thread { // ç»§æ‰¿Threadç±»å®ç°çº¿ç¨‹æ–¹æ³•
+	private Bank bank = null; // å¾…è®¿é—®çš„å¸å·å¯¹è±¡
 
-	private SyncBank sbank = null; // ´ı·ÃÎÊµÄÕÊºÅ¶ÔÏó
+	private SyncBank sbank = null; // å¾…è®¿é—®çš„å¸å·å¯¹è±¡
 
-	private String account = ""; // ·ÃÎÊÕÊºÅµÄ·½·¨
+	private String account = ""; // è®¿é—®å¸å·çš„æ–¹æ³•
 
-	public CashMachines(Bank bank, String account) { // ¹¹Ôì·½·¨½øĞĞ³õÊ¼»¯
+	public CashMachines(Bank bank, String account) { // æ„é€ æ–¹æ³•è¿›è¡Œåˆå§‹åŒ–
 		this.account = account;
 		this.bank = bank;
 	}
 
-	public CashMachines(SyncBank sbank, String account) { // ¹¹Ôì·½·¨½øĞĞ³õÊ¼»¯
+	public CashMachines(SyncBank sbank, String account) { // æ„é€ æ–¹æ³•è¿›è¡Œåˆå§‹åŒ–
 		this.account = account;
 		this.sbank = sbank;
 	}
 
-	public void run() { // ÊµÏÖThreadµÄ·½·¨
-		if (account.equals("saveMoney")) { // ²»Í¬²ÎÊıµ÷ÓÃ²»Í¬µÄ·½·¨
+	public void run() { // å®ç°Threadçš„æ–¹æ³•
+		if (account.equals("saveMoney")) { // ä¸åŒå‚æ•°è°ƒç”¨ä¸åŒçš„æ–¹æ³•
 			bank.saveMoney(800.0);
 		} else if (account.equals("withdrawMoney")) {
 			bank.withdrawMoney(300.0);

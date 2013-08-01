@@ -1,5 +1,6 @@
 package com.java.base.thread.three;
 
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,39 +14,39 @@ import javax.swing.SwingConstants;
 
 public class Nascar extends JFrame {
 	private JPanel panel;
-	// ÉùÃ÷²¼¾Ö¸ñÊ½
+	// å£°æ˜å¸ƒå±€æ ¼å¼
 	private BorderLayout borderLayout1 = new BorderLayout();
 	private JLabel label = new JLabel();
-	// ´´½¨JProgressBar¶ÔÏó²¢ÊµÀı»¯
+	// åˆ›å»ºJProgressBarå¯¹è±¡å¹¶å®ä¾‹åŒ–
 	private JProgressBar bar_1 = new JProgressBar();
 	private JProgressBar bar_2 = new JProgressBar();
 	private JButton button_1 = new JButton();
-	// ´´½¨PriorityÀà¶ÔÏó²¢ÊµÀı»¯
+	// åˆ›å»ºPriorityç±»å¯¹è±¡å¹¶å®ä¾‹åŒ–
 	private Priority thread_1 = new Priority(bar_1, 10);
 	private Priority thread_2 = new Priority(bar_2, 5);
-	private void Initial() throws Exception {// ´´½¨³õÊ¼»¯³ÌĞò£¬ÎªÆä³ÉÔ±±äÁ¿¸³³õÖµ
+	private void Initial() throws Exception {// åˆ›å»ºåˆå§‹åŒ–ç¨‹åºï¼Œä¸ºå…¶æˆå‘˜å˜é‡èµ‹åˆå€¼
 		panel = (JPanel) this.getContentPane();
 		label.setFont(new java.awt.Font("Dialog", 0, 14));
 		label.setToolTipText("");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setText("Èü³µ-Ïß³ÌµÄÓÅÏÈ¼¶(ÓÒ±ßµÄÓÅÏÈ¼¶>×ó±ßµÄÓÅÏÈ¼¶)");
+		label.setText("èµ›è½¦-çº¿ç¨‹çš„ä¼˜å…ˆçº§(å³è¾¹çš„ä¼˜å…ˆçº§>å·¦è¾¹çš„ä¼˜å…ˆçº§)");
 		panel.setLayout(borderLayout1);
 		this.setSize(new Dimension(333, 232));
-		this.setTitle("Èü³µ±ÈÈü");
-		bar_1.setOrientation(JProgressBar.VERTICAL);// ÉèÖÃ½ø¶ÈÌõµÄ´¹Ö±·½Ê½
-		bar_1.setFont(new java.awt.Font("Dialog", 0, 14));// ÉèÖÃ½ø¶ÈÌõÉÏÏÔÊ¾×ÖÌåµÄ´óĞ¡
-		bar_1.setMaximumSize(new Dimension(84, 32764));// ÉèÖÃ¸Ã½ø¶ÈÌõµÄ×î´óÖµ
-		bar_1.setPreferredSize(new Dimension(126, 148));// ÉèÖÃ´Ë×é¼şµÄÊ×Ñ¡´óĞ¡
-		bar_1.setString("1ºÅ²ÎÈüÕß");// ¸ø½ø¶ÈÌõÉèÖÃÏÔÊ¾ÎÄ×Ö
+		this.setTitle("èµ›è½¦æ¯”èµ›");
+		bar_1.setOrientation(JProgressBar.VERTICAL);// è®¾ç½®è¿›åº¦æ¡çš„å‚ç›´æ–¹å¼
+		bar_1.setFont(new java.awt.Font("Dialog", 0, 14));// è®¾ç½®è¿›åº¦æ¡ä¸Šæ˜¾ç¤ºå­—ä½“çš„å¤§å°
+		bar_1.setMaximumSize(new Dimension(84, 32764));// è®¾ç½®è¯¥è¿›åº¦æ¡çš„æœ€å¤§å€¼
+		bar_1.setPreferredSize(new Dimension(126, 148));// è®¾ç½®æ­¤ç»„ä»¶çš„é¦–é€‰å¤§å°
+		bar_1.setString("1å·å‚èµ›è€…");// ç»™è¿›åº¦æ¡è®¾ç½®æ˜¾ç¤ºæ–‡å­—
 		bar_1.setStringPainted(true);
 		bar_2.setOrientation(JProgressBar.VERTICAL);
 		bar_2.setFont(new java.awt.Font("Dialog", 0, 14));
 		bar_2.setPreferredSize(new Dimension(126, 148));
-		bar_2.setString("2ºÅ²ÎÈüÕß");
+		bar_2.setString("2å·å‚èµ›è€…");
 		bar_2.setStringPainted(true);
 		button_1.setFont(new java.awt.Font("Dialog", 0, 14));
 		button_1.setToolTipText("");
-		button_1.setText("¿ªÊ¼");
+		button_1.setText("å¼€å§‹");
 		setSize(500, 500);
 		setVisible(true);
 		button_1.addActionListener(new java.awt.event.ActionListener() {
@@ -58,36 +59,36 @@ public class Nascar extends JFrame {
 		panel.add(bar_2, BorderLayout.EAST);
 		panel.add(button_1, BorderLayout.SOUTH);
 	}
-	void AddEvent(ActionEvent e) {// Îª°´Å¤Ìí¼ÓÊÂ¼ş¼àÌı
-		if (((JButton) e.getSource()).getText().equals("¿ªÊ¼")) {
-			// µ±µ¥»÷°´Å¥ÎÄ×ÖÊÇ"Start"£¬Ôòµ¥»÷ºóÉèÎª"stop",²¢ÇÒ´´½¨Á½¸öPriorityµÄÊµÀı£¬µ«ÕâÁ½¸öÏß³ÌµÄÓÅÏÈ¼¶²»Í¬£¬È»ºó²Å¿ÉÒÔÔËĞĞÏß³Ì¡£
-			this.button_1.setText("Í£Ö¹");
+	void AddEvent(ActionEvent e) {// ä¸ºæŒ‰æ‰­æ·»åŠ äº‹ä»¶ç›‘å¬
+		if (((JButton) e.getSource()).getText().equals("å¼€å§‹")) {
+			// å½“å•å‡»æŒ‰é’®æ–‡å­—æ˜¯"Start"ï¼Œåˆ™å•å‡»åè®¾ä¸º"stop",å¹¶ä¸”åˆ›å»ºä¸¤ä¸ªPriorityçš„å®ä¾‹ï¼Œä½†è¿™ä¸¤ä¸ªçº¿ç¨‹çš„ä¼˜å…ˆçº§ä¸åŒï¼Œç„¶åæ‰å¯ä»¥è¿è¡Œçº¿ç¨‹ã€‚
+			this.button_1.setText("åœæ­¢");
 			Priority thread_1 = new Priority(this.bar_1, Thread.MAX_PRIORITY);
 			thread_1.start();
 			Priority thread_2 = new Priority(this.bar_2, Thread.MIN_PRIORITY);
 			thread_2.start();
 		} else {
-			this.button_1.setText("¿ªÊ¼");
+			this.button_1.setText("å¼€å§‹");
 			this.thread_1.stopped = true;
 		}
 	}
-	public static void main(String[] args) {// ¸Ã³ÌĞòµÄÈë¿Ú´¦
+	public static void main(String[] args) {// è¯¥ç¨‹åºçš„å…¥å£å¤„
 		try {
-			new Nascar().Initial();// µ÷ÓÃ¸Ã³ÌĞòµÄInitial·½·¨
+			new Nascar().Initial();// è°ƒç”¨è¯¥ç¨‹åºçš„Initialæ–¹æ³•
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 }
-class Priority extends Thread {// ÉèÖÃÏß³ÌÓÅÏÈ¼¶µÄÀà
-	JProgressBar bar_3;// ÉùÃ÷Ò»¸ö½ø¶ÈÌõ¶ÔÏó
-	static boolean stopped;// ÉùÃ÷Ò»¸öÊÇ·ñÍ£Ö¹µÄ±êÊ¶
-	public Priority(JProgressBar bar_3, int priority) {// ¹¹Ôì·½·¨Îª³ÉÔ±±äÁ¿¸³³õÖµ
+class Priority extends Thread {// è®¾ç½®çº¿ç¨‹ä¼˜å…ˆçº§çš„ç±»
+	JProgressBar bar_3;// å£°æ˜ä¸€ä¸ªè¿›åº¦æ¡å¯¹è±¡
+	static boolean stopped;// å£°æ˜ä¸€ä¸ªæ˜¯å¦åœæ­¢çš„æ ‡è¯†
+	public Priority(JProgressBar bar_3, int priority) {// æ„é€ æ–¹æ³•ä¸ºæˆå‘˜å˜é‡èµ‹åˆå€¼
 		this.bar_3 = bar_3;
 		this.stopped = false;
 		this.setPriority(priority);
 	}
-	public void run() {// Æô¶¯Ïß³Ì
+	public void run() {// å¯åŠ¨çº¿ç¨‹
 		int min = 0;
 		int max = 1000;
 		this.bar_3.setMinimum(min);

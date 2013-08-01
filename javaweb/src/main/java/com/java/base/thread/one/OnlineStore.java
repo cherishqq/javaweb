@@ -1,91 +1,92 @@
 package com.java.base.thread.one;
 
+
 import java.util.Random;
 
 public class OnlineStore {
 	public static void main(String[] args) {
-		Alipay alipay = new Alipay(2); // ´´½¨2¸öÖ§¸¶±¦
-		// ´´½¨ÊµÀı²¢Æô¶¯Ïß³Ì
-		new Seller("Âô¼Ò-nieqing13", alipay, 5).start();
-		new Seller("Âô¼Ò-Ğ¡²»²»88", alipay, 7).start();
-		new Buyer("Âò¼Ò-ÌÔÖ®ÑıÑı", alipay, 101).start();
-		new Buyer("Âò¼Ò-ÏàĞÅÃÀÀö", alipay, 102).start();
+		Alipay alipay = new Alipay(2); // åˆ›å»º2ä¸ªæ”¯ä»˜å®
+		// åˆ›å»ºå®ä¾‹å¹¶å¯åŠ¨çº¿ç¨‹
+		new Seller("å–å®¶-nieqing13", alipay, 5).start();
+		new Seller("å–å®¶-å°ä¸ä¸88", alipay, 7).start();
+		new Buyer("ä¹°å®¶-æ·˜ä¹‹å¦–å¦–", alipay, 101).start();
+		new Buyer("ä¹°å®¶-ç›¸ä¿¡ç¾ä¸½", alipay, 102).start();
 
 	}
 }
 
-class Alipay { // Ö§¸¶±¦ ÓÃÓÚÍøÉÏÂòÂô½»Ò×
-	private final String[] goods;//±êÊ¶Âô¼ÒÉÌÆ·£¬Êı×éµÄ³¤¶ÈÊÇ¶àÉÙÔò±íÊ¾ÉÌÆ·µÄÊıÁ¿ÊÇ¶àÉÙ
+class Alipay { // æ”¯ä»˜å® ç”¨äºç½‘ä¸Šä¹°å–äº¤æ˜“
+	private final String[] goods;//æ ‡è¯†å–å®¶å•†å“ï¼Œæ•°ç»„çš„é•¿åº¦æ˜¯å¤šå°‘åˆ™è¡¨ç¤ºå•†å“çš„æ•°é‡æ˜¯å¤šå°‘
 
-	private int n; // ±êÊ¶´æÈëÖ§¸¶±¦µÄ½»Ò×ÊıÁ¿
+	private int n; // æ ‡è¯†å­˜å…¥æ”¯ä»˜å®çš„äº¤æ˜“æ•°é‡
 
-	private int m; // ±êÊ¶Ö§³öÖ§¸¶±¦µÄ½»Ò×ÊıÁ¿
+	private int m; // æ ‡è¯†æ”¯å‡ºæ”¯ä»˜å®çš„äº¤æ˜“æ•°é‡
 
-	private int count; // »º´æÄÚµÄ½»Ò×ÊıÁ¿
+	private int count; // ç¼“å­˜å†…çš„äº¤æ˜“æ•°é‡
 
-	public Alipay(int count) { // ¹¹Ôì·½·¨½øĞĞ³õÊ¼»¯
-		this.goods = new String[count]; // ´´½¨×Ö·û´®Êı×é
+	public Alipay(int count) { // æ„é€ æ–¹æ³•è¿›è¡Œåˆå§‹åŒ–
+		this.goods = new String[count]; // åˆ›å»ºå­—ç¬¦ä¸²æ•°ç»„
 		this.m = 0;
 		this.n = 0;
 		this.count = 0;
 	}
 
-	public synchronized void storage(String alipay) { // ÍùÖ§¸¶±¦Àï´æ¿î
-		System.out.println("ÌÔ±¦ÓÃ»§ID=" + Thread.currentThread().getName()
-				+ "\tÖ§¸¶±¦´æÈë" + alipay);
+	public synchronized void storage(String alipay) { // å¾€æ”¯ä»˜å®é‡Œå­˜æ¬¾
+		System.out.println("æ·˜å®ç”¨æˆ·ID=" + Thread.currentThread().getName()
+				+ "\tæ”¯ä»˜å®å­˜å…¥" + alipay);
 		try {
 			while (count >= goods.length) {
-				wait(); // Ïß³ÌµÈ´ı
+				wait(); // çº¿ç¨‹ç­‰å¾…
 			}
-			goods[n] = alipay; // ·ÅÖÃÖ§¸¶±¦ÕËºÅÓÚÊı×é
+			goods[n] = alipay; // æ”¾ç½®æ”¯ä»˜å®è´¦å·äºæ•°ç»„
 			n = (n + 1) % goods.length;
 			count++;
 			notifyAll();
-		} catch (Exception e) { // ²¶»ñÒì³£
-			System.out.println("Ö§¸¶±¦´æÈë¹¦ÄÜ³öÏÖ´íÎó£º" + e.getMessage());
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
+			System.out.println("æ”¯ä»˜å®å­˜å…¥åŠŸèƒ½å‡ºç°é”™è¯¯ï¼š" + e.getMessage());
 		}
 	}
 
-	public synchronized String outlay() { // ´ÓÖ§¸¶±¦ÖĞÖ§³ö
+	public synchronized String outlay() { // ä»æ”¯ä»˜å®ä¸­æ”¯å‡º
 		String alipay = null;
 		try {
 			while (count <= 0) {
-				wait(); // Ïß³ÌµÈ´ı
+				wait(); // çº¿ç¨‹ç­‰å¾…
 			}
-			alipay = goods[m]; // È¡³öÖ¸¶¨µÄÖ§¸¶±¦ÕËºÅ
+			alipay = goods[m]; // å–å‡ºæŒ‡å®šçš„æ”¯ä»˜å®è´¦å·
 			m = (m + 1) % goods.length;
-			count--; // Êı×é¸öÊı¼õÒ»
+			count--; // æ•°ç»„ä¸ªæ•°å‡ä¸€
 			notifyAll();
-		} catch (Exception e) { // ²¶»ñÒì³£
-			System.out.println("Ö§¸¶±¦Ö§¸¶¹¦ÄÜ³öÏÖ´íÎó£º" + e.getMessage());
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
+			System.out.println("æ”¯ä»˜å®æ”¯ä»˜åŠŸèƒ½å‡ºç°é”™è¯¯ï¼š" + e.getMessage());
 		}
-		System.out.println("ÌÔ±¦ÓÃ»§ID=" + Thread.currentThread().getName()
-				+ "\tÖ§¸¶±¦Ö§³ö" + alipay);
+		System.out.println("æ·˜å®ç”¨æˆ·ID=" + Thread.currentThread().getName()
+				+ "\tæ”¯ä»˜å®æ”¯å‡º" + alipay);
 		return alipay;
 	}
 }
 
-class Buyer extends Thread { // Âò¼ÒÏß³ÌÀà
+class Buyer extends Thread { // ä¹°å®¶çº¿ç¨‹ç±»
 	private final Random random;
 
 	private final Alipay alipay;
 
-	private static int id = 0; // ½»Ò×µÄÁ÷Ë®ºÅ
+	private static int id = 0; // äº¤æ˜“çš„æµæ°´å·
 
-	public Buyer(String name, Alipay alipay, long seed) {// ¹¹Ôì·½·¨½øĞĞ³õÊ¼»¯
+	public Buyer(String name, Alipay alipay, long seed) {// æ„é€ æ–¹æ³•è¿›è¡Œåˆå§‹åŒ–
 		super(name);
 		this.alipay = alipay;
 		this.random = new Random(seed);
 	}
 
-	public void run() { // ÊµÏÖThreadÀàµÄ·½·¨£¬Æô¶¯Ïß³Ì
+	public void run() { // å®ç°Threadç±»çš„æ–¹æ³•ï¼Œå¯åŠ¨çº¿ç¨‹
 		try {
 			while (true) {
-				Thread.sleep(random.nextInt(1000));// Ëæ»úĞİÃß
-				String flowerID = "½»Ò×Á÷Ë®ÕËºÅ£º" + nextId();
-				alipay.storage(flowerID); // ´æÈëÖ§¸¶±¦ÖĞ
+				Thread.sleep(random.nextInt(1000));// éšæœºä¼‘çœ 
+				String flowerID = "äº¤æ˜“æµæ°´è´¦å·ï¼š" + nextId();
+				alipay.storage(flowerID); // å­˜å…¥æ”¯ä»˜å®ä¸­
 			}
-		} catch (Exception e) { // ²¶»ñÒì³£
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
 		}
 	}
 
@@ -94,26 +95,26 @@ class Buyer extends Thread { // Âò¼ÒÏß³ÌÀà
 	}
 }
 
-class Seller extends Thread { // Âô¼ÒÏß³ÌÀà
+class Seller extends Thread { // å–å®¶çº¿ç¨‹ç±»
 	private final Random random;
 
 	private final Alipay alipay;
 
-	// ¹¹Ôì·½·¨½øĞĞ³õÊ¼»¯
+	// æ„é€ æ–¹æ³•è¿›è¡Œåˆå§‹åŒ–
 	public Seller(String name, Alipay alipay, long seed) {
 		super(name);
 		this.alipay = alipay;
-		this.random = new Random(seed); // ´´½¨Ëæ»ú¶ÔÏó
+		this.random = new Random(seed); // åˆ›å»ºéšæœºå¯¹è±¡
 	}
 
-	public void run() { // ÊµÏÖThreadÀàµÄ·½·¨£¬Æô¶¯Ïß³Ì
+	public void run() { // å®ç°Threadç±»çš„æ–¹æ³•ï¼Œå¯åŠ¨çº¿ç¨‹
 		try {
 			while (true) {
 				String alipay = this.alipay.outlay();
 				Thread.sleep(random.nextInt(1000));
 			}
-		} catch (Exception e) { // ²¶»ñÒì³£
-			System.out.println("Âò¼ÒÖ§¸¶Ô¤¸¶¿î³ö´í£º" + e.getMessage());
+		} catch (Exception e) { // æ•è·å¼‚å¸¸
+			System.out.println("ä¹°å®¶æ”¯ä»˜é¢„ä»˜æ¬¾å‡ºé”™ï¼š" + e.getMessage());
 		}
 	}
 }

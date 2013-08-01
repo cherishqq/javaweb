@@ -5,16 +5,16 @@ public class MoreParameters<T, V> {
 
 	V v;
 
-	// ¹¹Ôì·½·¨Ò²¿ÉÒÔÊ¹ÓÃÕâÁ½¸öÀàĞÍ²ÎÊı
+	// æ„é€ æ–¹æ³•ä¹Ÿå¯ä»¥ä½¿ç”¨è¿™ä¸¤ä¸ªç±»å‹å‚æ•°
 	MoreParameters(T t1, V v1) {
 		t = t1;
 		v = v1;
 	}
 
-	// ÏÔÊ¾TºÍVµÄÀàĞÍ
+	// æ˜¾ç¤ºTå’ŒVçš„ç±»å‹
 	void printTypes() {
-		System.out.println("²ÎÊıTµÄ¶ÔÏóÀàĞÍÎª£º " + t.getClass().getName());
-		System.out.println("²ÎÊıVµÄ¶ÔÏóÀàĞÍÎª£º " + v.getClass().getName());
+		System.out.println("å‚æ•°Tçš„å¯¹è±¡ç±»å‹ä¸ºï¼š " + t.getClass().getName());
+		System.out.println("å‚æ•°Vçš„å¯¹è±¡ç±»å‹ä¸ºï¼š " + v.getClass().getName());
 	}
 
 	T getT() {
@@ -26,14 +26,14 @@ public class MoreParameters<T, V> {
 	}
 
 	public static void main(String args[]) {
-		MoreParameters<Integer, Double> tv; // Ö¸¶¨ÀàĞÍ²ÎÊıµÄÊµ¼ÊÀàĞÍ
-		// ¹¹Ôì·½·¨ÖĞĞèÒªÔÙ´ÎÖ¸¶¨ÀàĞÍ²ÎÊı£¬Í¬Ê±»¹Òª´«µİÊµ¼Ê²ÎÊı
+		MoreParameters<Integer, Double> tv; // æŒ‡å®šç±»å‹å‚æ•°çš„å®é™…ç±»å‹
+		// æ„é€ æ–¹æ³•ä¸­éœ€è¦å†æ¬¡æŒ‡å®šç±»å‹å‚æ•°ï¼ŒåŒæ—¶è¿˜è¦ä¼ é€’å®é™…å‚æ•°
 		tv = new MoreParameters<Integer, Double>(100, 12.56);
 		tv.printTypes();
 		int num = tv.getT();
-		System.out.println("num±äÁ¿ÖĞµÄÖµÎª: " + num);
+		System.out.println("numå˜é‡ä¸­çš„å€¼ä¸º: " + num);
 		double dou = tv.getV();
-		System.out.println("dou±äÁ¿ÖĞµÄÖµÎª:" + dou);
+		System.out.println("douå˜é‡ä¸­çš„å€¼ä¸º:" + dou);
 	}
 
 }

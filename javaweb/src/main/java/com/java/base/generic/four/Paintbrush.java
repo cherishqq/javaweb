@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-//¶à¹¦ÄÜ»­±Ê
+//å¤šåŠŸèƒ½ç”»ç¬”
 public class Paintbrush extends Frame{
 	private final static int POINT = 0;
 
@@ -14,7 +14,7 @@ public class Paintbrush extends Frame{
 
 	private final static int OVAL = 3;
 
-	private int type; // »­±ÊÀàĞÍ
+	private int type; // ç”»ç¬”ç±»å‹
 
 	Point p1;
 
@@ -31,7 +31,7 @@ public class Paintbrush extends Frame{
 	public void mainFrame() {
 		MenuBar menuBar = new MenuBar();
 
-		Menu menu = new Menu("²Ëµ¥");
+		Menu menu = new Menu("èœå•");
 		MenuItem fmi4 = new MenuItem("Exit");
 		fmi4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -41,26 +41,26 @@ public class Paintbrush extends Frame{
 		menu.addSeparator();
 		menu.add(fmi4);
 
-		Menu mtype = new Menu("»­±ÊÖÖÀà");
-		MenuItem menuItem = new MenuItem("µã×´");
+		Menu mtype = new Menu("ç”»ç¬”ç§ç±»");
+		MenuItem menuItem = new MenuItem("ç‚¹çŠ¶");
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				type = Paintbrush.POINT;
 			}
 		});
-		MenuItem menuItem2 = new MenuItem("Ïß×´");
+		MenuItem menuItem2 = new MenuItem("çº¿çŠ¶");
 		menuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				type = Paintbrush.LINE;
 			}
 		});
-		MenuItem dmi3 = new MenuItem("¾ØĞÎ");
+		MenuItem dmi3 = new MenuItem("çŸ©å½¢");
 		dmi3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				type = Paintbrush.RECTANGLE;
 			}
 		});
-		MenuItem dmi4 = new MenuItem("Ô²ĞÎ");
+		MenuItem dmi4 = new MenuItem("åœ†å½¢");
 		dmi4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				type = Paintbrush.OVAL;
@@ -104,14 +104,14 @@ public class Paintbrush extends Frame{
 	}
 
 	public void paint(Graphics g) {
-		Iterator<Point> ip = points.iterator(); // Ê¹ÓÃ·ºĞÍ
+		Iterator<Point> ip = points.iterator(); // ä½¿ç”¨æ³›å‹
 		g.setColor(Color.black);
 		while (ip.hasNext()) {
-			Point p = ip.next(); // Ê¹ÓÃ·ºĞÍ
+			Point p = ip.next(); // ä½¿ç”¨æ³›å‹
 			g.fillOval(p.x, p.y, 10, 10);
 		}
 
-		// ÆğÊ¼µã×ø±ê
+		// èµ·å§‹ç‚¹åæ ‡
 		int x1, y1, x2, y2;
 		for (Iterator<DrawPoint> ipp = area.iterator(); ipp.hasNext();) {
 			DrawPoint pp = ipp.next();
@@ -129,7 +129,7 @@ public class Paintbrush extends Frame{
 			case RECTANGLE:
 				g.setColor(Color.red);
 				g.drawRect(x1, y1, x2 - x1, y2 - y1);
-				// Êó±ê´ÓÓÒÏò×ó»ò´ÓÏÂÍùÉÏÍÏ¶¯£¬²»ÄÜ»æÖÆ³öÍ¼Ïñ:¸ºÖµÎŞÒâÒå
+				// é¼ æ ‡ä»å³å‘å·¦æˆ–ä»ä¸‹å¾€ä¸Šæ‹–åŠ¨ï¼Œä¸èƒ½ç»˜åˆ¶å‡ºå›¾åƒ:è´Ÿå€¼æ— æ„ä¹‰
 				break;
 			case OVAL:
 				g.setColor(Color.blue);
@@ -142,7 +142,7 @@ public class Paintbrush extends Frame{
 	}
 
 	public static void main(String[] args) {
-		Paintbrush drawApp = new Paintbrush("¶à¹¦ÄÜ²ÊÉ«»­±Ê");
+		Paintbrush drawApp = new Paintbrush("å¤šåŠŸèƒ½å½©è‰²ç”»ç¬”");
 		drawApp.mainFrame();
 	}
 }

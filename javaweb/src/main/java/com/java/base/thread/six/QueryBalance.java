@@ -16,45 +16,45 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 public class QueryBalance extends JPanel {
-	private JTextField acctext;// ÉùÃ÷Ò»¸öÂ¼ÈëÕÊºÅµÄÊäÈë¿ò
-	private JTextField pass;// ÉùÃ÷Ò»¸öÂ¼ÈëÕÊºÅÃÜÂëµÄÊäÈë¿ò
-	private JButton button1;// ÉùÃ÷Ò»¸ö²éÑ¯°´Å¤
-	private JButton button2;// ÉùÃ÷Ò»¸öÈ¡Ïû°´Å¤
-	private JLabel balanceL;// ÉùÃ÷Ò»¸öÂ¼ÈëÕÊºÅµÄÊäÈë¿ò
-	private volatile Thread lookupThread;// ´´½¨Ò»¸öÏß³Ì
-	public QueryBalance() {// ¹¹Ôì·½·¨
+	private JTextField acctext;// å£°æ˜ä¸€ä¸ªå½•å…¥å¸å·çš„è¾“å…¥æ¡†
+	private JTextField pass;// å£°æ˜ä¸€ä¸ªå½•å…¥å¸å·å¯†ç çš„è¾“å…¥æ¡†
+	private JButton button1;// å£°æ˜ä¸€ä¸ªæŸ¥è¯¢æŒ‰æ‰­
+	private JButton button2;// å£°æ˜ä¸€ä¸ªå–æ¶ˆæŒ‰æ‰­
+	private JLabel balanceL;// å£°æ˜ä¸€ä¸ªå½•å…¥å¸å·çš„è¾“å…¥æ¡†
+	private volatile Thread lookupThread;// åˆ›å»ºä¸€ä¸ªçº¿ç¨‹
+	public QueryBalance() {// æ„é€ æ–¹æ³•
 		mainFrame();
 		searchEvents();
 	}
 	private void mainFrame() {
-		// ´´½¨×é¼ş
-		JLabel Lacct = new JLabel("ÕË»§±àºÅ:");
-		JLabel Lpass = new JLabel("ÃÜÂë:");
+		// åˆ›å»ºç»„ä»¶
+		JLabel Lacct = new JLabel("è´¦æˆ·ç¼–å·:");
+		JLabel Lpass = new JLabel("å¯†ç :");
 		acctext = new JTextField(12);
 		pass = new JTextField(4);
-		JPanel mainPanel = new JPanel();// ´´½¨Ò»¸öÃæ°å¶ÔÏó
+		JPanel mainPanel = new JPanel();// åˆ›å»ºä¸€ä¸ªé¢æ¿å¯¹è±¡
 		mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		// ½«×é¼şÌí¼Óµ½Ãæ°åÖĞ
+		// å°†ç»„ä»¶æ·»åŠ åˆ°é¢æ¿ä¸­
 		mainPanel.add(Lacct);
 		mainPanel.add(acctext);
 		mainPanel.add(Lpass);
 		mainPanel.add(pass);
-		// ´´½¨Button°´Å¤
-		button1 = new JButton("²éÑ¯");
-		button2 = new JButton("È¡Ïû²éÑ¯");
+		// åˆ›å»ºButtonæŒ‰æ‰­
+		button1 = new JButton("æŸ¥è¯¢");
+		button2 = new JButton("å–æ¶ˆæŸ¥è¯¢");
 		button2.setEnabled(false);
-		// ´´½¨×°ÔØButton×é¼şµÄÃæ°å
+		// åˆ›å»ºè£…è½½Buttonç»„ä»¶çš„é¢æ¿
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1, -1, 5, 5));
-		// ½«Button×é¼şÌí¼Óµ½buttonPanelÃæ°åÖĞ
+		// å°†Buttonç»„ä»¶æ·»åŠ åˆ°buttonPanelé¢æ¿ä¸­
 		buttonPanel.add(button1);
 		buttonPanel.add(button2);
 		JPanel addPanel = new JPanel();
 		addPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		addPanel.add(buttonPanel);// ½«buttonPanelÃæ°åÌí¼Óµ½addPanelÃæ°åÖĞ
-		JLabel balancePrefixL = new JLabel("ÕË»§Óà¶î:");
-		balanceL = new JLabel("²éÑ¯Î´Öª");
-		// ½«ÓÃÓÚÏÔÊ¾²éÑ¯½á¹ûµÄ×é¼ş·Åµ½searchPanelÃæ°åÖĞ
+		addPanel.add(buttonPanel);// å°†buttonPanelé¢æ¿æ·»åŠ åˆ°addPanelé¢æ¿ä¸­
+		JLabel balancePrefixL = new JLabel("è´¦æˆ·ä½™é¢:");
+		balanceL = new JLabel("æŸ¥è¯¢æœªçŸ¥");
+		// å°†ç”¨äºæ˜¾ç¤ºæŸ¥è¯¢ç»“æœçš„ç»„ä»¶æ”¾åˆ°searchPanelé¢æ¿ä¸­
 		JPanel searchPanel = new JPanel();
 		searchPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		searchPanel.add(balancePrefixL);
@@ -67,7 +67,7 @@ public class QueryBalance extends JPanel {
 		setLayout(new BorderLayout());
 		add(showPanel, BorderLayout.NORTH);
 	}
-	private void searchEvents() {// Îª²éÑ¯°´Å¤ºÍÈ¡Ïû°´Å¤
+	private void searchEvents() {// ä¸ºæŸ¥è¯¢æŒ‰æ‰­å’Œå–æ¶ˆæŒ‰æ‰­
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				searchING();
@@ -79,17 +79,17 @@ public class QueryBalance extends JPanel {
 			}
 		});
 	}
-	private void searchING() {// ÕıÔÚ²éÑ¯µÄ¹ı³ÌÖĞ
+	private void searchING() {// æ­£åœ¨æŸ¥è¯¢çš„è¿‡ç¨‹ä¸­
 		ensureEventThread();
 		button1.setEnabled(false);
 		button2.setEnabled(true);
-		balanceL.setText("ÕıÔÚ²éÑ¯ ÇëÉÔºò ...");
-		// »ñÈ¡Â¼ÈëµÄÕËºÅºÍÃÜÂë
+		balanceL.setText("æ­£åœ¨æŸ¥è¯¢ è¯·ç¨å€™ ...");
+		// è·å–å½•å…¥çš„è´¦å·å’Œå¯†ç 
 		String acct = acctext.getText();
 		String pin = pass.getText();
 		lookupMessage(acct, pin);
 	}
-	private void lookupMessage(String acct, String pin) {// ÉèÖÃ²éÑ¯ĞÅÏ¢
+	private void lookupMessage(String acct, String pin) {// è®¾ç½®æŸ¥è¯¢ä¿¡æ¯
 		final String acctNum = acct;
 		final String pinNum = pin;
 		Runnable lookupRun = new Runnable() {
@@ -101,20 +101,20 @@ public class QueryBalance extends JPanel {
 		lookupThread = new Thread(lookupRun, "lookupThread");
 		lookupThread.start();
 	}
-	private String searchAndCheck(String acct, String pin) {// ¼ì²éÕËºÅºÍÃÜÂëÊÇ·ñÊäÈëÕıÈ·
+	private String searchAndCheck(String acct, String pin) {// æ£€æŸ¥è´¦å·å’Œå¯†ç æ˜¯å¦è¾“å…¥æ­£ç¡®
 		try {
 			Thread.sleep(5000);
 			if (!acct.equals("220302113325") && pin.equals("198713")) {
-				return "ÄúÊäÈëµÄÕËºÅ´íÎó£¡";
+				return "æ‚¨è¾“å…¥çš„è´¦å·é”™è¯¯ï¼";
 			} else if (acct.equals("220302113325") && !pin.equals("198713")) {
-				return "ÄúÊäÈëµÄÃÜÂë´íÎó£¡";
+				return "æ‚¨è¾“å…¥çš„å¯†ç é”™è¯¯ï¼";
 			}
 			return "1,234.56";
 		} catch (InterruptedException x) {
-			return "È¡Ïû²éÑ¯";
+			return "å–æ¶ˆæŸ¥è¯¢";
 		}
 	}
-	private void setSafe(String newBal) {// ½øĞĞ°²È«ÉèÖÃ
+	private void setSafe(String newBal) {// è¿›è¡Œå®‰å…¨è®¾ç½®
 		final String newBalance = newBal;
 		Runnable r = new Runnable() {
 			public void run() {
@@ -127,13 +127,13 @@ public class QueryBalance extends JPanel {
 		};
 		SwingUtilities.invokeLater(r);
 	}
-	private void setValue(String newBalance) {// »ñÈ¡²éÑ¯½á¹û
+	private void setValue(String newBalance) {// è·å–æŸ¥è¯¢ç»“æœ
 		ensureEventThread();
 		balanceL.setText(newBalance);
-		button2.setEnabled(false);// ÕıÔÚ²éÑ¯µÄ¹ı³ÌÖĞ£¬È¡Ïû²éÑ¯°´Å¤ÊÇ²»ÓÃµÄ
+		button2.setEnabled(false);// æ­£åœ¨æŸ¥è¯¢çš„è¿‡ç¨‹ä¸­ï¼Œå–æ¶ˆæŸ¥è¯¢æŒ‰æ‰­æ˜¯ä¸ç”¨çš„
 		button1.setEnabled(true);
 	}
-	private void cancelSearch() {// È¡Ïû²éÑ¯
+	private void cancelSearch() {// å–æ¶ˆæŸ¥è¯¢
 		ensureEventThread();
 		button2.setEnabled(false); // prevent additional requests
 		if (lookupThread != null) {
@@ -144,7 +144,7 @@ public class QueryBalance extends JPanel {
 		if (SwingUtilities.isEventDispatchThread()) {
 			return;
 		}
-		throw new RuntimeException("Ö»ÓĞÏß³Ì¿ÉÒÔµ÷ÓÃ´Ë·½·¨");
+		throw new RuntimeException("åªæœ‰çº¿ç¨‹å¯ä»¥è°ƒç”¨æ­¤æ–¹æ³•");
 	}
 	public static void main(String[] args) {
 		QueryBalance qb = new QueryBalance();

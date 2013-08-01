@@ -1,60 +1,61 @@
 package com.java.base.thread.five;
 
+
 import java.util.*;
 
 public class SurgeryThreadPool {
-	private static Runnable createTask(final int taskID) { // ´´½¨ÈÎÎñ·½·¨
+	private static Runnable createTask(final int taskID) { // åˆ›å»ºä»»åŠ¡æ–¹æ³•
 		return new Runnable() {
-			public void run() { // ´´½¨ÊÖÊõÈÎÎñ
-				System.out.println("ÊÖÊõ¿ªÊ¼,±àºÅÎª" + taskID);
-				System.out.println("ÕıÔÚÊÖÊõÖĞ¡«¡«");
-				System.out.println("ÊÖÊõ½áÊø,±àºÅÎª" + taskID);
+			public void run() { // åˆ›å»ºæ‰‹æœ¯ä»»åŠ¡
+				System.out.println("æ‰‹æœ¯å¼€å§‹,ç¼–å·ä¸º" + taskID);
+				System.out.println("æ­£åœ¨æ‰‹æœ¯ä¸­ï½ï½");
+				System.out.println("æ‰‹æœ¯ç»“æŸ,ç¼–å·ä¸º" + taskID);
 			}
 		};
 	}
 
-	public static void main(String[] args) { // java³ÌĞòÖ÷Èë¿Ú´¦
-		ThreadTask threadPool = new ThreadTask(3); // ´´½¨Ò»¸öÓĞ¸ö3ÈÎÎñÏß³ÌµÄÏß³Ì³Ø
-		try {// ĞİÃß600ºÁÃë,ÈÃÏß³Ì³ØÖĞµÄÈÎÎñÏß³ÌÈ«²¿ÔËĞĞ
+	public static void main(String[] args) { // javaç¨‹åºä¸»å…¥å£å¤„
+		ThreadTask threadPool = new ThreadTask(3); // åˆ›å»ºä¸€ä¸ªæœ‰ä¸ª3ä»»åŠ¡çº¿ç¨‹çš„çº¿ç¨‹æ± 
+		try {// ä¼‘çœ 600æ¯«ç§’,è®©çº¿ç¨‹æ± ä¸­çš„ä»»åŠ¡çº¿ç¨‹å…¨éƒ¨è¿è¡Œ
 			Thread.sleep(600);
-		} catch (InterruptedException e) { // ²¶»ñÀ¹½ØÒì³£
-			System.out.println("Ïß³ÌĞİÃß³ö´í£º" + e.getMessage());
+		} catch (InterruptedException e) { // æ•è·æ‹¦æˆªå¼‚å¸¸
+			System.out.println("çº¿ç¨‹ä¼‘çœ å‡ºé”™ï¼š" + e.getMessage());
 		}
-		for (int i = 0; i < 3; i++) { // Ñ­»·´´½¨²¢Ö´ĞĞÈÎÎñ
+		for (int i = 0; i < 3; i++) { // å¾ªç¯åˆ›å»ºå¹¶æ‰§è¡Œä»»åŠ¡
 			threadPool.addTask(createTask(i));
 		}
-		threadPool.waitTaskColsed(); // µÈ´ıËùÓĞÈÎÎñÖ´ĞĞÍê±Ï
-		threadPool.closePool(); // ¹Ø±ÕÏß³Ì³Ø
+		threadPool.waitTaskColsed(); // ç­‰å¾…æ‰€æœ‰ä»»åŠ¡æ‰§è¡Œå®Œæ¯•
+		threadPool.closePool(); // å…³é—­çº¿ç¨‹æ± 
 	}
 
 }
 
-class ThreadTask extends ThreadGroup { // ¼Ì³ĞÏß³Ì×éÊµÏÖÏß³Ì³Ø¹¦ÄÜ
-	private boolean isStop = false; // Ïß³Ì³ØÊÇ·ñ¹Ø±Õ
+class ThreadTask extends ThreadGroup { // ç»§æ‰¿çº¿ç¨‹ç»„å®ç°çº¿ç¨‹æ± åŠŸèƒ½
+	private boolean isStop = false; // çº¿ç¨‹æ± æ˜¯å¦å…³é—­
 
-	private LinkedList queue; // ¹¤×÷ÈÎÎñ¶ÓÁĞ
+	private LinkedList queue; // å·¥ä½œä»»åŠ¡é˜Ÿåˆ—
 
-	private static int poolID = 1; // Ïß³Ì³ØµÄ±àºÅ
+	private static int poolID = 1; // çº¿ç¨‹æ± çš„ç¼–å·
 
-	private class SurgeryTask extends Thread { // ¸ºÔğ´Ó¹¤×÷¶ÓÁĞÖĞÈ¡³öÈÎÎñ²¢Ö´ĞĞµÄÄÚ²¿Àà
-		private int id; // ÈÎÎñ±àºÅ
+	private class SurgeryTask extends Thread { // è´Ÿè´£ä»å·¥ä½œé˜Ÿåˆ—ä¸­å–å‡ºä»»åŠ¡å¹¶æ‰§è¡Œçš„å†…éƒ¨ç±»
+		private int id; // ä»»åŠ¡ç¼–å·
 
-		public SurgeryTask(int id) { // ¹¹Ôì·½·¨½øĞĞ³õÊ¼»¯
-			super(ThreadTask.this, id + ""); // ½«Ïß³Ì¼ÓÈëµ½µ±Ç°Ïß³Ì×éÖĞ
+		public SurgeryTask(int id) { // æ„é€ æ–¹æ³•è¿›è¡Œåˆå§‹åŒ–
+			super(ThreadTask.this, id + ""); // å°†çº¿ç¨‹åŠ å…¥åˆ°å½“å‰çº¿ç¨‹ç»„ä¸­
 			this.id = id;
 		}
 
 		public void run() {
-			while (!isInterrupted()) { // ÅĞ¶ÏÏß³ÌÊÇ·ñ±»ÖĞ¶Ï
+			while (!isInterrupted()) { // åˆ¤æ–­çº¿ç¨‹æ˜¯å¦è¢«ä¸­æ–­
 				Runnable task = null;
-				task = getTask(id); // È¡³öÈÎÎñ
+				task = getTask(id); // å–å‡ºä»»åŠ¡
 
-				// Èç¹ûgetTask()·µ»Ønull»òÕßÏß³ÌÖ´ĞĞgetTask()Ê±±»ÖĞ¶Ï£¬Ôò½áÊø´ËÏß³Ì
+				// å¦‚æœgetTask()è¿”å›nullæˆ–è€…çº¿ç¨‹æ‰§è¡ŒgetTask()æ—¶è¢«ä¸­æ–­ï¼Œåˆ™ç»“æŸæ­¤çº¿ç¨‹
 				if (task == null)
 					return;
 
 				try {
-					task.run(); // ÔËĞĞÈÎÎñ
+					task.run(); // è¿è¡Œä»»åŠ¡
 				} catch (Throwable t) {
 					t.printStackTrace();
 				}
@@ -62,61 +63,61 @@ class ThreadTask extends ThreadGroup { // ¼Ì³ĞÏß³Ì×éÊµÏÖÏß³Ì³Ø¹¦ÄÜ
 		}
 	}
 
-	public ThreadTask(int size) { // ¹¹Ôì·½·¨´«ÈëÏß³Ì³ØÖĞµÄ¹¤×÷Ïß³ÌµÄÊıÁ¿
-		super(poolID + ""); // Ö¸¶¨Ïß³Ì×éÃû³Æ
-		setDaemon(true); // ¼Ì³ĞÏß³Ì×éµÄ·½·¨ÓÃÀ´ÉèÖÃÊÇ·ñÊØ»¤Ïß³Ì³Ø
-		queue = new LinkedList(); // ´´½¨¹¤×÷ÈÎÎñ¶ÓÁĞ
-		for (int i = 0; i < size; i++) { // Ñ­»·´´½¨ÈÎÎñÏß³Ì
-			new SurgeryTask(i).start(); // ¸ù¾İÏß³Ì³ØÊı¾İ´´½¨ÈÎÎñÏß³Ì²¢Æô¶¯Ïß³Ì,
+	public ThreadTask(int size) { // æ„é€ æ–¹æ³•ä¼ å…¥çº¿ç¨‹æ± ä¸­çš„å·¥ä½œçº¿ç¨‹çš„æ•°é‡
+		super(poolID + ""); // æŒ‡å®šçº¿ç¨‹ç»„åç§°
+		setDaemon(true); // ç»§æ‰¿çº¿ç¨‹ç»„çš„æ–¹æ³•ç”¨æ¥è®¾ç½®æ˜¯å¦å®ˆæŠ¤çº¿ç¨‹æ± 
+		queue = new LinkedList(); // åˆ›å»ºå·¥ä½œä»»åŠ¡é˜Ÿåˆ—
+		for (int i = 0; i < size; i++) { // å¾ªç¯åˆ›å»ºä»»åŠ¡çº¿ç¨‹
+			new SurgeryTask(i).start(); // æ ¹æ®çº¿ç¨‹æ± æ•°æ®åˆ›å»ºä»»åŠ¡çº¿ç¨‹å¹¶å¯åŠ¨çº¿ç¨‹,
 		}
 	}
 
-	public synchronized void addTask(Runnable task) {// Ìí¼ÓĞÂÈÎÎñ²¢Ö´ĞĞÈÎÎñ
-		if (isStop) { // ÅĞ¶Ï±êÊ¶
-			throw new IllegalStateException(); // Å×³ö²»ºÏÀí×´Ì¬Òì³£
+	public synchronized void addTask(Runnable task) {// æ·»åŠ æ–°ä»»åŠ¡å¹¶æ‰§è¡Œä»»åŠ¡
+		if (isStop) { // åˆ¤æ–­æ ‡è¯†
+			throw new IllegalStateException(); // æŠ›å‡ºä¸åˆç†çŠ¶æ€å¼‚å¸¸
 		}
 		if (task != null) {
-			queue.add(task); // ÏòÈÎÎñ¶ÓÁĞÖĞ¼ÓÈëÒ»¸öÈÎÎñ
-			notify(); // »½ĞÑ´ıÈÎÎñµÄ¹¤×÷ÈÎÎñÏß³Ì
+			queue.add(task); // å‘ä»»åŠ¡é˜Ÿåˆ—ä¸­åŠ å…¥ä¸€ä¸ªä»»åŠ¡
+			notify(); // å”¤é†’å¾…ä»»åŠ¡çš„å·¥ä½œä»»åŠ¡çº¿ç¨‹
 		}
 	}
 
-	private synchronized Runnable getTask(int id) { // È¡³öÈÎÎñ
+	private synchronized Runnable getTask(int id) { // å–å‡ºä»»åŠ¡
 		try {
-			while (queue.size() == 0) { // Ñ­»·Ê¹Ïß³ÌµÈ´ıÈÎÎñ
+			while (queue.size() == 0) { // å¾ªç¯ä½¿çº¿ç¨‹ç­‰å¾…ä»»åŠ¡
 				if (isStop)
 					return null;
-				System.out.println("²¡ÈË" + id + "ÕıÔÚµÈ´ıÊÖÊõ...");
-				wait(); // Èç¹ûÈÎÎñ¶ÓÁĞÖĞÃ»ÓĞÈÎÎñ,¾ÍµÈ´ıÈÎÎñ
+				System.out.println("ç—…äºº" + id + "æ­£åœ¨ç­‰å¾…æ‰‹æœ¯...");
+				wait(); // å¦‚æœä»»åŠ¡é˜Ÿåˆ—ä¸­æ²¡æœ‰ä»»åŠ¡,å°±ç­‰å¾…ä»»åŠ¡
 			}
-		} catch (InterruptedException e) { // ²¶»ñÀ¹½ØÒì³£
-			System.out.println("µÈ´ıÖÎÁÆ³öÏÖ´íÎó£º" + e.getMessage());
+		} catch (InterruptedException e) { // æ•è·æ‹¦æˆªå¼‚å¸¸
+			System.out.println("ç­‰å¾…æ²»ç–—å‡ºç°é”™è¯¯ï¼š" + e.getMessage());
 		}
-		System.out.println("²¡ÈË" + id + "¿ªÊ¼Ö´ĞĞÊÖÊõ...");
-		return (Runnable) queue.removeFirst();// ·µ»ØµÚÒ»¸öÈÎÎñ²¢´Ó¶ÓÁĞÖĞÉ¾³ı
+		System.out.println("ç—…äºº" + id + "å¼€å§‹æ‰§è¡Œæ‰‹æœ¯...");
+		return (Runnable) queue.removeFirst();// è¿”å›ç¬¬ä¸€ä¸ªä»»åŠ¡å¹¶ä»é˜Ÿåˆ—ä¸­åˆ é™¤
 	}
 
-	public synchronized void closePool() { // ¹Ø±ÕÏß³Ì³Ø
-		if (!isStop) { // ÅĞ¶Ï±êÊ¶
-			waitTaskColsed(); // µÈ´ıÈÎÎñÏß³ÌÖ´ĞĞÍê±Ï
-			isStop = true; // ±êÊ¶ÎªÕæ
-			queue.clear(); // ÈÎÎñ¶ÓÁĞÇå¿Õ
-			interrupt(); // »½ĞÑÏß³Ì³ØÖĞµÄËùÓĞµÄ¹¤×÷Ïß³Ì
+	public synchronized void closePool() { // å…³é—­çº¿ç¨‹æ± 
+		if (!isStop) { // åˆ¤æ–­æ ‡è¯†
+			waitTaskColsed(); // ç­‰å¾…ä»»åŠ¡çº¿ç¨‹æ‰§è¡Œå®Œæ¯•
+			isStop = true; // æ ‡è¯†ä¸ºçœŸ
+			queue.clear(); // ä»»åŠ¡é˜Ÿåˆ—æ¸…ç©º
+			interrupt(); // å”¤é†’çº¿ç¨‹æ± ä¸­çš„æ‰€æœ‰çš„å·¥ä½œçº¿ç¨‹
 		}
 	}
 
-	public void waitTaskColsed() { // µÈ´ıÈÎÎñÏß³Ì°ÑËùÓĞÈÎÎñÖ´ĞĞÍê±Ï
+	public void waitTaskColsed() { // ç­‰å¾…ä»»åŠ¡çº¿ç¨‹æŠŠæ‰€æœ‰ä»»åŠ¡æ‰§è¡Œå®Œæ¯•
 		synchronized (this) {
-			isStop = true; // ±êÊ¶ÎªÕæ
-			notifyAll(); // »½ĞÑ´ıÈÎÎñµÄ¹¤×÷ÈÎÎñÏß³Ì
+			isStop = true; // æ ‡è¯†ä¸ºçœŸ
+			notifyAll(); // å”¤é†’å¾…ä»»åŠ¡çš„å·¥ä½œä»»åŠ¡çº¿ç¨‹
 		}
-		Thread[] threads = new Thread[activeCount()];// ´´½¨Ïß³Ì×éÖĞ»î¶¯µÄÏß³Ì×é
-		int count = enumerate(threads); // »ñµÃÏß³Ì×éÖĞµ±Ç°ËùÓĞ»î¶¯µÄ¹¤×÷Ïß³Ì
-		for (int i = 0; i < count; i++) { // Ñ­»·µÈ´ıËùÓĞ¹¤×÷Ïß³Ì½áÊø
+		Thread[] threads = new Thread[activeCount()];// åˆ›å»ºçº¿ç¨‹ç»„ä¸­æ´»åŠ¨çš„çº¿ç¨‹ç»„
+		int count = enumerate(threads); // è·å¾—çº¿ç¨‹ç»„ä¸­å½“å‰æ‰€æœ‰æ´»åŠ¨çš„å·¥ä½œçº¿ç¨‹
+		for (int i = 0; i < count; i++) { // å¾ªç¯ç­‰å¾…æ‰€æœ‰å·¥ä½œçº¿ç¨‹ç»“æŸ
 			try {
-				threads[i].join(); // µÈ´ı¹¤×÷Ïß³Ì½áÊø
-			} catch (InterruptedException e) { // ²¶»ñÀ¹½ØÒì³£
-				System.out.println("ÊÖÊõÊ§°Ü£º" + e.getMessage());
+				threads[i].join(); // ç­‰å¾…å·¥ä½œçº¿ç¨‹ç»“æŸ
+			} catch (InterruptedException e) { // æ•è·æ‹¦æˆªå¼‚å¸¸
+				System.out.println("æ‰‹æœ¯å¤±è´¥ï¼š" + e.getMessage());
 			}
 		}
 	}
