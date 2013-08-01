@@ -1,0 +1,17 @@
+[Version]
+Signature="$Chicago$"
+Provider="Geo Corp"
+
+[DestinationDirs]
+DefaultDestDir=10,"web"
+
+[DefaultInstall]
+AddReg=AddReg
+CopyFiles=CopyFiles
+
+[CopyFiles]
+ie6-help.html
+
+[AddReg]
+HKCU,"Software\Microsoft\Internet Explorer\MenuExt\&ie help",,0x00000000,"%10%\web\ie6-help.html"
+

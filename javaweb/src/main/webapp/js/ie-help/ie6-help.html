@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+</head>
+<body>
+<script language="JavaScript">
+<!--
+
+	var IEHelp = function(){
+	}
+	
+	IEHelp.prototype = {
+		parse : function(obj){		
+			if(obj && obj.nodeType == 1){
+				return obj.innerHTML;
+			}
+			 
+			var objType = Object.prototype.toString.call(obj).slice(8, -1);
+			switch(objType){
+				case 'String':
+			        return  "'" + obj + "'";
+
+			    case 'Number':
+			    case 'Boolean':
+				case 'Function':
+			    case 'Date':
+			        return obj;
+				case 'Array':
+				case 'HTMLCollection':
+				case 'NodeList':
+					result = '[';
+					var arr_list = [];
+					for(var j=0,jj=obj.length;j<jj;j++){
+						arr_list[j] = this.parse(obj[j]);
+					}
+					return result + arr_list.join(', ') +']';
+				default:
+					if( typeof obj === 'object'){
+						var keys = [];
+						for(var key in obj){
+							if(obj.hasOwnProperty(key)){
+								keys.push(key);
+							}
+						}
+						result = '{';
+						if(!keys.length){
+							return "{}";
+						}
+						keys = keys.sort();
+						var properties = [];
+						for(var n=0,nn=keys.length;n<nn;n++){
+							key = keys[n];
+							try{
+								var value = this.parse(obj[key]);
+								properties.push(key + ":" + value);
+							} catch(e){
+								alert(e);
+							}
+						}
+						return result + properties.join(',') + '}';
+					} else {
+						return obj;
+					}
+			}
+		},
+		exec : function(obj){
+				if(null != obj ) { 
+					if ( "" == obj || "document" == obj ) {
+						try {
+							win.prompt('DOM value:',external.menuArguments.document.documentElement.outerHTML);			
+								 }catch(e) {
+							win.prompt(obj + " value:","undefined");
+						 } 
+						} else if( obj.indexOf('function') >=0){
+							var str = obj.split(" ")[1];
+							if( str){
+							  try{
+								var funcName = str.substring(0,str.indexOf("()"));
+								eval('external.menuArguments.'+ funcName+ ' = ' + obj);
+								var o = eval('external.menuArguments.'+funcName+"();");
+								var result = this.parse(o);
+								win.prompt("value:",result);
+							  } catch(e){
+								win.prompt(obj + " value:","undefined(exception)" + help.parse(e));
+							  }
+							}
+						} else {
+							var str ="";
+							try {
+								var o = eval('external.menuArguments.'+obj);
+								var result = this.parse(o);
+								win.prompt("value:",result);
+							}catch(e){
+								win.prompt(obj + " value:","undefined(exception)" + help.parse(e));
+							}
+							
+						}
+					}
+				}
+							
+			}
+
+
+var help = new IEHelp();
+
+var win = window.external.menuArguments;
+var varTemp;
+varTemp = win.prompt('Input the var:','');
+help.exec(varTemp);
+
+
+// -->
+</script>
+</body>
+</html>
