@@ -9,3 +9,15 @@ function p( value){
 	
 	$("<div>").text(value).appendTo($("#result"));
 }
+function StringBuffer() {
+	this._Strings = [];
+}
+
+StringBuffer.prototype.append = function(str){
+	this._Strings.push(str);
+}
+StringBuffer.prototype.toString() = function() {
+	return this._Strings.join("");
+}
+
+

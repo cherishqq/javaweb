@@ -249,3 +249,36 @@ function findAllInput( type) {
  		}
  	}
  }
+ 
+ // 延时加载
+ 
+ window.interval = null;
+ 
+ function clearMyInterval(){
+	 if(window.interval){
+		 window.clearInterval(window.interval);
+	 }
+ }
+ 
+ function delayControl(o){
+	 
+	 var isloaded = false;
+	 if( ) {
+		 window.interval = window.setInterval(function(){
+			 if( APP  && APP.call && !isloaded) {
+				 clearMyInterval();
+				 eval(FunctionObj);
+				 isloaded = true;
+			 }
+			 
+		 },500);
+		 
+	 } else {
+		 eval(FunctionObj);
+	 }
+	 
+	 
+ }
+ 
+ 
+ 

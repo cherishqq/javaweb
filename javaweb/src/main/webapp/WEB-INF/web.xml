@@ -98,7 +98,6 @@
 		<servlet-name>xfire</servlet-name>
 		<url-pattern>*.ws</url-pattern>
 	</servlet-mapping>
- -->
 
 		<servlet>
 			<servlet-name>xfireServlet</servlet-name>
@@ -109,7 +108,7 @@
 			<servlet-name>xfireServlet</servlet-name>
 			<url-pattern>/service/*</url-pattern>
 		</servlet-mapping>
-		
+		-->
 		
 		<servlet>
 		<servlet-name>CXFServlet</servlet-name>
