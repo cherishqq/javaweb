@@ -19,6 +19,7 @@ import org.hibernate.metadata.ClassMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
@@ -87,9 +88,15 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	
+	/**
+	 * derek
+	 * @return
+	 * opensession是从sessionfactory得到一个新的session，所以可以使用，而getCurrentSession是从当前线程 中得到事务开始时创建transaction的那个session，而你的事务没有能正确的启动，所以并没有一个session绑定到当前线程，所以你也 得不到。
+	 */
 	public Session getSession() {
 		
-		return sessionFactory.getCurrentSession();
+//		return sessionFactory.getCurrentSession();
+		return sessionFactory.openSession();
 	}
 
 

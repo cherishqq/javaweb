@@ -53,7 +53,7 @@ public class UserServiceTest {
 		String s = System.getProperty("java.class.path");
 
 			
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath*:/applicationContext.xml");		
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath*:/applicationContext-test.xml");		
 	   String [] ss = ctx.getBeanDefinitionNames();
 		System.out.println(" length:" + ss.length);
 		
@@ -62,9 +62,9 @@ public class UserServiceTest {
 	
 	//@Test
 	public void save() {
-	//	User user = new User("derek","123","haijinme@qq.com");
+		User user = new User("derek","123","haijinme@qq.com");
 		System.out.println("hehe");
-//		userDao.save(user);
+		userDao.save(user);
 	}
 	
 	@Test

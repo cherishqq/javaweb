@@ -12,10 +12,12 @@
             </list>   
         </property>   
     </bean> 
-
+    
+     <aop:aspectj-autoproxy />
+    
     <import resource="spring-base.xml"/>
     <import resource="sys-platform.xml" />
-    <!-- <import resource="spring-ds.xml" /> -->
+    <import resource="spring-ds.xml" /> 
 	
 
 
