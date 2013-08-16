@@ -1,4 +1,4 @@
-package com.javaweb.platform.utils;
+package com.platform.sys;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.Assert;

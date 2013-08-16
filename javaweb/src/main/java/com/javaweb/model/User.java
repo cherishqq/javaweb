@@ -2,13 +2,22 @@ package com.javaweb.model;
 
 import java.io.Serializable;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="user")
 public class User implements Serializable{
+	
+	
+	public User(){
+		
+	}
 	
 	
 	public User(String userName,String password,String email){
@@ -20,6 +29,9 @@ public class User implements Serializable{
 	private long id;
 	private String username;
 	private String password;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}

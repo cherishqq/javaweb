@@ -1,4 +1,4 @@
-package com.javaweb.platform.sys;
+package com.platform.sys;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

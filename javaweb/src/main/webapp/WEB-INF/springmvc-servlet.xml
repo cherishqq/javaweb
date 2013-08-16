@@ -20,7 +20,7 @@
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd" >
 
-	<context:component-scan base-package="com.javaweb"/>
+
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
 	
@@ -131,11 +131,7 @@
         -->
     <!-- use annotation define transaction-->  
     
- 
-    <tx:annotation-driven transaction-manager="transactionManager" />  
-    
-    
-    	
+   	
 	<!-- XFire start -->  
 	
 	<!-- 在这里定义没用,转到web.xml 里面加进去,才生效 -->
