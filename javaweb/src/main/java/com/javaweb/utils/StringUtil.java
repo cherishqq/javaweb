@@ -24,7 +24,7 @@ public class StringUtil {
 		return str == null || str.equals("");
 	}
 	
-	
+	// 表达式替换。。比如经常有个场景就是在数据库配置 {xxx} .. 然后要具体的值去替换
 	
 	/**
 	 * Str replace

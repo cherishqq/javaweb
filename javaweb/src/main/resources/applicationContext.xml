@@ -14,6 +14,8 @@
     </bean> 
     
      <aop:aspectj-autoproxy />
+     
+     <import resource="cache/applicationContext-ehcache.xml" />
     
     <import resource="spring-base.xml"/>
     <import resource="sys-platform.xml" />

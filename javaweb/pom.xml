@@ -10,6 +10,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-version>3.1.1.RELEASE</spring-version>
 		<cxf.version>2.7.5</cxf.version>
+		<jetty.version>7.2.2.v20101205</jetty.version>
+		<jetty.jsp.version>7.6.11.v20130520</jetty.jsp.version>
+		<glassfish-jsp-2.1.version>2.1.v20100127</glassfish-jsp-2.1.version>
 	</properties>
 	
 	<dependencies> 
@@ -26,8 +29,57 @@
 			<version>1.3.152</version>
 			<scope>runtime</scope>
 		</dependency>
-
 		
+		  <dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<version>3.2</version>
+				<scope>test</scope>
+			</dependency>
+			
+		  	<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			
+		  	
+		  		 <!--  jetty -->
+
+
+        <!--
+        Jetty artifacts. Note: They do have transitive dependencies.
+        -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        
+          <dependency>
+		  <groupId>org.eclipse.jetty</groupId>
+		  <artifactId>jetty-jsp</artifactId>
+		  <version>${jetty.jsp.version}</version>
+		</dependency>    
+        
+       <dependency>
+	      <groupId>javax.servlet</groupId>
+	      <artifactId>jstl</artifactId>
+	      <version>1.2</version>
+	      <scope>provided</scope>
+	    </dependency>
+		  	
+
 	<!--  spring relate -->
 	
 		<dependency>
@@ -322,4 +374,12 @@
 		<!--  end -->
 		
 	</dependencies>
+	
+	<build>
+	     <!-- jetty插件 -->
+		<plugin>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>maven-jetty-plugin</artifactId>
+		</plugin>
+	</build>
 </project>
