@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+ <diskStore path="D:/ehcache/session"/>
+   <!--调用ehcache2的RMI-->
+   <cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" 
+   properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:40002/userIdcache "/>
+
+<!--RMI监听40001端口-->
+    <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+        properties="hostName=127.0.0.1,port=40001,socketTimeoutMillis=2000"/>
+        
+    <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true" diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000" diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+    
+    <cache name="userIdcache"
+        maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1800" timeToLiveSeconds="0"
+        overflowToDisk="true" diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000" diskPersistent="true"
+        diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU">
+
+
+       <!--监听配置-->
+
+     <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"    
+        properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true,replicateUpdatesViaCopy= false, replicateRemovals= true " />
+    </cache>
+
+</ehcache>
+	
