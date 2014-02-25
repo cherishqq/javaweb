@@ -1,0 +1,28 @@
+
+
+/**  text-align:center; */
+*.box      { padding:5px; border:5px solid black;  background-color:gold;  }
+
+.leftFloat {
+	float: left;
+	
+}
+
+.rightFloat {
+	float: right;
+}
+
+*.right       { float:right; }
+*.clear-left  { clear:left;  }    
+*.clear-right { clear:right; }
+*.clear-both  { clear:both;  }
+
+.margin_style { margin-left: 10px;}
+
+
+.relative_box { position: relative;}
+
+.relative_style { position: relative; z-index: auto ;left: 20px; top: 40px}
+
+*.absolute { position:absolute; z-index:auto;
+             left:450px; top:0; width:130px; height:130px; background-color:yellow; }

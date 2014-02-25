@@ -65,7 +65,7 @@
 				 }
 			},
 			showConsole : function(){
-				if( this.；.style.display == 'none'){
+				if( this.onsoleShowArea.display == 'none'){
 					consoleShowArea.style.display = 'block';
 				}
 			}

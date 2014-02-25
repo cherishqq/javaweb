@@ -1,0 +1,51 @@
+/* 	内联模型 */
+inline_selector {
+	display: inline;
+	visibility: value;
+	line-height: value;
+	padding: +value;
+	margin: +value;
+	border: +width style color;
+	background: value;
+}
+
+inline_block_selector {
+	display: inline-block;
+	line-height: value;
+	width: +value;
+	height: +value; overflow : value;
+	visibility: value; padding : + value;
+	margin: +value;
+	border: +width style color;
+	background: value;
+	padding: +value;
+	overflow: value;
+}
+
+.box {
+	display: block;
+	overflow: auto;
+	visibility: visible;
+	width: 220px;
+	height: 100px;
+	margin: 10px auto;
+	padding: 10px;
+	background: values;
+}
+
+.absolute {
+	position: absolute;
+	overflow: auto;
+	visibility: visible;
+	z-index: auto;
+	left: 0;
+	right: auto;
+	top: 0;
+	bottom: auto;
+	width: 220px;
+	height: 100px;
+	margin: 10px;
+	padding: 10px;
+	border: +value;
+	background-color: gold;
+}

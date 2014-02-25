@@ -8,7 +8,7 @@ Animal.prototype = {
 		name : "anmimal",
 		weight : 0,
 		eat : function() {
-			alert(" Animal is eating！");
+			alert(" Animal is eating");
 		}
 }
 
